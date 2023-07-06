@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 213029f8f1c25784b929c3e2c5b15185
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - uiBoss_Kill: {instanceID: 0}
+  - rigid: {instanceID: 0}
+  - target: {instanceID: 0}
+  - bulletPrefab: {fileID: 7038307259611575648, guid: 0f6f40117c566ea4cb47370f44a86feb, type: 3}
+  - firePoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

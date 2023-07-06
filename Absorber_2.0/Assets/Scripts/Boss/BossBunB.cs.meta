@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 7984c811ec0ea864db0972f946a49f1e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - splitBulletPrefab: {fileID: 7038307259611575648, guid: 0f6f40117c566ea4cb47370f44a86feb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
