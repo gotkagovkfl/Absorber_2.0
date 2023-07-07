@@ -32,11 +32,9 @@ public class StageManager : MonoBehaviour
     public int finalStageNum;               // 최종 스테이지 번호 
     public int totalStageNum;
 
-    // public Transform[] spawnPoints;         // 적 생성 지점
-    // public Transform    spawnRange;         // 적 생성 범위 
-    // public Transform    bossSpawnPoint;     // 보스 생성 지점
-    // public Transform[]  specials;           // 스테이지 특수 정보( 특수 적 생성 좌표 or 보스가 사용하는 좌표 등)
-    
+    // 
+    bool isPortalBreak;
+
     //--------------------------------------------------------------------------------------------------------------------------------------------
 
     //==============================================================
@@ -249,15 +247,17 @@ public class StageManager : MonoBehaviour
     public void GoToNextStage()
     {        
         StageUI.su.CloseStageClearUI();
-
         currStage.routineOnGoing = false;
-        StartCoroutine( ChangeRoutine() );
+        DirectingManager.dm.onDirecting = true;
+
+        Fade.fade.FadeOut( ChangeRoutine );  
     }
 
-    public IEnumerator ChangeRoutine()
-    {
-        yield return StartCoroutine(EnterPortalEvent());
-
+    //==============================================
+    // 스테이지 전환 연출: 페이드 아웃되면서 다음 스테이지로 진행할 준비를 한다.  
+    //=================================================
+    public void ChangeRoutine()
+    {   
         // 다음 스테이지 세팅
         SetNextStage();
         
@@ -275,41 +275,18 @@ public class StageManager : MonoBehaviour
         DirectingManager.dm.onDirecting = false;
     }
 
-    //============================================================
-    // 스테이지 전환 이벤트 : 포탈타고 화면이 전환되는 연출을 진행한다. 
-    //============================================================
-    public IEnumerator EnterPortalEvent()
-    {
-        DirectingManager.dm.onDirecting = true;
-        Fade.fade.FadeOut();
-        yield return new WaitForSeconds(1f);
-        Destroy(portal);
-    }
-
-
     // ==================================================================================================
     // 스테이지 교체 : 기존 스테이지를 파괴하고 현재 stageNum에 맞는 스테이지를 생성한다. ( 포탈에 입장하면 실행됨 )
     // ==================================================================================================
     public void ChangeStage()
     {        
-        // OnChangeEvent();
         DestroyStage();
         GenerateStage();
     }   
 
-    // public IEnumerator WaitForAnimation()
-    // {
-    //     // yield return new Wait
-    // }
 
 
     //=================================================================================================================================
-
-    // public void OnChangeEvent()
-    // {
-    //     StartCoroutine(PlayerEnterPortal());
-    // }
-
 
 
     //===================================================================

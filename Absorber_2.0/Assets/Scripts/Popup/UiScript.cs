@@ -54,21 +54,21 @@ public class UiScript : MonoBehaviour
     {
         select(First_Image_Num, First_status, First_Amount);
         gameObject.SetActive(false);
-        GameManager.gm.Pause(false);
+        GameManager.gm.PauseGame(false);
         PlayerUi.SetActive(true);
     }
     public void S()
     {
         select(Second_Image_Num, Second_status, Second_Amount);
         gameObject.SetActive(false);
-        GameManager.gm.Pause(false);
+        GameManager.gm.PauseGame(false);
         PlayerUi.SetActive(true);
     }
     public void T()
     {
         select(Third_Image_Num, Third_status, Third_Amount);      
         gameObject.SetActive(false);
-        GameManager.gm.Pause(false);
+        GameManager.gm.PauseGame(false);
         PlayerUi.SetActive(true);
     }
     public void select(string img, string status, int amount)

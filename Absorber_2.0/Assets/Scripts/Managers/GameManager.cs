@@ -35,37 +35,26 @@ public class GameManager : MonoBehaviour
     public bool gameClear;
 
     //=============================================================================================================================
-    //
-    public void AccelGameSpeed(bool flag)
-    {
-        gameSpeed = (flag)?3:1;
-
-        Time.timeScale = gameSpeed;
-    }
-
+    // Use in Scene_Lobbby
+    // ------------------------
 
     // =========================================
-    // Pause : Stop All entities and Time Progress
+    // Exit Game
     // =========================================
-    public void Pause(bool flag)
+    public void ExitGame()
     {
-        isPaused = flag;
-        // pauseBoard.gameObject.SetActive(flag);
-        Time.timeScale = (flag) ? 0 : gameSpeed;                    // �߿�
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit(); 
+        #endif
     }
-
-    //=============================================================================================================================
 
     //==========================================
     // Init Game 
     //==========================================
     public void InitGame()
     {
-        /*totalGameTime = 0;       // Ÿ�̸� �ʱ�ȭ
-                            // ü�� Ǯ��
-                            // �� ���� ������
-        KillCount = 0;
-        Score = 0;*/
         onPlay = false;         // have to call 'StartGame'
         
         gameClear = false;
@@ -77,15 +66,62 @@ public class GameManager : MonoBehaviour
     //==========================================
     public void StartGame()
     {
-        totalGameTime = 0;       // Ÿ�̸� �ʱ�ȭ
-                                 // ü�� Ǯ��
-                                 // �� ���� ������
+        totalGameTime = 0;       
         KillCount = 0;
         Score = 0;
+
         onPlay = true;
 
         gameClear = false;
+
+        Fade.fade.FadeOut(()=>SceneManager.LoadScene("Scene_Main"));
     }
+
+    //=============================================================================================================================
+    // Use in Scene_Main
+    // ------------------------
+    
+    // =========================================
+    // Pause Game: Stop All entities and Time Progress
+    // =========================================
+    public void PauseGame(bool flag)
+    {
+        isPaused = flag;
+        OnApplicationPause(isPaused);
+    }
+    
+    //test *************************
+    void OnGUI()
+    {
+        if (isPaused)
+            GUI.Label(new Rect(100, 100, 50, 30), "Game paused");
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        isPaused = !hasFocus;
+    }
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        isPaused = pauseStatus;
+        Time.timeScale = (isPaused) ? 0 : gameSpeed;   
+    }
+
+    //==========================================
+    // Accelate GameSpeed : *3 (can't undo )
+    //==========================================
+    public void AccelGameSpeed(bool flag)
+    {
+        gameSpeed = (flag)?3:1;
+
+        Time.timeScale = gameSpeed;
+    }
+
+
+    //=============================================================================================================================
+
+
 
     //==========================================
     // Finish Game ( Kill Final Boss / Fail Any Stage )
@@ -156,9 +192,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-        
         //The code below will not run unless 'onPlay' is true
         if (!onPlay)
         {
@@ -166,7 +199,7 @@ public class GameManager : MonoBehaviour
         }
         
         // totalGameTime increases by pure playing time ( as in the case of exception of pause, animation event )
-        if (StageManager.sm.currStageState == StageManager.StageState.onGoing)
+        if (StageManager.sm !=null && StageManager.sm.currStageState == StageManager.StageState.onGoing)
         {
             totalGameTime += Time.deltaTime;
         }

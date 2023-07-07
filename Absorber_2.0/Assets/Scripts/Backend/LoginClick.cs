@@ -30,14 +30,14 @@ public class LoginClick : MonoBehaviour
         BackendLogin.Instance.CustomLogin(ID, PWD);
         if (BackendLogin.Instance.LoginSuccess)
         {
-            Fade.fade.FadeOut();
+            // Fade.fade.FadeOut();
             yield return new WaitForSeconds(1f);
             SceneManager.LoadScene("TestLobby");
         }
         else
         {
             Error_pop.SetActive(true);
-            Error_text.text = "Àß¸øµÈ ¾ÆÀÌµð/ºñ¹Ð¹øÈ£ ÀÔ´Ï´Ù.";
+            Error_text.text = "ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ô´Ï´ï¿½.";
         }
     }
 }

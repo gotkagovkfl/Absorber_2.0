@@ -9,12 +9,18 @@ public class Fade : MonoBehaviour
     public static Fade fade;
 
 
-    public AudioSource audioSource;
+    AudioSource audioSource;
 
-    public AudioClip sound_click;   
+    [SerializeField]
+    AudioClip sound_click;   
     
-    public Animator animator;
+    Animator animator;
 
+
+    public delegate void Delegate_fadeOut();
+
+
+    //=========================================================================================================
     void Awake()
     {
         animator = transform.GetChild(0).GetComponent<Animator>();
@@ -46,16 +52,24 @@ public class Fade : MonoBehaviour
         FadeIn();
     }
 
-    public void FadeOut()
+    //================================
+    public void FadeOut( Delegate_fadeOut d)
     {
-        // Debug.Log("fade out");
-        // animator.SetBool("fade", true);
         if (animator!=null)
         {
             animator.SetTrigger("fadeOut");
         }
-        
+
+        StartCoroutine(FadeOut_C( d ));
     }
+
+    IEnumerator FadeOut_C( Delegate_fadeOut d )
+    {
+        yield return new WaitForSeconds(1f);
+        d();
+    }
+
+
     public void FadeIn()
     {
         // Debug.Log("fade in");

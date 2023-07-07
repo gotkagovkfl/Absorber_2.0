@@ -213,7 +213,7 @@ public class LevelUpManager : MonoBehaviour
                 }
                 break;
         }
-        GameManager.gm.Pause(true);
+        GameManager.gm.PauseGame(true);
     }
 
     public void AutoLevelUp()

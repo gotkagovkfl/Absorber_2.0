@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour
     {       
         Fade.fade.BtnClickSound();
         
-        GameManager.gm.Pause(flag);
+        GameManager.gm.PauseGame(flag);
         inventory.SetActive(flag);
     }
 

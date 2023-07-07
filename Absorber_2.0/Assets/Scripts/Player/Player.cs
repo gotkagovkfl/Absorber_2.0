@@ -585,10 +585,12 @@ public class Player : MonoBehaviour
         animator.SetTrigger("die");
         yield return new WaitForSeconds(2f);    // wait for death animation
 
-        Fade.fade.FadeOut();
-        yield return new WaitForSeconds(1f);    // wait for fade out
+        Fade.fade.FadeOut( ()=>StageManager.sm.FinishStage(false)  );
 
-        StageManager.sm.FinishStage(false) ;
+
+        // yield return new WaitForSeconds(1f);    // wait for fade out
+
+        // StageManager.sm.FinishStage(false) ;
     }
 	
 	public void Life_Up()
@@ -719,7 +721,7 @@ public class Player : MonoBehaviour
     {
         Fade.fade.BtnClickSound();
         
-        GameManager.gm.Pause(!GameManager.gm.isPaused);
+        GameManager.gm.PauseGame(!GameManager.gm.isPaused);
         pauseUI.SetActive(GameManager.gm.isPaused);
         pauseUI.GetComponent<PauseUI>().SetStatus();
     }

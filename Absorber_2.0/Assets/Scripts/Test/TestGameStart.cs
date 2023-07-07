@@ -14,7 +14,7 @@ public class TestGameStart : MonoBehaviour
 
     IEnumerator onbtnClick_c()
     {
-        Fade.fade.FadeOut();
+        // Fade.fade.FadeOut();
     
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("SampleScene");

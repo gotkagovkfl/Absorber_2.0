@@ -38,7 +38,9 @@ public class Portal : MonoBehaviour
             effect.InitEffect(Player.Instance.myTransform.position );
             effect.ActionEffect();
             
+            // 스테이지 전환 및 포탈 1초후에 파괴 (1초는 페이드 아웃 시간)
             StageManager.sm.GoToNextStage();
+            Destroy(gameObject,1f); 
         }
     }
 }

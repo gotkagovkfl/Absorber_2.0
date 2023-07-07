@@ -16,7 +16,7 @@ public class Stage_000_tutorial : Stage
     }
 
     public override void StartStageRoutine_custom()
-    {
+    {        
         audioSource.clip = bgm_normal;
         audioSource.loop = true;
         audioSource.Play();
