@@ -56,7 +56,7 @@ public class PlayerWeapon : MonoBehaviour
         
         currWeapon[0] = h[0].GetChild(0).gameObject;
         
-        currWeapon[0].GetComponent<Weapon>().InitEssentialWeaponInfo();
+        currWeapon[0].GetComponent<Weapon>().InitEssentialInfo();
 
         InitWeapons();
     }

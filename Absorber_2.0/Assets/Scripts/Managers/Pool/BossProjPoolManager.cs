@@ -13,20 +13,21 @@ public class BossProjPoolManager : PoolManager<Projectile_Enemy>
         bppm = this;
     }
     
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/Boss";
-    }
-    
-    public override string GetId(Projectile_Enemy proj)
-    {
-        return proj.id_proj;
+        id_category = "03";
     }
 
-    public override void InitPoolData_custom(Projectile_Enemy proj)
-    {
-        proj.InitEssentialProjInfo();
-    }
+    // public override void SetDir()
+    // {
+    //     dir = "Prefabs/Boss";
+    // }
+    
+    // public override string GetId(Projectile_Enemy proj)
+    // {
+    //     return proj.id_proj;
+    // }
+
 
     //--------------------------------------------------------------------
     

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_666_eliteSkill : Effect
 {
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "666";
     }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // ========================================================================
-// 스테이지매니저 : 게임매니저(gm)으로부터 현재 스테이지 정보를 받아 그에 맞춰 스테이지를 구성하고, 게임을 진행한다. 
+// 스테이지매니저 
 //==========================================================================
 public class StageManager : MonoBehaviour
 {
     public static StageManager sm;
 
     //
-    public GameObject[] stages = new GameObject[100];
-    public Dictionary<string, GameObject> dic_stages = new Dictionary<string, GameObject>();       
+    // public GameObject[] stages = new GameObject[100];
+    // public Dictionary<string, GameObject> dic_stages = new Dictionary<string, GameObject>();       
 
 
     public GameObject portal_prefab;
@@ -19,7 +19,8 @@ public class StageManager : MonoBehaviour
 
     //
     public float currStageTimer; 
-    public int currStageNum;    // 현재 스테이지 Num ( GM에서 가져옴 )
+    public string currStageId;
+    public int currStageNum;   
 
     public Effect currStageEffect;  // 현재 스테이지를 꾸미는 이펙트
     
@@ -28,23 +29,37 @@ public class StageManager : MonoBehaviour
 
     // 해당 스테이지 전용 정보
     public Stage currStage;                     // 현재 스테이지 정보 
+    
+    // 승리를 위해 남은 스테이지 클리어 횟수
+    int numStageLeft = 1;
+    int numStageLeft_total = 1;
 
-    public int finalStageNum;               // 최종 스테이지 번호 
-    public int totalStageNum;
+
+    // public int finalStageNum;               // 최종 스테이지 번호 
+    // public int totalStageNum;
 
     // 
     bool isPortalBreak;
 
-    //--------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    List<string> list_playStages = new List<string>();
 
     //==============================================================
     void Awake()
     {
         sm = this;
 
-        portal_prefab = Resources.Load<GameObject>("Prefabs/W/Stages/Object_000_portal");  // 포탈 프리팹 로드 **************************** 나중에수정
+        portal_prefab = Resources.Load<GameObject>("Prefabs/06_Stages/Object_000_portal");  // 포탈 프리팹 로드 **************************** 나중에수정
 
-        LoadStagePrefabs(); // 모든 스테이지 로드 & 초기화
+        // LoadStagePrefabs(); // 모든 스테이지 로드 & 초기화
+    }
+
+    //=============================
+    // Start 호출 시 스테이지 시작
+    //=============================
+    void Start()
+    {
+        ChangeRoutine();
     }
 
 
@@ -58,32 +73,8 @@ public class StageManager : MonoBehaviour
     }
 
     //====================================================================================================================================================
-    
-    //============================
-    // 최초 1회 스테이지 프리팹을 메모리에 로드하고/ 정보를 초기화 해놓는다. (스테이지 번호 오름차 순으로 정렬)
-    // 스테이지 프리팹 정보 : 이미지, 콜라이더, 스폰포인트, 스폰레인지, 보스스폰포인트, 스페셜( 스테이지 특수 좌표나 시스템 )
-    //============================
-    public void LoadStagePrefabs()
-    {
-        finalStageNum = 1;
-        totalStageNum = 100;
-        
-        GameObject[] list_stages = Resources.LoadAll<GameObject>("Prefabs/W/Stages");
 
 
-        // 일단 가져온 스테이지 오브젝트를 사전에 등록
-        for(int i = 0;i<list_stages.Length;i++)
-        {
-            Stage s = list_stages[i].GetComponent<Stage>();
-            if (s != null)
-            {
-                s.InitStageInfo(); 
-                stages[s.num_stage] = s.gameObject;
-                // dic_stages.Add( s.id_stage, s.gameObject );
-            }
-        }
-    }
-    
     //===================================================== 스테이지 루틴 ====================================================
     
     //======================================================================
@@ -95,7 +86,7 @@ public class StageManager : MonoBehaviour
     }
 
     //======================================================================
-    // 스테이지 로드 : 스테이지를 시작하기 전 필요 리소스들을 다운받거나 애니메이션 연출을 진행한다. 
+    // 스테이지 로드 : 스테이지를 시작하기 전 필요 애니메이션 연출을 진행한다. 
     //======================================================================
     public void LoadStage()
     {
@@ -170,6 +161,9 @@ public class StageManager : MonoBehaviour
         // flag == true: 성공
         if(flag ==true)
         {
+            
+            numStageLeft--; //   
+            
             // 스테이지 청소 
             CleanStage();
             
@@ -211,20 +205,15 @@ public class StageManager : MonoBehaviour
     //===================================
     public void SetNextStage()
     {
-        if (currStageNum ==finalStageNum)
+        if ( numStageLeft == 0)
         {
             // 최종 스테이지를 클리어 했다면,
             GameManager.gm.FinishGame(true);
             // Debug.Log("게임 클리어!");
             return;
         }
-        
-        do 
-        {
-            currStageNum++;
-            currStageNum %= totalStageNum;
-        }
-        while( stages[currStageNum] == null );  // 여기 조심. 이거때문에 무한 루프 걸릴 수 있음. 잘 필터링 해야함 .
+
+        currStageId = (list_playStages.Count ==0)?"000":StagePoolManager.spm.GetRandomStageId();
     }
 
     //====================================
@@ -278,7 +267,7 @@ public class StageManager : MonoBehaviour
     // ==================================================================================================
     // 스테이지 교체 : 기존 스테이지를 파괴하고 현재 stageNum에 맞는 스테이지를 생성한다. ( 포탈에 입장하면 실행됨 )
     // ==================================================================================================
-    public void ChangeStage()
+    void ChangeStage()
     {        
         DestroyStage();
         GenerateStage();
@@ -292,7 +281,7 @@ public class StageManager : MonoBehaviour
     //===================================================================
     // 현재 스테이지 오브젝트들을 파괴한다. ( 스테이지 종료 후 교체 목적)
     //===================================================================
-    public void DestroyStage()
+    void DestroyStage()
     {
         // 스테이지 이펙트 파괴
         if (currStageEffect!=null)
@@ -304,20 +293,21 @@ public class StageManager : MonoBehaviour
         // 스테이지 게임오브젝트 파괴
         if (currStage != null && !currStage.routineOnGoing)
         {
-            Destroy(currStage.gameObject);
+            StagePoolManager.spm.TakeToPool(currStage);
         }
     }
 
     //====================================================================
     // 스테이지 생성 - 현재 스테이지 번호에 맞는 스테이지를 생성한다.  
     //====================================================================
-    public void GenerateStage()
+    void GenerateStage()
     {
         // 스테이지 생성
-        currStage = Instantiate(stages[currStageNum], transform).GetComponent<Stage>();
+        list_playStages.Add(currStageId);
+        currStage = StagePoolManager.spm.GetFromPool(currStageId);
         currStage.transform.position = Vector3.zero;
     }
-    
+
 
     //===============================================================================================
 }

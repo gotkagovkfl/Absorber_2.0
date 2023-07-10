@@ -7,7 +7,7 @@ public class ProjEnemy_002_magicCircleE : Projectile_Enemy
     float tickDelay;
     Animator animator;
 
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_enemyProj()
     {
         id_proj = "002";
     }

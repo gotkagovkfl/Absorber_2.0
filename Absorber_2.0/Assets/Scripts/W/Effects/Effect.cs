@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Effect : MonoBehaviour
+public abstract class Effect : MonoBehaviour , IPoolObject
 {
     public Transform myTransform;
     public Transform target;
@@ -25,9 +25,44 @@ public abstract class Effect : MonoBehaviour
     protected AudioSource audioSource;
 
     //=================================================================================
-    public abstract void InitEssentialEffectInfo();
+    
+    
+    //===========================
+    // IPoolObject : resourceManager에 로드시에 id 초기화 
+    //===========================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_effect();
+    }
+    //
+    protected abstract void InitEssentialInfo_effect();
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_effect;
+    }
+    //===========================
+    // IPoolObject : 처음 생성될때 
+    //===========================
+    public void OnCreatedInPool()
+    {
+
+    }
+
+    //===========================
+    // IPoolObject : 다시 사용될때, 
+    //===========================
+    public void OnGettingFromPool()
+    {
+
+    }
 
 
+
+
+    //==============================================================
     public void InitEffect(Vector3 targetPos)
     {
         myTransform = transform;

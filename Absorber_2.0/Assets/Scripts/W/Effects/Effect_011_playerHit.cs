@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_011_playerHit : Effect
 {
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "011";
     }

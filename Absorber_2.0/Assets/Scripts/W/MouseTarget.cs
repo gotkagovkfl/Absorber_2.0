@@ -17,10 +17,10 @@ public class MouseTarget : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 mousePosRaw =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        myTransform.position =new Vector3(mousePosRaw.x, mousePosRaw.y, 0); 
+        myTransform.position = new Vector3(mousePosRaw.x, mousePosRaw.y, 0); 
     }
 }

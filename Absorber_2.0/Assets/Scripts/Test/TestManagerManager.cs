@@ -8,8 +8,7 @@ public class TestManagerManager : MonoBehaviour
     void Start()
     {
         // GameManager.gm.StartGame();
-        StageManager.sm.ChangeStage();
-        StageManager.sm.LoadStage();
+        // StageManager.sm.ChangeRoutine();
     }
 
     // Update is called once per frame

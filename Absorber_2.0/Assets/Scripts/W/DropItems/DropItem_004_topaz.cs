@@ -7,7 +7,7 @@ public class DropItem_004_topaz : DropItem
     //================== 오버라이드 =========================
     // 필수정보 초기화
     //==============================================
-    public override void InitEssentialItemInfo()
+    protected override void InitEssentialInfo_item()
     {
         id_dropItem = "004";
     }

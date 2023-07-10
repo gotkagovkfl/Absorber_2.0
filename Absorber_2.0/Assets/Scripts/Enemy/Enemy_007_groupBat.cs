@@ -15,7 +15,13 @@ public class Enemy_007_groupBat : Enemy
 
     bool canDash;
     //bool isDash;
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "007";
+    }
 
+
+    
     public override void DieCustom()
     {
         
@@ -44,10 +50,7 @@ public class Enemy_007_groupBat : Enemy
         manaValue = 3;
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "007";
-    }
+
 
     public override void MoveCustom()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_777_Dummy : Enemy
 {
-    public override void InitEssentialEnemyInfo()
+    protected override void InitEssentialInfo_enemy()
     {
         id_enemy = "777";
     }

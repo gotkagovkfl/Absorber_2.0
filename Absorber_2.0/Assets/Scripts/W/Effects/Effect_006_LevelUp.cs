@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_006_LevelUp : Effect
 {
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "006";
     }

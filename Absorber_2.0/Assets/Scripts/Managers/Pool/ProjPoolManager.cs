@@ -15,25 +15,23 @@ public class ProjPoolManager : PoolManager<Projectile>
         base.Awake();
         ppm = this;
     }
-
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/W/Projectiles";
+        id_category = "01";
     }
+
+    // public override void SetDir()
+    // {
+    //     dir = "Prefabs/W/Projectiles";
+    // }
 
     //============================================================================================
-    // 투사체 초기화 ( id 및 필수 정보 초기화 )
-    public override void InitPoolData_custom(Projectile proj)
-    {
-        proj.InitEssentialProjInfo();
-    }
-
 
     // 투사체 풀링 사전에 추가 : id 중복되면 안됨 ㅋ
-    public override string GetId(Projectile proj)
-    {
-        return proj.id_proj;
-    }
+    // public override string GetId(Projectile proj)
+    // {
+    //     return proj.id_proj;
+    // }
 
     //=========================== get & take ==================
     // Pool한 obj 별 초기화    

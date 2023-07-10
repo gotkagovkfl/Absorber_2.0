@@ -5,7 +5,7 @@ using UnityEngine;
 public class Proj_101_sanctuaryProj : Projectile
 {
     // id 초기화
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_proj()
     {
         id_proj = "101";
 

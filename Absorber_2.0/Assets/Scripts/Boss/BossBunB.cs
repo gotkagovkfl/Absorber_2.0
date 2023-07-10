@@ -12,7 +12,7 @@ public class BossBunB : Projectile_Enemy
     public float baseTime = 2.0f;
     public int baseNum = 10;
 
-    public override void InitEssentialProjInfo()
+   protected override void InitEssentialInfo_enemyProj()
     {
         id_proj =  "101";
     }

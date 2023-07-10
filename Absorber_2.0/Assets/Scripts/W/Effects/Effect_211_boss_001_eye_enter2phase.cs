@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_211_boss_001_eye_enter2phase : Effect
 {
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "211";
     }

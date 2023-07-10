@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Stage_testFinal : Stage
 {
-    public override void InitStageInfo_custom()
+    protected override void InitEssentialInfo_stage()
     {
         id_stage = "99";
 
-        num_stage = 99;
+        name_stage = "test";
     }
 
     public override void StartStageRoutine_custom()

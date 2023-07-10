@@ -10,6 +10,12 @@ public class Enemy_006_Normal_Healing : Enemy
     public float distance;
     Vector3 dirVec;
 
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "006";
+    }
+
+
     public override void InitEnemyStatusCustom()
     {
         hpFull = 25;
@@ -87,8 +93,5 @@ public class Enemy_006_Normal_Healing : Enemy
         proj.Action();
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "006";
-    }
+
 }

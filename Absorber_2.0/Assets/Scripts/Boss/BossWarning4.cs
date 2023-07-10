@@ -7,7 +7,7 @@ public class BossWarning4 : Projectile_Enemy
 
     Animator animator;
 
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_enemyProj()
     {
         id_proj = "213";
     }

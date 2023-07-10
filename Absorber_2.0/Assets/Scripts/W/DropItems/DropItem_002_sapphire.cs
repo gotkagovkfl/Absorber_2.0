@@ -12,7 +12,7 @@ public class DropItem_002_sapphire: DropItem
     //================== 오버라이드 =========================
     // 필수정보 초기화
     //==============================================
-    public override void InitEssentialItemInfo()
+    protected override void InitEssentialInfo_item()
     {
         id_dropItem = "002";
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Effect_002_bleeding : Effect
 {
 
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "102";
     }

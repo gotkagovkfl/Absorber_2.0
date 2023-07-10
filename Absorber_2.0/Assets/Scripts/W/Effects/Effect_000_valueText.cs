@@ -10,7 +10,7 @@ public class Effect_000_valueText : Effect
 
     public int typeNum {get;set;}
     
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "000";
     }

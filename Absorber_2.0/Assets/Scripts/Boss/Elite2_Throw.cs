@@ -15,7 +15,7 @@ public class Elite2_Throw : Projectile_Enemy
         
     }
 
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_enemyProj()
     {
         id_proj = "011";
     }

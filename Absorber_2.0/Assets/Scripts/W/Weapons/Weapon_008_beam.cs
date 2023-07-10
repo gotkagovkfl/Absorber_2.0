@@ -7,7 +7,7 @@ public class Weapon_008_beam : Weapon
   // =========== 오버라이드 =============
     // 필수정보초기화
     // ===================================
-    public override void InitEssentialWeaponInfo()
+    protected override void InitEssentialInfo_weapon()
     {
         weaponName = "광선";
         id_weapon = "008";

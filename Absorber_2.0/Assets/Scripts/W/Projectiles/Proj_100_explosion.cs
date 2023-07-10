@@ -10,7 +10,7 @@ public class Proj_100_explosion : Projectile
     // =========== 오버라이드 =============
     // 필수 정보 초기화 
     // ===================================    
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_proj()
     {
         id_proj = "100";
 

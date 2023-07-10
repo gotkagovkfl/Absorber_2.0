@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 // using System;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
 //===========================================
 // 플레이어 능력치 관리 
 //============================================
@@ -564,7 +566,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         // BackendRank.Instance.RankInsert(GameManager.gm.KillCount);
-        StageManager.sm.currStage.audioSource.Stop();
+        // StageManager.sm.currStage.audioSource.Stop();
         audioSource.PlayOneShot( Resources.Load<AudioClip>("Sound/14_defeat"));
 
         //die 

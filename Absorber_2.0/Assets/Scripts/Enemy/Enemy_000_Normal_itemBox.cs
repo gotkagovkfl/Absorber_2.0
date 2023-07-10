@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_000_Normal_itemBox : Enemy
 {
-    public override void InitEssentialEnemyInfo()
+    protected override void InitEssentialInfo_enemy()
     {
         id_enemy = "000";
     }

@@ -11,6 +11,11 @@ public class Enemy_014_Epic_Dash : Enemy
     bool canDash = true; // ���� ���ɿ���
 
 
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "014";
+    }
+
     public override void InitEnemyStatusCustom()
     {
         hpFull = 130;
@@ -97,8 +102,4 @@ public class Enemy_014_Epic_Dash : Enemy
         }
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "014";
-    }
 }

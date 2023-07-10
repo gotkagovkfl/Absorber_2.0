@@ -7,7 +7,7 @@ using UnityEngine;
 // 공격시 발생하며, 적에게 피해를 입힐 수 있는 투사체나 공격효과 등에 관한 클래스 - 자식 클래스의 이름은 "Proj_(이름)"으로 작명 
 //  ex )  총알, 광선, 검흔 등 
 //===================================================================
-public abstract class Projectile_Enemy : MonoBehaviour
+public abstract class Projectile_Enemy : MonoBehaviour , IPoolObject
 {
     public string id_proj;
     
@@ -52,13 +52,50 @@ public abstract class Projectile_Enemy : MonoBehaviour
     public AudioSource audioSource;
 
     //==============================================================================
+    
+    //===========================
+    // IPoolObject : resourceManager에 로드시에 id 초기화 
+    //===========================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_enemyProj();
+    }
+    //
+    protected abstract void InitEssentialInfo_enemyProj();
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_proj;
+    }
+    //===========================
+    // IPoolObject : 처음 생성될때 
+    //===========================
+    public void OnCreatedInPool()
+    {
+
+    }
+
+    //===========================
+    // IPoolObject : 다시 사용될때, 
+    //===========================
+    public void OnGettingFromPool()
+    {
+
+    }
+    
+    
+    //==========================================================
+    
+    
     void Awake()
     {
         originalScale = transform.localScale;
     }
 
 
-    public abstract void InitEssentialProjInfo();
+    // public abstract void InitEssentialProjInfo();
 
     //public void InitProj(Vector3 firePoint, Transform target)
     //{

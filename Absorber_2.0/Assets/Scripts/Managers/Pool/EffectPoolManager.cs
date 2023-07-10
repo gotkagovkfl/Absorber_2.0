@@ -15,10 +15,17 @@ public class EffectPoolManager : PoolManager<Effect>
 
     
     //========================================================================================
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/W/Effects";
+        id_category = "04";
     }
+    
+    
+    
+    // public override void SetDir()
+    // {
+    //     dir = "Prefabs/W/Effects";
+    // }
 
     
     protected override void Awake()
@@ -28,18 +35,13 @@ public class EffectPoolManager : PoolManager<Effect>
     }
 
     //============================================================================================
-    // 투사체 초기화 ( id 및 필수 정보 초기화 )
-    public override void InitPoolData_custom(Effect effect)
-    {
-        effect.InitEssentialEffectInfo();
-    }
 
     
-    // 투사체 풀링 사전에 추가 : id 중복되면 안됨 ㅋ
-    public override string GetId(Effect effect)
-    {
-        return effect.id_effect;
-    }
+    // // 투사체 풀링 사전에 추가 : id 중복되면 안됨 ㅋ
+    // public override string GetId(Effect effect)
+    // {
+    //     return effect.id_effect;
+    // }
 
     //=========================== get & take ==================
     // Pool한 obj 별 초기화    

@@ -12,6 +12,10 @@ public class Elite_002 : Enemy
     public float distance;
     public GameObject prefabBullet;
 
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "200";
+    }
 
     public override void InitEnemyStatusCustom()
     {
@@ -85,8 +89,4 @@ public class Elite_002 : Enemy
     //     }
     // }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "200";
-    }
 }

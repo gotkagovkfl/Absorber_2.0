@@ -25,7 +25,7 @@ public class Weapon_002_sawedOff : Weapon
     // =========== 오버라이드 =============
     // 필수정보초기화
     // ===================================
-    public override void InitEssentialWeaponInfo()
+    protected override void InitEssentialInfo_weapon()
     {
         base.weaponName = "샷건";
         base.id_weapon = "002";

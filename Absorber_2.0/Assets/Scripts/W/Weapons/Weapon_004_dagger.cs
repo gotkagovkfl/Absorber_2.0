@@ -14,7 +14,7 @@ public class Weapon_004_dagger : Weapon
     // =========== 오버라이드 =============
     // 필수정보초기화
     // ===================================
-    public override void InitEssentialWeaponInfo()
+    protected override void InitEssentialInfo_weapon()
     {
         base.weaponName = "단검";
         base.id_weapon = "004";

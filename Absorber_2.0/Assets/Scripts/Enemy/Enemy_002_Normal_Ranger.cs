@@ -13,6 +13,13 @@ public class Enemy_002_Normal_Ranger : Enemy
 
     
 
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "002";
+    }
+
+
+    
     public override void InitEnemyStatusCustom()
     {
         hpFull = 18;
@@ -80,8 +87,4 @@ public class Enemy_002_Normal_Ranger : Enemy
 
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "002";
-    }
 }

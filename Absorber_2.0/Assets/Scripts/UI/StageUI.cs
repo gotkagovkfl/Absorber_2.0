@@ -64,15 +64,7 @@ public class StageUI : MonoBehaviour
         stageText0.SetActive(true);
         stageText1.SetActive(false);
         
-        string text = "";
-        if (StageManager.sm.currStageNum == 0)
-        {
-            text ="듀토리얼";
-        }
-        if (StageManager.sm.currStageNum == 1)
-        {
-            text ="스테이지 1";
-        }
+        string text = StageManager.sm.currStage.name_stage;
 
 
         text_stageText0.text = string.Format(text, StageManager.sm.currStageNum);

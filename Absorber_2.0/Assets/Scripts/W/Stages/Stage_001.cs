@@ -25,28 +25,27 @@ public class Stage_001 : Stage
     float spawn_late = 0f;
 
 
-    public override void InitStageInfo_custom()
+    protected override void InitEssentialInfo_stage()
     {
         id_stage = "001";
 
-        num_stage = 1;
+        name_stage = "스테이지 1";
 
-        routineOnGoing = true;
 
         //
-        bgm_normal = Resources.Load<AudioClip>("Sound/1.bgm_DF");
-        bgm_bossIn = Resources.Load<AudioClip>("Sound/12_BossIn");
-        bgm_boss = Resources.Load<AudioClip>("Sound/1.bgm_Tr(bossmain)");
-        //
+        // bgm_normal = Resources.Load<AudioClip>("Sound/1.bgm_DF");
+        // bgm_bossIn = Resources.Load<AudioClip>("Sound/12_BossIn");
+        // bgm_boss = Resources.Load<AudioClip>("Sound/1.bgm_Tr(bossmain)");
+        // //
 
-        prefabs_sound_bats = Resources.Load<GameObject>("Prefabs/W/SoundObjects/SoundObject_000_bats");
+        // prefabs_sound_bats = Resources.Load<GameObject>("Prefabs/W/SoundObjects/SoundObject_000_bats");
     }
 
     public override void StartStageRoutine_custom()
     {
-        audioSource.clip = bgm_normal;
-        audioSource.loop = true;
-        audioSource.Play();
+        // audioSource.clip = bgm_normal;
+        // audioSource.loop = true;
+        // audioSource.Play();
         //
 
 
@@ -221,22 +220,22 @@ public class Stage_001 : Stage
         yield return new WaitForSeconds(240f);
         BossSpawnManager.bsm.SpawnBoss();
 
-        StartCoroutine( PlayBossBGM());
+        // StartCoroutine( PlayBossBGM());
     }
 
-    IEnumerator PlayBossBGM()
-    {
-        audioSource.Stop();
-        audioSource.clip = bgm_bossIn;
-        audioSource.loop = false;
-        audioSource.Play();
+    // IEnumerator PlayBossBGM()
+    // {
+    //     // audioSource.Stop();
+    //     // audioSource.clip = bgm_bossIn;
+    //     // audioSource.loop = false;
+    //     // audioSource.Play();
 
-        yield return new WaitUntil( ()=>!audioSource.isPlaying );
+    //     // yield return new WaitUntil( ()=>!audioSource.isPlaying );
         
-        audioSource.clip = bgm_boss;
-        audioSource.loop = false;
-        audioSource.Play();
-    }
+    //     // audioSource.clip = bgm_boss;
+    //     // audioSource.loop = false;
+    //     // audioSource.Play();
+    // }
 
     // ����ġ ���� �ڷ�ƾ �߰� 
     IEnumerator add_weight()

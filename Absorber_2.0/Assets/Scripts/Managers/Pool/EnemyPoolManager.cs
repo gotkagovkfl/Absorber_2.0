@@ -15,26 +15,23 @@ public class EnemyPoolManager : PoolManager<Enemy>
         base.Awake();
         epm = this;
 
-        spawnInfo = Resources.Load<GameObject>("Prefabs/Enemies/SpawnInfo");
+        spawnInfo = Resources.Load<GameObject>("Prefabs/02_Enemies/SpawnInfo");
     }
 
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/Enemies";
+        id_category = "02";
     }
-    public override void InitPoolData_custom(Enemy obj)
-    {
-        obj.InitEssentialEnemyInfo();
-    }
+
     public override void GetFromPool_custom(Enemy obj)
     {
         obj.isDead = false;
     }
 
-    public override string GetId(Enemy obj)
-    {
-        return obj.id_enemy;
-    }
+    // public override string GetId(Enemy obj)
+    // {
+    //     return obj.id_enemy;
+    // }
 
     // Ǯ�� �ݳ�
     public override void TakeToPool_custom(Enemy obj)

@@ -17,7 +17,7 @@ public class Boss_002 : Enemy
 
     public Vector2[] positions;
 
-    public override void InitEssentialEnemyInfo()
+    protected override void InitEssentialInfo_enemy()
     {
         id_enemy = "b_002";
     }
@@ -112,7 +112,7 @@ public class Boss_002 : Enemy
         StopCoroutine(MoveAnimation());
         yield return new WaitForSeconds(3.5f);
 
-        //bac.OnEnter2Phase();        // ¿¬Ãâ
+        //bac.OnEnter2Phase();        // ï¿½ï¿½ï¿½ï¿½
 
         yield return new WaitForSeconds(2f);
 
@@ -124,7 +124,7 @@ public class Boss_002 : Enemy
         StartCoroutine(MoveAnimation());
     }
 
-    IEnumerator Die()   // º¸½º Ã¼·Â 0 ÀÌÇÏ·Î ³»·Á°¥ ½Ã 3ÃÊ µÚ º¸½º ¿ÀºêÁ§Æ® ÆÄ±«
+    IEnumerator Die()   // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ 0 ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ä±ï¿½
     {
         speed = 0f;
 
@@ -141,7 +141,7 @@ public class Boss_002 : Enemy
 
     void Update()
     {
-        if (hp < (hpFull * 0.8) && !bulletCheck)       // ¹ÝÇÇ ¶§ º¯½Å ¿¹Á¤. º¯½Å ½Ã Çàµ¿ Áß´Ü ¹× ¹ÝÇÇ ÆÐÅÏ.
+        if (hp < (hpFull * 0.8) && !bulletCheck)       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½àµ¿ ï¿½ß´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         {
             Enter2Phase();
         }

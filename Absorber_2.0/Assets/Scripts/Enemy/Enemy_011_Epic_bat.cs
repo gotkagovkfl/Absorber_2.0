@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Enemy_011_Epic_bat : Enemy
 {
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "011";
+    }
+    
     public override void InitEnemyStatusCustom()
     {
         hpFull = 35;
@@ -39,8 +44,5 @@ public class Enemy_011_Epic_bat : Enemy
         // base.DropItem();
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "011";
-    }
+
 }

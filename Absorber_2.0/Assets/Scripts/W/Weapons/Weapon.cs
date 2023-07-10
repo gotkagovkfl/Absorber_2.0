@@ -6,7 +6,7 @@ using UnityEngine;
 //===================== 부모의 부모 클래스 ========================
 // 무기 클래스의 최상단에 위치하는 클래스 : 필수적인 무기 정보를 관리  (이름, 데미지 등 )
 //===============================================================
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour , IPoolObject
 {
     //====================================================
     // 변수
@@ -231,12 +231,43 @@ public abstract class Weapon : MonoBehaviour
 
 
     //===================================================================================================================
+    //================================ 풀링 관련 ==================================================================================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_weapon();
+    }
 
+    protected abstract void InitEssentialInfo_weapon();
+    
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_weapon;
+    }
+    
+    //============================================
+    // 처음 생성될 때 할 일 
+    //============================================    
+    public void OnCreatedInPool()
+    {
+        // InitEssentialProjInfo();
+    }
+
+
+    //============================================
+    // 풀에서 가져올때 발생할 일 - 근데 초기화작업은 여기서 호출되지 않음
+    //============================================    
+    public void OnGettingFromPool()
+    {
+        // InitProj();
+    }
 
     //===================================
     // 필수 정보 초기화 - 무기 도감이 초기화 될때 '반드시' 호출되어야함. ( 현재 초기화 장소 - 무기사전 )
     //===================================
-    public abstract void InitEssentialWeaponInfo();
+    // public abstract void InitEssentialWeaponInfo();
 
 
     //===================================

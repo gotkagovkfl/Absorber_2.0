@@ -11,7 +11,10 @@ public class Enemy_012_Epic_Ranger : Enemy
     public Transform firePoint;
     public float distance;
 
-    
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "012";
+    }
 
     public override void InitEnemyStatusCustom()
     {
@@ -81,8 +84,5 @@ public class Enemy_012_Epic_Ranger : Enemy
 
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "012";
-    }
+
 }

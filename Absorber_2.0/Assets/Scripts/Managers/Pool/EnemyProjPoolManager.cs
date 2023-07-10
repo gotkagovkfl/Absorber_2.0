@@ -11,26 +11,25 @@ public class EnemyProjPoolManager : PoolManager<Projectile_Enemy>
         base.Awake();
         eppm = this;
     }
-
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/Enemies";
+        id_category = "03";
     }
+    // public override void SetDir()
+    // {
+    //     dir = "Prefabs/Enemies";
+    // }
     public override void GetFromPool_custom(Projectile_Enemy obj)
     {
         obj.active = true;
         obj.isAlive = true;
     }
 
-    public override string GetId(Projectile_Enemy obj)
-    {
-        return obj.id_proj;
-    }
+    // public override string GetId(Projectile_Enemy obj)
+    // {
+    //     return obj.id_proj;
+    // }
 
-    public override void InitPoolData_custom(Projectile_Enemy obj)
-    {
-        obj.InitEssentialProjInfo();
-    }
 
     public override void TakeToPool_custom(Projectile_Enemy obj)
     {

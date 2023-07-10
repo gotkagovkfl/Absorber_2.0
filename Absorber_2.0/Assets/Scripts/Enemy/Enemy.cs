@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour , IPoolObject
 {
     public bool isBoss;     // 보스몬스터인지
     public bool deathAnimationEnd;
@@ -119,6 +119,45 @@ public abstract class Enemy : MonoBehaviour
     public Queue<float> dotQ = new Queue<float>();
     // public int currDotNum;
     //=====================================================================================
+    
+    
+    //===========================
+    // IPoolObject : resourceManager에 로드시에 id 초기화 
+    //===========================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_enemy();
+    }
+    //
+    protected abstract void InitEssentialInfo_enemy();
+
+
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_enemy;
+    }
+    
+    //===========================
+    // IPoolObject : 처음 생성될때 
+    //===========================
+    public void OnCreatedInPool()
+    {
+
+    }
+
+    //===========================
+    // IPoolObject : 다시 사용될때, 
+    //===========================
+    public void OnGettingFromPool()
+    {
+
+    }
+
+    //===============================================================
+
 
     // 초기화작업 (공통)                         
     public void InitEnemyStatus()
@@ -150,7 +189,7 @@ public abstract class Enemy : MonoBehaviour
     // 개별 능력치 초기화
     public abstract void InitEnemyStatusCustom();
 
-    public abstract void InitEssentialEnemyInfo();
+    // public abstract void InitEssentialEnemyInfo();
 
     // ������(exp) ���
     public void DropItem()

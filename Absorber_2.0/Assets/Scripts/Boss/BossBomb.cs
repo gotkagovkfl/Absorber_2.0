@@ -11,7 +11,7 @@ public class BossBomb : Projectile_Enemy
 
 
 
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_enemyProj()
     {
         id_proj =  "102";
     }

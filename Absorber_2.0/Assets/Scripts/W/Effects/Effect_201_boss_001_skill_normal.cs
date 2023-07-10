@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_201_boss_001_skill_normal : Effect
 {
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "201";
     }

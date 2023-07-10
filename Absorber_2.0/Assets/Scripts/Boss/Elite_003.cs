@@ -13,6 +13,11 @@ public class Elite_003 : Enemy
     public GameObject prefabBullet;
     public Transform tar;
     
+    
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "300";
+    }
     public override void InitEnemyStatusCustom()
     {
         hpFull = 500;
@@ -70,8 +75,5 @@ public class Elite_003 : Enemy
     //     }
     // }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "300";
-    }
+
 }

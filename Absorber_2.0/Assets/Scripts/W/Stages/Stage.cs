@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Stage : MonoBehaviour
+public abstract class Stage : MonoBehaviour, IPoolObject
 {
-    public AudioSource audioSource;
+    // public AudioSource audioSource;
     
     
     //
     public string id_stage;
-    public int      num_stage;
+    public string name_stage;
 
     //------------------------------------------------
     // Routine
@@ -42,22 +42,45 @@ public abstract class Stage : MonoBehaviour
 
 
     //====================================================// 정보 초기화 관련==================================================================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_stage();
+        InitStageInfo();
+    }
+    protected abstract void InitEssentialInfo_stage();
 
+
+    public string GetId()
+    {
+        return id_stage;
+    }
+
+    public void OnCreatedInPool()
+    {
+        
+    }
+
+    public void OnGettingFromPool()
+    {
+        
+    }
+
+    //=======================================================================================================
     //============================
     // 스테이지 정보 초기화 
     //============================
     public void InitStageInfo()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource != null)
-        {
-            audioSource.playOnAwake = false;
-            audioSource.loop = false;
-        }
+        // audioSource = GetComponent<AudioSource>();
+        // if (audioSource != null)
+        // {
+        //     audioSource.playOnAwake = false;
+        //     audioSource.loop = false;
+        // }
         
         
         // 스테이지 개별 초기화 (id 같은거)
-        InitStageInfo_custom();
+        // InitStageInfo_custom();
 
         // SpawnPoint
         Transform temp = transform.Find("SpawnPoints");
@@ -90,7 +113,7 @@ public abstract class Stage : MonoBehaviour
     }
 
 
-    public abstract void InitStageInfo_custom();
+    // public abstract void InitStageInfo_custom();
 
     
 
@@ -158,4 +181,6 @@ public abstract class Stage : MonoBehaviour
     {
         return bossSpawnPoint;
     }
+
+
 }

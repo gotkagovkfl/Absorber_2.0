@@ -14,20 +14,22 @@ public class ItemPoolManager : PoolManager<DropItem>
     }
 
     //=======================================================
-    public override void SetDir()
+    protected override void SetCategory()
     {
-        dir = "Prefabs/W/DropItems";
+        id_category = "05";
     }
 
-    public override string GetId(DropItem item)
-    {
-        return item.id_dropItem;
-    }
 
-    public override void InitPoolData_custom(DropItem item)
-    {
-        item.InitEssentialItemInfo();
-    }
+    // public override void SetDir()
+    // {
+    //     dir = "Prefabs/W/DropItems";
+    // }
+
+    // public override string GetId(DropItem item)
+    // {
+    //     return item.id_dropItem;
+    // }
+
 
     //=======================================================
     public override void GetFromPool_custom(DropItem item)

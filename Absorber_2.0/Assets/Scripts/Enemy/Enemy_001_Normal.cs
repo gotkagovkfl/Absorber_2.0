@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy_001_Normal : Enemy
 {
+   
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "111";
+    } 
+    
+    
+    
     public override void InitEnemyStatusCustom()
     {
         hpFull =12;
@@ -39,8 +47,4 @@ public class Enemy_001_Normal : Enemy
         // base.DropItem();
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "111";
-    }
 }

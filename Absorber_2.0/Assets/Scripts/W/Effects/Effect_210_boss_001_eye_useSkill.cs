@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_210_boss_001_eye_useSkill : Effect
 {   
-    public override void InitEssentialEffectInfo()
+    protected override void InitEssentialInfo_effect()
     {
         id_effect = "210";
     }

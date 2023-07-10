@@ -66,12 +66,44 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
 
 
     //=====================================================================================================================
+    //================================ 풀링 관련 ==================================================================================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_proj();
+    }
 
+    protected abstract void InitEssentialInfo_proj();
+    
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_proj;
+    }
+    //============================================
+    // 처음 생성될 때 할 일 
+    //============================================    
+    public void OnCreatedInPool()
+    {
+        // InitEssentialProjInfo();
+    }
+
+
+    //============================================
+    // 풀에서 가져올때 발생할 일 - 근데 초기화작업은 여기서 호출되지 않음
+    //============================================    
+    public void OnGettingFromPool()
+    {
+        // InitProj();
+    }
+
+    ///==============================================
 
     //================================
     // 투사체 필수정보 초기화 ( idName 등)
     //================================
-    public abstract void InitEssentialProjInfo();
+    
 
 
     //=============================================
@@ -156,7 +188,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
     {
         rb.simulated = true;
         // 투사체 크기는 플레이어 크기에 맞춰 설정됨  - 기본 투사체 정보는 ppm의 dic_proj으로부터 가져옴
-        transform.localScale = Player.Instance.myTransform.localScale.x * ProjPoolManager.ppm.dic_objs[id_proj].transform.lossyScale * scale; 
+        transform.localScale = Player.Instance.myTransform.localScale.x * ResourceManager.rm.GetFromDic_prefab("01", id_proj).transform.lossyScale * scale; 
         
         Action_custom();            // 여기서 애니메이션 등 기타 이유로 수명을 뒤늦게 설정할 수 있기 때문에, 투사체 삭제를 뒤늦게 호출
         SetLifeTime();
@@ -449,24 +481,4 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
             proj.Action();
         }
     }
-
-    //================================ 풀링 관련 ==================================================================================
-    //============================================
-    // 처음 생성될 때 할 일 
-    //============================================    
-    public void OnCreatedInPool()
-    {
-        // InitEssentialProjInfo();
-    }
-
-
-    //============================================
-    // 풀에서 가져올때 발생할 일 - 근데 초기화작업은 여기서 호출되지 않음
-    //============================================    
-    public void OnGettingFromPool()
-    {
-        // InitProj();
-    }
-
-    ///==============================================
 }

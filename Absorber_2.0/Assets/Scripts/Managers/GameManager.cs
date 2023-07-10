@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
     public void PauseGame(bool flag)
     {
         isPaused = flag;
-        OnApplicationPause(isPaused);
+        Time.timeScale = (isPaused) ? 0 : gameSpeed;   
+        // OnApplicationPause(isPaused);
     }
     
     //test *************************
@@ -99,14 +100,14 @@ public class GameManager : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        isPaused = !hasFocus;
+        PauseGame(!hasFocus);
     }
 
-    void OnApplicationPause(bool pauseStatus)
-    {
-        isPaused = pauseStatus;
-        Time.timeScale = (isPaused) ? 0 : gameSpeed;   
-    }
+    // void OnApplicationPause(bool pauseStatus)
+    // {
+    //     isPaused = pauseStatus;
+        
+    // }
 
     //==========================================
     // Accelate GameSpeed : *3 (can't undo )
@@ -117,6 +118,17 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = gameSpeed;
     }
+
+    //==========================================
+    // Start Stage when scene changed
+    //==========================================
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     if (scene.name.Equals("Scene_Main"))
+    //     {
+    //         StageManager.sm.ChangeRoutine();
+    //     }
+    // }
 
 
     //=============================================================================================================================
@@ -156,7 +168,7 @@ public class GameManager : MonoBehaviour
 
         // Go To Next Scene to check result
         // StartCoroutine(FinishGame_c());
-        SceneManager.LoadScene("FinishGameScene");
+        SceneManager.LoadScene("Scene_Result");
         //
         // UIGameResult.ugr.ShowGameResult(clear);
     }
@@ -165,7 +177,7 @@ public class GameManager : MonoBehaviour
     {
         // Fade.fade.FadeOut();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("FinishGameScene");
+        SceneManager.LoadScene("Scene_Result");
     }
 
 
@@ -187,6 +199,8 @@ public class GameManager : MonoBehaviour
         //
         Application.targetFrameRate = 70;   // set maximum fps  
 
+        //
+        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame

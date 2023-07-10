@@ -17,7 +17,7 @@ public class Proj_003_sword : Projectile
     // =========== 오버라이드 =============
     // 필수 정보 초기화 
     // ===================================    
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_proj()
     {
         id_proj = "003";
         splitWhenHit= true;

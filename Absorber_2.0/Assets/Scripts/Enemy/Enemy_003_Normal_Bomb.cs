@@ -11,6 +11,12 @@ public class Enemy_003_Normal_Bomb : Enemy
 
     
     public GameObject particle_Boom;
+    
+    protected override void InitEssentialInfo_enemy()
+    {
+        id_enemy = "003";
+    }
+
 
     public override void InitEnemyStatusCustom()
     {
@@ -124,8 +130,5 @@ public class Enemy_003_Normal_Bomb : Enemy
 
     }
 
-    public override void InitEssentialEnemyInfo()
-    {
-        id_enemy = "003";
-    }
+
 }

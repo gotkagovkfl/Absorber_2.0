@@ -23,7 +23,7 @@ public class Boss_001 : Enemy
 
     public AudioClip sound_bossHit;
     
-    public override void InitEssentialEnemyInfo()
+    protected override void InitEssentialInfo_enemy()
     {
         id_enemy = "b_001";
     }

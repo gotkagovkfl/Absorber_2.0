@@ -11,7 +11,7 @@ public class Elite3_Spear : Projectile_Enemy
     public float stopDistance;
     public float spearSpeed;
 
-    public override void InitEssentialProjInfo()
+    protected override void InitEssentialInfo_enemyProj()
     {
         id_proj = "020";
     }

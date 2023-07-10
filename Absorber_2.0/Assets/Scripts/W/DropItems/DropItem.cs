@@ -7,7 +7,7 @@ using UnityEngine;
 // 몬스터를 잡거나, 상자를 부숴 필드에 드랍되어 플레이어가 획득 가능한 아이템에 대한 스크립트
 // 플레이어와의 거리를 계산하여, 범위안에 들어오면 플레이어쪽으로 당겨지며, 플레이어와 충돌 시 획득된다.
 //===================================================
-public abstract class DropItem : MonoBehaviour
+public abstract class DropItem : MonoBehaviour , IPoolObject
 {
     Rigidbody2D rb;
 
@@ -49,12 +49,40 @@ public abstract class DropItem : MonoBehaviour
     }
 
     //=========================================================================================================
+    //===========================
+    // IPoolObject : resourceManager에 로드시에 id 초기화 
+    //===========================
+    public void InitEssentialInfo()
+    {
+        InitEssentialInfo_item();
+    }
+    //
+    
+    protected abstract void InitEssentialInfo_item();
+    //================
+    // GetID
+    //==============
+    public string GetId()
+    {
+        return id_dropItem;
+    }
+    //===========================
+    // IPoolObject : 처음 생성될때 
+    //===========================
+    public void OnCreatedInPool()
+    {
 
+    }
 
-    //==============================================
-    // 아이템 필수정보 초기화
-    //==============================================
-    public abstract void InitEssentialItemInfo();
+    //===========================
+    // IPoolObject : 다시 사용될때, 
+    //===========================
+    public void OnGettingFromPool()
+    {
+
+    }
+
+    //================================================================
 
     //==================================
     // 아이템 정보 초기화  : 기본값
