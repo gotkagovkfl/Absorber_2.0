@@ -12,27 +12,27 @@ public class ResourceManager : MonoBehaviour
     
     // -----------------texts : 나중에 scriptableobject로 바꿔보자 ---------------------------------------------------------
     public Dictionary<string, TextAsset> dic_data = new Dictionary<string, TextAsset>();
-    string dir_data = "Data";
+    string dir_data = "04_Data";
     // --------------------sounds--------------------------------------------------------------------------------------------
     public Dictionary<string, AudioClip> dic_sounds = new Dictionary<string, AudioClip>();
-    string dir_sounds = "Sounds";
+    string dir_sounds = "03_Sounds";
 
     // -------------------prite - 픽토그램에만 사용될듯 -------------------------------------------------------------------------------
     public Dictionary<string, Dictionary<string, Sprite>> dic_images = new Dictionary<string, Dictionary<string, Sprite>>();
     
-    string dir_pictogram = "Images/Pictograms";
+    string dir_pictogram = "00_Images/Pictograms";
     Dictionary<string, Sprite> dic_pictograms = new Dictionary<string, Sprite>();
 
     // ----------------------prefabs --------------------------------------------------------------------------------------------------------
     Dictionary<string, string> dic_prefabDir = new Dictionary<string, string>();
     
-    string dir_weapons = "Prefabs/00_Weapons";          // 00
-    string dir_projs = "Prefabs/01_Projectiles";        // 01
-    string dir_enemies = "Prefabs/02_Enemies";          // 02
-    string dir_enemyProjs = "Prefabs/03_EnemyProjs";    // 03
-    string dir_effects = "Prefabs/04_Effects";          // 04
-    string dir_items = "Prefabs/05_DropItems";          // 05
-    string dir_stages = "Prefabs/06_Stages";            // 06
+    string dir_weapons = "02_Prefabs/00_Weapons";          // 00
+    string dir_projs = "02_Prefabs/01_Projectiles";        // 01
+    string dir_enemies = "02_Prefabs/02_Enemies";          // 02
+    string dir_enemyProjs = "02_Prefabs/03_EnemyProjs";    // 03
+    string dir_effects = "02_Prefabs/04_Effects";          // 04
+    string dir_items = "02_Prefabs/05_DropItems";          // 05
+    string dir_stages = "02_Prefabs/06_Stages";            // 06
 
     public Dictionary<string, Dictionary<string, GameObject>> dic_prefabs = new Dictionary<string, Dictionary<string, GameObject>>();
 
