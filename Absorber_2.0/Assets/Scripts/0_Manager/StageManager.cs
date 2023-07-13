@@ -49,7 +49,7 @@ public class StageManager : MonoBehaviour
     {
         get
         {
-            return isRunning;
+            return _isRunning;
         }
     }
 
@@ -225,9 +225,6 @@ public class StageManager : MonoBehaviour
         // 포탈 오브젝트 생성
         portal = Instantiate(portal_prefab, Vector3.zero, Quaternion.identity);
 
-        // 포탈 입장 지시 HUD 추가 ( 화살표 nextStage 같은거 )
-        //code here
-
     }
     //=================================================================================================================================
 
@@ -237,7 +234,6 @@ public class StageManager : MonoBehaviour
     public void GoToNextStage()
     {        
         StageUI.su.CloseStageClearUI();  // 이벤트 체인에 넣자****************
-        _currStage.routineOnGoing = false;  
         DirectingManager.dm.onDirecting = true;  // 이벤트 체인에 넣자****************
 
         Fade.fade.FadeOut( ChangeRoutine );  
@@ -251,30 +247,17 @@ public class StageManager : MonoBehaviour
         // 다음 스테이지 세팅
         SetNextStage();
         
-        //스테이지가 교체 되는 사이에 플레이어의 입력을 차단한다. 
-        // 플레이어 입력 차단 
-        
-        // 스테이지 교체
-        ChangeStage();
+        // 스테이지 오브젝트 교체 관련
+        DestroyStage();
+        GenerateStage();
 
-        // 
+        // 생성된 스테이지 초기화 관련
         InitStage();
         LoadStage();
 
         //
         DirectingManager.dm.onDirecting = false; // 이벤트 체인에 넣자****************
     }
-
-    // ==================================================================================================
-    // 스테이지 교체 : 기존 스테이지를 파괴하고 현재 stageNum에 맞는 스테이지를 생성한다. ( 포탈에 입장하면 실행됨 )
-    // ==================================================================================================
-    void ChangeStage()
-    {        
-        DestroyStage();
-        GenerateStage();
-    }   
-
-
 
     //=================================================================================================================================
 

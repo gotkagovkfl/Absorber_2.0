@@ -67,8 +67,7 @@ public abstract class Stage : MonoBehaviour, IPoolObject
 
     public void OnGettingFromPool()
     {
-        // transform.position = Vector3.zero;
-        transform.position = new Vector3(4.2f, 3.4f, 0);
+        transform.position = Vector3.zero;
     }
 
     //=======================================================================================================
@@ -137,7 +136,6 @@ public abstract class Stage : MonoBehaviour, IPoolObject
     public void FinishStageRoutine()
     {
         routineOnGoing = false;
-        // Debug.Log("스테이지 루틴 종료");
     }
     
 

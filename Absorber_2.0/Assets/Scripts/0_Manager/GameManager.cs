@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
     {
         onPlay = false;
         gameClear = clear;
+
         Player_Level = "Level " + Player.Instance.Level;
         Player_Weapon = "Weapon\n" + Player.Instance.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0, 11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)", ""); ;
         Player_Hp = "Hp " + Player.Instance.Max_Hp;
@@ -151,6 +152,7 @@ public class GameManager : MonoBehaviour
         Player_Speed = "Speed " + (Player.Instance.Speed + Player.Instance.Speed * Player.Instance.Speed_Plus / 100f);
         Player_Crit = "Crit " + Player.Instance.Crit + "%";
         Stage1_PlayerTime = StageManager.sm.currStageTimer;
+        
         // when kill final boss
         if (clear)
         {
@@ -167,10 +169,7 @@ public class GameManager : MonoBehaviour
         
 
         // Go To Next Scene to check result
-        // StartCoroutine(FinishGame_c());
         SceneManager.LoadScene("Scene_Result");
-        //
-        // UIGameResult.ugr.ShowGameResult(clear);
     }
     
     public IEnumerator FinishGame_c()
@@ -198,9 +197,6 @@ public class GameManager : MonoBehaviour
 
         //
         Application.targetFrameRate = 70;   // set maximum fps  
-
-        //
-        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame
