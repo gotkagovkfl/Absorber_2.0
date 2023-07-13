@@ -213,7 +213,7 @@ public class GameManager : MonoBehaviour
         }
         
         // totalGameTime increases by pure playing time ( as in the case of exception of pause, animation event )
-        if (StageManager.sm !=null && StageManager.sm.currStageState == StageManager.StageState.onGoing)
+        if (StageManager.sm !=null && StageManager.sm.isRunning)
         {
             totalGameTime += Time.deltaTime;
         }

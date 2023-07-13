@@ -9,7 +9,12 @@ public abstract class Stage : MonoBehaviour, IPoolObject
     
     //
     public string id_stage;
-    public string name_stage;
+    protected string _name_stage;
+    public string name_stage
+    {
+        get => _name_stage;
+        
+    }
 
     //------------------------------------------------
     // Routine
@@ -57,12 +62,13 @@ public abstract class Stage : MonoBehaviour, IPoolObject
 
     public void OnCreatedInPool()
     {
-        
+        // transform.position = Vector3.zero;
     }
 
     public void OnGettingFromPool()
     {
-        
+        // transform.position = Vector3.zero;
+        transform.position = new Vector3(4.2f, 3.4f, 0);
     }
 
     //=======================================================================================================

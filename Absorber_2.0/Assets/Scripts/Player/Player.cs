@@ -587,7 +587,7 @@ public class Player : MonoBehaviour
         animator.SetTrigger("die");
         yield return new WaitForSeconds(2f);    // wait for death animation
 
-        Fade.fade.FadeOut( ()=>StageManager.sm.FinishStage(false)  );
+        Fade.fade.FadeOut( ()=>GameManager.gm.FinishGame(false)  );
 
 
         // yield return new WaitForSeconds(1f);    // wait for fade out

@@ -10,7 +10,7 @@ public class Stage_000_tutorial : Stage
     {
         id_stage = "000";
 
-        name_stage = "듀토리얼";
+        _name_stage = "듀토리얼";
 
         // bgm_normal = Resources.Load<AudioClip>("Sound/20_Tutorial");
     }

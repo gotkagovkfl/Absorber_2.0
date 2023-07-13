@@ -29,7 +29,7 @@ public class Stage_001 : Stage
     {
         id_stage = "001";
 
-        name_stage = "스테이지 1";
+        _name_stage = "스테이지 1";
 
 
         //

@@ -49,10 +49,14 @@ public class Fade : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FadeIn();
+        FadeIn(null);
     }
 
     //================================
+
+    //===============
+    // 페이드 아웃
+    //===============
     public void FadeOut( Delegate_fadeOut d)
     {
         if (animator!=null)
@@ -60,26 +64,32 @@ public class Fade : MonoBehaviour
             animator.SetTrigger("fadeOut");
         }
 
-        StartCoroutine(FadeOut_C( d ));
+        StartCoroutine(Fade_c( d ));
     }
 
-    IEnumerator FadeOut_C( Delegate_fadeOut d )
+    //===============
+    // 페이드인
+    //===============
+    public void FadeIn( Delegate_fadeOut d )
+    {
+        if (animator!=null)
+        {
+            animator.SetTrigger("fadeIn");
+        }
+        
+        StartCoroutine(Fade_c( d) );
+    }
+
+    //
+    IEnumerator Fade_c( Delegate_fadeOut d )
     {
         yield return new WaitForSeconds(1f);
         d();
     }
 
 
-    public void FadeIn()
-    {
-        // Debug.Log("fade in");
-        // animator.SetBool("fade", false);
-        if (animator!=null)
-        {
-            animator.SetTrigger("fadeIn");
-        }
-        
-    }
+
+
 
     public void BtnClickSound()
     {

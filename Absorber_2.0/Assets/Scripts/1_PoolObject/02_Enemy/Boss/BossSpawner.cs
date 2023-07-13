@@ -34,10 +34,7 @@ public class BossSpawner : MonoBehaviour
     public void SpawnBoss()              
     {
         string id ="b_001";
-        if (StageManager.sm.currStageNum == 2 )
-        {
-            id = "b_002";
-        }
+
 
         boss = EnemyPoolManager.epm.SpawnBoss(id);
         boss.InitEnemyStatus();

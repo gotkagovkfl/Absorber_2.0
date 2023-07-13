@@ -60,7 +60,7 @@ public class BossSpawnManager : MonoBehaviour
         {
             bossSpawnPoint = StageManager.sm.currStage.GetBossSpawnPos();
         }
-        bossSpawner = Instantiate(bossSpawners[StageManager.sm.currStageNum], bossSpawnPoint, Quaternion.identity).GetComponent<BossSpawner>();
+        bossSpawner = Instantiate(bossSpawners[1], bossSpawnPoint, Quaternion.identity).GetComponent<BossSpawner>();
         bossSpawner.InitBossSpawner();
         bossSpawner.Action();
         

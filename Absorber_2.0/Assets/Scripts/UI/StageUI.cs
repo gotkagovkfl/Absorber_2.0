@@ -10,11 +10,12 @@ public class StageUI : MonoBehaviour
 
     public static StageUI su;
     
-    public GameObject stageClearUI;
-    public GameObject stageText0;
+    public GameObject stageUI;
+    public GameObject stageName;
     public GameObject stageText1;
 
-    public TextMeshProUGUI text_stageText0;
+    TextMeshProUGUI text_stageTime; // 진행 경과 시간 UI
+    public TextMeshProUGUI text_stageName;
     public TextMeshProUGUI text_stageText1;
 
     // public Button btn_GotoLobby;
@@ -24,36 +25,53 @@ public class StageUI : MonoBehaviour
     {
         su = this;
 
-        stageClearUI = GameObject.Find("Canvas").transform.Find("StageUI").gameObject;
+        stageUI = GameObject.Find("Canvas").transform.Find("StageUI").gameObject;
 
-        stageText0     = stageClearUI.transform.Find("Text_StageClear").gameObject;
-        stageText1     = stageClearUI.transform.Find("Text_StageClearTime").gameObject;
+        stageName     = stageUI.transform.Find("Text_StageClear").gameObject;
+        stageText1     = stageUI.transform.Find("Text_StageClearTime").gameObject;
 
-        text_stageText0       = stageText0.GetComponent<TextMeshProUGUI>();
+        text_stageTime        =  stageUI.transform.Find("Text_StageTime").GetComponent<TextMeshProUGUI>();
+        text_stageName       = stageName.GetComponent<TextMeshProUGUI>();
         text_stageText1     = stageText1.GetComponent<TextMeshProUGUI>();
 
         OffUI(0);
     }
 
-    // UI 업데이트
-    void LateUpdate()
+    void Start()
     {
-        // 시간 업데이트
-        float stageTime_raw = StageManager.sm.currStageTimer;
-        int stageTime_minutes = (int)stageTime_raw/60;
-        int stageTime_seconds = (int)stageTime_raw%60;
-        
-        // text_gameTime.text = string.Format("{0}:{1}",gameTime_minutes,gameTime_seconds);
-
+        StartCoroutine(UpdateTimeUI());
     }
+
+    //=================
+    // 시간 UI 업데이트
+    //================
+    public IEnumerator UpdateTimeUI()
+    {
+        while (true)
+        {
+            float stageTime_raw = StageManager.sm.currStageTimer;
+            
+            int stageTime_minutes = (int)stageTime_raw/60;
+            int temp = (int)stageTime_raw%60;
+
+            string stageTime_seconds=(temp< 10)?"0":"";
+            stageTime_seconds+=stageTime_seconds.ToString();
+        
+            text_stageTime.text = string.Format("{0}:{1}",stageTime_minutes, stageTime_seconds);
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    //==============================================================
 
     public IEnumerator OffUI(float time)
     {
         yield return new WaitForSeconds(time);
-        stageText0.SetActive(false);
+        stageName.SetActive(false);
         stageText1.SetActive(false);
         
-        text_stageText0.color  = Color.white;
+        text_stageName.color  = Color.white;
     }
 
     //====================================================================================
@@ -61,27 +79,27 @@ public class StageUI : MonoBehaviour
     //====================================================================================
     public void SetStageEnterUI()
     {
-        stageText0.SetActive(true);
+        stageName.SetActive(true);
         stageText1.SetActive(false);
         
         string text = StageManager.sm.currStage.name_stage;
 
 
-        text_stageText0.text = string.Format(text, StageManager.sm.currStageNum);
+        text_stageName.text = string.Format(text, StageManager.sm.currStage.name_stage);
         StartCoroutine(StageEnterAnimation());
         
     }
 
     public IEnumerator StageEnterAnimation()
     {
-        Vector3 originalPos = stageText0.transform.position;
+        Vector3 originalPos = stageName.transform.position;
         
         Color color = Color.white;
         for (int i=0;i<10;i++)
         {
             color.a = 0.1f*i;
-            text_stageText0.color  = color;
-            stageText0.transform.position += Vector3.up*1.5f;
+            text_stageName.color  = color;
+            stageName.transform.position += Vector3.up*1.5f;
             yield return null;
             yield return null;
             yield return null;
@@ -90,14 +108,14 @@ public class StageUI : MonoBehaviour
         for (int i=9;i>=0;i--)
         {
             color.a = 0.1f*i;
-            text_stageText0.color  = color;
+            text_stageName.color  = color;
             yield return null;
             yield return null;
             yield return null;
-            stageText0.transform.position -= Vector3.up * 1.5f;
+            stageName.transform.position -= Vector3.up * 1.5f;
             
         }
-        stageText0.transform.position = originalPos;
+        stageName.transform.position = originalPos;
         StartCoroutine( OffUI(0f) );
     }
 
@@ -109,21 +127,9 @@ public class StageUI : MonoBehaviour
     //====================================================================================
     public void SetStageClearUI()
     {
-        text_stageText0.text = string.Format("스테이지 {0} 클리어!", StageManager.sm.currStageNum);
+        text_stageName.text = string.Format("스테이지 {0} 클리어!", StageManager.sm.currStage.name_stage);
 
-        // 시간 업데이트
-        float stageTime_raw = StageManager.sm.currStageTimer;
-        int stageTime_minutes = (int)stageTime_raw/60;
-        int stageTime_seconds = (int)stageTime_raw%60;
-
-        string seconds="";
-        if (stageTime_seconds< 10)
-        {
-            seconds= "0";
-        }
-        seconds+=stageTime_seconds.ToString();
-
-        text_stageText1.text = string.Format("클리어 시간 {0}:{1}",stageTime_minutes, seconds);
+        text_stageText1.text = string.Format("클리어 시간 {0}", text_stageTime.text);
 
     }
 
@@ -133,7 +139,7 @@ public class StageUI : MonoBehaviour
     //==================================================================================== 
     public void ShowStageClearUI()
     {
-        stageText0.SetActive(true);
+        stageName.SetActive(true);
         stageText1.SetActive(true);
 
         SetStageClearUI();
@@ -145,7 +151,7 @@ public class StageUI : MonoBehaviour
     //==================================================================================== 
     public void CloseStageClearUI()
     {
-        stageText0.SetActive(false);
+        stageName.SetActive(false);
         stageText1.SetActive(false);
     }
 }

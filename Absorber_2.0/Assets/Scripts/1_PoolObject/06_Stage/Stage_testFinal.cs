@@ -8,7 +8,7 @@ public class Stage_testFinal : Stage
     {
         id_stage = "99";
 
-        name_stage = "test";
+        _name_stage = "test";
     }
 
     public override void StartStageRoutine_custom()

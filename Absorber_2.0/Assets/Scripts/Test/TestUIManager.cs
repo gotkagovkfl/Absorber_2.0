@@ -112,8 +112,8 @@ public class TestUIManager : MonoBehaviour
         btn_StageFail = GameObject.Find("Btn_StageFail");
 
         // 버튼에 리스너 추가 (스테이지 성공/ 실패 )
-        btn_StageClear.GetComponent<Button>().onClick.AddListener( ()=> StageManager.sm.FinishStage(true) ); 
-        btn_StageFail.GetComponent<Button>().onClick.AddListener( ()=> StageManager.sm.FinishStage(false) ); 
+        btn_StageClear.GetComponent<Button>().onClick.AddListener( ()=>GameManager.gm.FinishGame(true)  ); 
+        btn_StageFail.GetComponent<Button>().onClick.AddListener( ()=>GameManager.gm.FinishGame(false)  ); 
 
         #endregion
 
