@@ -7,9 +7,9 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Animator_weapon_002_sawedOff
-  m_Controller: {fileID: 9100000, guid: ec54b3fc39c726844a7994383c738201, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef60979ee40f3304e9ee7ca1b521d373, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 8798c005adf6d074b905e7f95409a015, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9d49ceb324af3fc47aa967f7dde66573, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 434fcfc750e777a40a269e704ff7bfcb, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 054249ab7a7b1804bafb43559017f529, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 042eb06383cb5a64298403b7edb0496c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e90ee21dbdf41db438c40edabe560430, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5d1fc3b134adca642822c4d5bcb87091, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ffc57217b4187a24a85c6ab61b220ade, type: 2}

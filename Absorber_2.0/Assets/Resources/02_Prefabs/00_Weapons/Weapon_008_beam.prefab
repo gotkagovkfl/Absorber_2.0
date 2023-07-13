@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1897800143
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: f94fe972c8e264d459232ac4dd6b9738, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,6 +118,7 @@ MonoBehaviour:
   notAvailable: 0
   target: {fileID: 0}
   list_targets: []
+  audioSource: {fileID: 0}
 --- !u!95 &2007217124722817527
 Animator:
   serializedVersion: 4
@@ -128,7 +129,7 @@ Animator:
   m_GameObject: {fileID: 5551960707117263930}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 52546f3fe312e5848b25d05956d43cfc, type: 2}
+  m_Controller: {fileID: 22100000, guid: b5c96648b4b81094d99533674fce1545, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

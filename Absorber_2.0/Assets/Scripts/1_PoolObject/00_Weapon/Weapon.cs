@@ -483,9 +483,11 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     public IEnumerator SetAttackAnimation()
     {
         animator.SetTrigger("attack");
+        float asMul = ( 100 + Player.Instance.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f; ///  *********************
+        animator.SetFloat("asMul",asMul ); 
 
         yield return new WaitForFixedUpdate();      // 애니메이션 전환 속도때문에 딜레이 줘야함.
-        animator.speed = attackSpeedT;
+        // animator.speed = attackSpeedT;
         animationLength = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
 
     }

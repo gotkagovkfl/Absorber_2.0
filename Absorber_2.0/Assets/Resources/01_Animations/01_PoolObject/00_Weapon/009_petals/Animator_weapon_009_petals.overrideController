@@ -7,9 +7,9 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Animator_weapon_009_petals
-  m_Controller: {fileID: 9100000, guid: ec54b3fc39c726844a7994383c738201, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef60979ee40f3304e9ee7ca1b521d373, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 8798c005adf6d074b905e7f95409a015, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 2fd55f637673c514da0708450be29b8d, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 434fcfc750e777a40a269e704ff7bfcb, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9d9b9bee71a1dca4b828406b1266c4ab, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 042eb06383cb5a64298403b7edb0496c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 60141f09c99f67b4bb0df6957d749b97, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5d1fc3b134adca642822c4d5bcb87091, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d2caf7ae60729c4f9e28b5f71845e1b, type: 2}
