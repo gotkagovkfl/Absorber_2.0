@@ -74,7 +74,7 @@ public class UIGameResult : MonoBehaviour
 
         btn_GotoLobby = gameResult.transform.Find("Btn_GoToLobby").GetComponent<Button>();
         
-        btn_GotoLobby.onClick.AddListener( ()=> Fade.fade.BtnClickSound() );  
+        // btn_GotoLobby.onClick.AddListener( ()=> Fade.fade.BtnClickSound() );   ******************************************************
         btn_GotoLobby.onClick.AddListener( ()=> SceneManager.LoadScene("TestLobby") );      // 로비로 가는 버튼 연결
         
 

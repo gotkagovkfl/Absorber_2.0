@@ -51,7 +51,7 @@ public class RegisterUI : MonoBehaviour
     
     public void CancelClick()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
         Register_pop.SetActive(false);
         GameObject.Find("Canvas").transform.Find("Login_pop").gameObject.SetActive(true);
 

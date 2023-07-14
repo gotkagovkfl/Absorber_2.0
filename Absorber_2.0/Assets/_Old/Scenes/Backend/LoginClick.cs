@@ -18,7 +18,7 @@ public class LoginClick : MonoBehaviour
     // Start is called before the first frame update
     public void onbtnClick()
     {  
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
         StartCoroutine(onbtnClick_c());
     }
 

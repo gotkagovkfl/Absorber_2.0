@@ -16,7 +16,7 @@ public class SigninClick : MonoBehaviour
     }
     public void onbtnClick()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
         
         Login_pop.SetActive(false);
         Register_pop.SetActive(true);

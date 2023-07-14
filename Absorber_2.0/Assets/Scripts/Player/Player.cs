@@ -417,7 +417,7 @@ public class Player : MonoBehaviour
 
 
         playerUI.SetHpBar();
-        playerUI.SetBloodOverlay();
+        // playerUI.SetBloodOverlay();
 
         string absValue = ((value >= 0) ? value : -value).ToString();
         Color color = ((value >= 0) ? Color.green : Color.red);
@@ -586,13 +586,8 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("die");
         yield return new WaitForSeconds(2f);    // wait for death animation
-
-        Fade.fade.FadeOut( ()=>GameManager.gm.FinishGame(false)  );
-
-
-        // yield return new WaitForSeconds(1f);    // wait for fade out
-
-        // StageManager.sm.FinishStage(false) ;
+        
+        GameManager.gm.FinishGame(false);
     }
 	
 	public void Life_Up()
@@ -721,7 +716,7 @@ public class Player : MonoBehaviour
     //
     public void Pause()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();                      *************************
         
         GameManager.gm.PauseGame(!GameManager.gm.isPaused);
         pauseUI.SetActive(GameManager.gm.isPaused);

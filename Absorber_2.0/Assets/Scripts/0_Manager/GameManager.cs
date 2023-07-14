@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//=============================================================
+// GameManager: 씬을 넘나들면서 게임 시작, 종료, 게임 속도 등을 관리한다. 
+//=============================================================
 public class GameManager : MonoBehaviour
 {
-    public SpawnManager pool;
     public int KillCount;
     public string Player_Level;
     public string Player_Weapon;
@@ -56,9 +59,11 @@ public class GameManager : MonoBehaviour
     public void InitGame()
     {
         onPlay = false;         // have to call 'StartGame'
-        
         gameClear = false;
 
+        totalGameTime = 0;       
+        KillCount = 0;
+        Score = 0;
     }
 
     //==========================================
@@ -66,15 +71,12 @@ public class GameManager : MonoBehaviour
     //==========================================
     public void StartGame()
     {
-        totalGameTime = 0;       
-        KillCount = 0;
-        Score = 0;
-
         onPlay = true;
 
-        gameClear = false;
+        // GoToNextScene( "Scne_Main",1f);
+        // EventManager.em.onGameStart.Invoke();
 
-        Fade.fade.FadeOut(()=>SceneManager.LoadScene("Scene_Main"));
+        DirectingManager.dm.FadeOut(()=>SceneManager.LoadScene("Scene_Main"));
     }
 
     //=============================================================================================================================
@@ -103,12 +105,6 @@ public class GameManager : MonoBehaviour
         PauseGame(!hasFocus);
     }
 
-    // void OnApplicationPause(bool pauseStatus)
-    // {
-    //     isPaused = pauseStatus;
-        
-    // }
-
     //==========================================
     // Accelate GameSpeed : *3 (can't undo )
     //==========================================
@@ -119,20 +115,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = gameSpeed;
     }
 
-    //==========================================
-    // Start Stage when scene changed
-    //==========================================
-    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    // {
-    //     if (scene.name.Equals("Scene_Main"))
-    //     {
-    //         StageManager.sm.ChangeRoutine();
-    //     }
-    // }
-
-
     //=============================================================================================================================
-
 
 
     //==========================================
@@ -152,7 +135,7 @@ public class GameManager : MonoBehaviour
         Player_Speed = "Speed " + (Player.Instance.Speed + Player.Instance.Speed * Player.Instance.Speed_Plus / 100f);
         Player_Crit = "Crit " + Player.Instance.Crit + "%";
         Stage1_PlayerTime = StageManager.sm.currStageTimer;
-        
+
         // when kill final boss
         if (clear)
         {
@@ -162,23 +145,14 @@ public class GameManager : MonoBehaviour
         else
         {
             // Debug.Log("Game Over");
-                   
         }
         //
         // BackendRank.Instance.RankInsert(GameManager.gm.KillCount);
         
 
         // Go To Next Scene to check result
-        SceneManager.LoadScene("Scene_Result");
+        DirectingManager.dm.FadeOut( ()=>SceneManager.LoadScene("Scene_Result") );
     }
-    
-    public IEnumerator FinishGame_c()
-    {
-        // Fade.fade.FadeOut();
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Scene_Result");
-    }
-
 
     // ======================================================================================================================================================
     void Awake()

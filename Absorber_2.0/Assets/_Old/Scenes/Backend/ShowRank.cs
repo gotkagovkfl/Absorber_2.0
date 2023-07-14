@@ -16,7 +16,7 @@ public class ShowRank : MonoBehaviour
     // Start is called before the first frame update
     public void RankingBtnClick()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
         
         //RankingBoard = GameObject.Find("RankingBoard");
         RankingBoard.SetActive(true);

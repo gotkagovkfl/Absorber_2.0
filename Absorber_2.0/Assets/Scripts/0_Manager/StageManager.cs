@@ -106,7 +106,7 @@ public class StageManager : MonoBehaviour
         
         // 할일끝나고 게임 시작  
         // StartStage();
-        Fade.fade.FadeIn( StartStage );
+        DirectingManager.dm.FadeIn( StartStage );
     }
 
     //================================================
@@ -225,6 +225,7 @@ public class StageManager : MonoBehaviour
         // 포탈 오브젝트 생성
         portal = Instantiate(portal_prefab, Vector3.zero, Quaternion.identity);
 
+
     }
     //=================================================================================================================================
 
@@ -234,9 +235,10 @@ public class StageManager : MonoBehaviour
     public void GoToNextStage()
     {        
         StageUI.su.CloseStageClearUI();  // 이벤트 체인에 넣자****************
-        DirectingManager.dm.onDirecting = true;  // 이벤트 체인에 넣자****************
+        // DirectingManager.dm.onDirecting = true;  // 이벤트 체인에 넣자****************
 
-        Fade.fade.FadeOut( ChangeRoutine );  
+        DirectingManager.dm.FadeOut( ChangeRoutine );  
+        
     }
 
     //==============================================
@@ -256,7 +258,7 @@ public class StageManager : MonoBehaviour
         LoadStage();
 
         //
-        DirectingManager.dm.onDirecting = false; // 이벤트 체인에 넣자****************
+        // DirectingManager.dm.onDirecting = false; // 이벤트 체인에 넣자****************
     }
 
     //=================================================================================================================================

@@ -51,8 +51,7 @@ public class BossSpawnManager : MonoBehaviour
 
     public IEnumerator SpawnBoss_c()
     {
-        DirectingManager.dm.DirectingBegin();
-        DirectingManager.dm.ShowBossAppearanceEffect();
+        DirectingManager.dm.ShowDirecting_bossAppearance();
         yield return new WaitForSeconds(3f);
         
         Vector3 bossSpawnPoint = Vector3.zero;

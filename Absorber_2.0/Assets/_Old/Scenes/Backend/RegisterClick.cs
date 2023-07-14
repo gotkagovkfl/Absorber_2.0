@@ -47,7 +47,7 @@ public class RegisterClick : MonoBehaviour
     
     IEnumerator onbtnClick_c()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
 
         // Fade.fade.FadeOut();
         yield return new WaitForSeconds(1f);

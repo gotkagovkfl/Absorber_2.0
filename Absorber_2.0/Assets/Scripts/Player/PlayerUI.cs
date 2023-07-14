@@ -35,8 +35,8 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI text_hp;
     public Coroutine coroutine_delay;
 
-    public AudioSource audioSource;
-    public AudioClip sound_fatal;
+    // public AudioSource audioSource;
+    // public AudioClip sound_fatal;
 
     //================================================================================
     public void SetHpBar()
@@ -124,26 +124,6 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    //===============================================================================================
-    //============================================================================================
-    public Animator bloodEffect;
-
-    public void SetBloodOverlay()
-    {
-        if (Player.Instance.Hp < Player.Instance.Max_Hp * 0.3 && Player.Instance.Hp > 0)
-        {
-            bloodEffect.SetBool("fatal", true);
-            audioSource.clip = sound_fatal;
-            audioSource.Play();
-        }
-        else
-        {
-            bloodEffect.SetBool("fatal", false);
-            audioSource.Stop();
-        }
-        
-    }    
-
 
 
 //==========================================================================================================================
@@ -158,12 +138,12 @@ public class PlayerUI : MonoBehaviour
         slider_mp = GameObject.Find("Slider_MP").GetComponent<Slider>();
         slider_dash  =GameObject.Find("Slider_Dash").GetComponent<Slider>();
 
-        bloodEffect = GameObject.Find("BloodOverlay").GetComponent<Animator>();
-        sound_fatal = Resources.Load<AudioClip>("Sound/15_heartbeat");
+        
+        // sound_fatal = Resources.Load<AudioClip>("Sound/15_heartbeat");
 
-        audioSource = GetComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        audioSource.loop = true;
+        // audioSource = GetComponent<AudioSource>();
+        // audioSource.playOnAwake = false;
+        // audioSource.loop = true;
 
 
         //
@@ -178,7 +158,7 @@ public class PlayerUI : MonoBehaviour
         SetDashBar();
         SetLevelText();
 
-        bloodEffect.SetBool("fatal", false); 
+        // bloodEffect.SetBool("fatal", false); 
 
     }
 

@@ -8,7 +8,7 @@ public class TestGameStart : MonoBehaviour
 
     public void StartGame()
     {
-        Fade.fade.BtnClickSound();
+        // Fade.fade.BtnClickSound();
         StartCoroutine(onbtnClick_c());
     }
 
