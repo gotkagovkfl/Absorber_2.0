@@ -9,6 +9,15 @@ public class Effect_999_stageDust : Effect
         id_effect = "999";
     }
 
+    //=================================================================
+    void Start()
+    {
+        
+        // 스테이지 교체시 이벤트 
+        EventManager.em.onStageChange.AddListener( ()=> readyDestroy = true );   // 특수효과 제거
+    }
+
+
     // 개별 능력치 초기화 
     public override void InitEffect_custom(Vector3 targetPos)
     {
@@ -25,5 +34,7 @@ public class Effect_999_stageDust : Effect
     {
         // rb.velocity = dir * speed;
     }
+
+
 
 }

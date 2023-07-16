@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,14 @@ public class ItemPoolManager : PoolManager<DropItem>
         base.Awake();
         ipm = this;
     }
+
+    void Start()
+    {
+        // 스테이지 종료 이벤트 발생시 필드위 아이템 제거
+        EventManager.em.onStageClear.AddListener( CleanEveryObjects_item );
+    }
+
+    
 
     //=======================================================
     protected override void SetCategory()
@@ -58,7 +66,7 @@ public class ItemPoolManager : PoolManager<DropItem>
     //=================================================
     // 모든 아이템 청소 - 스테이지 종료시 발동  : 경험치와 회복아이템만. ( 나머지는 발동되어도 쓸모가 없기 때문 )
     //=================================================
-    public void CleanEveryItem()
+    public void CleanEveryObjects_item()
     {
         DropItem[] items = GetComponentsInChildren<DropItem>();
 

@@ -136,7 +136,7 @@ public class Boss_002 : Enemy
 
         deathAnimationEnd = true;
 
-        StageManager.sm.FinishStage(true);
+        StageManager.sm.FinishStage_clear();
     }
 
     void Update()

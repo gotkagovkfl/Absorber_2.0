@@ -174,7 +174,7 @@ public class Boss_001 : Enemy
         deathAnimationEnd = true;
         bossUI.ActiveHpBar(false);
 
-        StageManager.sm.FinishStage(true);
+        StageManager.sm.FinishStage_clear();
     }
 
     void Update()

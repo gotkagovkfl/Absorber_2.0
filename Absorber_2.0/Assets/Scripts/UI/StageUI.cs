@@ -40,6 +40,14 @@ public class StageUI : MonoBehaviour
     void Start()
     {
         StartCoroutine(UpdateTimeUI());
+        
+        
+        
+        // 스테이지 시작시 이벤트
+        EventManager.em.onStageStart.AddListener( ShowStageStartUI );
+        // 스테이지 클리어시 이벤트
+        EventManager.em.onStageClear.AddListener( ShowStageClearUI );
+        
     }
 
     //=================
@@ -77,7 +85,7 @@ public class StageUI : MonoBehaviour
     //====================================================================================
     //  스테이지 진입시 텍스트를 출력한다. 
     //====================================================================================
-    public void SetStageEnterUI()
+    public void ShowStageStartUI()
     {
         stageName.SetActive(true);
         stageText1.SetActive(false);

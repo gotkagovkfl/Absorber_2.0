@@ -18,6 +18,12 @@ public class EnemyPoolManager : PoolManager<Enemy>
         spawnInfo = Resources.Load<GameObject>("Prefabs/02_Enemies/SpawnInfo");
     }
 
+    void Start()
+    {
+        // 스테이지 종료 이벤트 발생시 일반 적 제거 (아이템 드랍 없이 그냥 지우기)
+        EventManager.em.onStageClear.AddListener( CleanEveryObjects_enemy );   
+    }
+
     protected override void SetCategory()
     {
         id_category = "02";
@@ -98,7 +104,7 @@ public class EnemyPoolManager : PoolManager<Enemy>
     //=======================================
     // 스테이지 종료시 남아있는 모든 적 제거 - 아이템을 생성하지않고 점수를 증가시키지 않음. 
     //=======================================
-    public void CleanEveryEnemy()
+    public void CleanEveryObjects_enemy()
     {
         Enemy[] enemies = GetComponentsInChildren<Enemy>();
 

@@ -14,6 +14,7 @@ public class EffectPoolManager : PoolManager<Effect>
     public enum valueType {dmg_e_n, dmg_e_c, dmg_,e}
 
     
+
     //========================================================================================
     protected override void SetCategory()
     {
@@ -34,6 +35,16 @@ public class EffectPoolManager : PoolManager<Effect>
         epm = this;
     }
 
+    void Start()
+    {
+        // 스테이지 시작시 이벤트
+        EventManager.em.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
+        
+        // 스테이지 클리어 시 이벤트
+        EventManager.em.onStageClear.AddListener( CreatePortal );       // 포탈생성
+
+
+    }
     //============================================================================================
 
     
@@ -180,4 +191,24 @@ public class EffectPoolManager : PoolManager<Effect>
         hitEffect.ActionEffect();
     }
 
+    //===========================================================================================
+    //====================================
+    // 다음 단계로 넘어갈 수 있는 포탈을 생성한다.  - 플레이어 위치와 겹치지 않게 하거나, 생성후 일정 시간동안은 비활성화 하여 바로 충돌 이벤트 발생하는 거 막아야함. 
+    //====================================
+    public void CreatePortal()
+    {
+        // 포탈 오브젝트 생성
+        // portal = Instantiate(portal_prefab, Vector3.zero, Quaternion.identity);
+    }
+
+    //===================================
+    // 스테이지 분위기에 맞는 특수효과를 생성한다./ 원래는 스테이지마다 달라야하는데 2.0 버전까지는 먼지로 통일 
+    //===================================
+    public void CreateStageSFX()
+    {
+        Effect currStageEffect = GetFromPool("999");
+
+        currStageEffect.InitEffect( Vector3.zero);
+        currStageEffect.ActionEffect();
+    }
 }

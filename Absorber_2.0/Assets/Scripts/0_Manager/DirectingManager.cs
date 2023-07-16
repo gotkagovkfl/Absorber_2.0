@@ -18,7 +18,30 @@ public class DirectingManager : MonoBehaviour
     }
 
     //-------------------------------------------------------------
+   void Awake()
+    {
+        // singleton;
+        if (dm == null)
+        {
+            dm = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
+    }
+
+    void Start()
+    {
+        animator_fade  = transform.Find("000_fade").GetComponent<Animator>();
+        animator_bloodOverlay = transform.Find("001_bloodOverlay").GetComponent<Animator>();
+        animator_warningMessage = transform.Find("002_warning").GetComponent<Animator>();
+
+        
+    }
+    
     
     // =============================================================================================================
     
@@ -187,28 +210,7 @@ public class DirectingManager : MonoBehaviour
     #endregion
 
     //============================================================================================================
-   void Awake()
-    {
-        // singleton;
-        if (dm == null)
-        {
-            dm = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
-    }
-
-    void Start()
-    {
-        animator_fade  = transform.Find("000_fade").GetComponent<Animator>();
-        animator_bloodOverlay = transform.Find("001_bloodOverlay").GetComponent<Animator>();
-        animator_warningMessage = transform.Find("002_warning").GetComponent<Animator>();
-    }
-    
 
 
 }
