@@ -9,7 +9,10 @@ public abstract class Stage : MonoBehaviour, IPoolObject
     
     //
     public string id_stage;
+    
+    [SerializeField]
     protected string _name_stage;
+    
     public string name_stage
     {
         get => _name_stage;
@@ -117,10 +120,6 @@ public abstract class Stage : MonoBehaviour, IPoolObject
         startPoint = transform.Find("StartPoint").position;
     }
 
-
-    // public abstract void InitStageInfo_custom();
-
-    
 
     //===============================================// 루틴 관련 ================================================================
 

@@ -7,48 +7,54 @@ using TMPro;
 
 public class StageUI : MonoBehaviour
 {
-
-    public static StageUI su;
-    
     public GameObject stageUI;
-    public GameObject stageName;
-    public GameObject stageText1;
 
+    public GameObject obj_stageStartUI;
+    public GameObject obj_stageClearUI;
+
+    //--
     TextMeshProUGUI text_stageTime; // 진행 경과 시간 UI
-    public TextMeshProUGUI text_stageName;
-    public TextMeshProUGUI text_stageText1;
-
-    // public Button btn_GotoLobby;
+    //
+    TextMeshProUGUI text_stageClear;
+    TextMeshProUGUI text_enterPortal;
+    //
+    TextMeshProUGUI text_stageName;
+    
     
     //================================================================================================================================
     void Awake()
     {
-        su = this;
-
         stageUI = GameObject.Find("Canvas").transform.Find("StageUI").gameObject;
 
-        stageName     = stageUI.transform.Find("Text_StageClear").gameObject;
-        stageText1     = stageUI.transform.Find("Text_StageClearTime").gameObject;
+        obj_stageStartUI = stageUI.transform.Find("StageStartUI").gameObject;
+        obj_stageClearUI = stageUI.transform.Find("StageClearUI").gameObject;
 
-        text_stageTime        =  stageUI.transform.Find("Text_StageTime").GetComponent<TextMeshProUGUI>();
-        text_stageName       = stageName.GetComponent<TextMeshProUGUI>();
-        text_stageText1     = stageText1.GetComponent<TextMeshProUGUI>();
 
-        OffUI(0);
-    }
+        text_stageTime  =  stageUI.transform.Find("Text_StageTime").GetComponent<TextMeshProUGUI>();
 
-    void Start()
-    {
-        StartCoroutine(UpdateTimeUI());
+        text_stageName  = obj_stageStartUI.transform.Find("Text_StageName").GetComponent<TextMeshProUGUI>();
+
+        text_stageClear = obj_stageClearUI.transform.Find("Text_StageClear").GetComponent<TextMeshProUGUI>();
+        text_enterPortal= obj_stageClearUI.transform.Find("Text_EnterPortal").GetComponent<TextMeshProUGUI>();
+        //
+        CloseStageStartUI();
+        CloseStageClearUI();
         
-        
+        // 스테이지 교체시 이벤트
+        EventManager.em.onStageChange.AddListener( CloseStageClearUI);
         
         // 스테이지 시작시 이벤트
         EventManager.em.onStageStart.AddListener( ShowStageStartUI );
         // 스테이지 클리어시 이벤트
         EventManager.em.onStageClear.AddListener( ShowStageClearUI );
-        
+
     }
+
+    void Start()
+    {
+        StartCoroutine(UpdateTimeUI());
+    }
+    //=========================================================================================================================
 
     //=================
     // 시간 UI 업데이트
@@ -57,57 +63,48 @@ public class StageUI : MonoBehaviour
     {
         while (true)
         {
-            float stageTime_raw = StageManager.sm.currStageTimer;
-            
+            float stageTime_raw = StageManager.sm.currStageTimer; 
+
             int stageTime_minutes = (int)stageTime_raw/60;
-            int temp = (int)stageTime_raw%60;
+            int temp = (int)stageTime_raw % 60;
 
             string stageTime_seconds=(temp< 10)?"0":"";
-            stageTime_seconds+=stageTime_seconds.ToString();
-        
+            stageTime_seconds+=temp.ToString();
+
             text_stageTime.text = string.Format("{0}:{1}",stageTime_minutes, stageTime_seconds);
 
             yield return new WaitForSeconds(1f);
         }
     }
 
-    //==============================================================
 
-    public IEnumerator OffUI(float time)
-    {
-        yield return new WaitForSeconds(time);
-        stageName.SetActive(false);
-        stageText1.SetActive(false);
-        
-        text_stageName.color  = Color.white;
-    }
+    //====================================================================================================================================
 
-    //====================================================================================
-    //  스테이지 진입시 텍스트를 출력한다. 
-    //====================================================================================
+    //===========================================
+    //  스테이지 시작 UI를 보여준다.
+    //===========================================
     public void ShowStageStartUI()
-    {
-        stageName.SetActive(true);
-        stageText1.SetActive(false);
+    {        
+        obj_stageStartUI.SetActive(true);
         
-        string text = StageManager.sm.currStage.name_stage;
+        text_stageName.text = StageManager.sm.currStage.name_stage;
 
-
-        text_stageName.text = string.Format(text, StageManager.sm.currStage.name_stage);
-        StartCoroutine(StageEnterAnimation());
-        
+        StartCoroutine(ShowStageStartUIAnimation());
     }
 
-    public IEnumerator StageEnterAnimation()
+    //===================================
+    // 스테이지 시작 UI 애니메이션 
+    //===================================
+    public IEnumerator ShowStageStartUIAnimation()
     {
-        Vector3 originalPos = stageName.transform.position;
+        Vector3 originalPos = obj_stageStartUI.transform.position;
         
         Color color = Color.white;
         for (int i=0;i<10;i++)
         {
             color.a = 0.1f*i;
             text_stageName.color  = color;
-            stageName.transform.position += Vector3.up*1.5f;
+            obj_stageStartUI.transform.position += Vector3.up*1.5f;
             yield return null;
             yield return null;
             yield return null;
@@ -120,46 +117,40 @@ public class StageUI : MonoBehaviour
             yield return null;
             yield return null;
             yield return null;
-            stageName.transform.position -= Vector3.up * 1.5f;
+            obj_stageStartUI.transform.position -= Vector3.up * 1.5f;
             
         }
-        stageName.transform.position = originalPos;
-        StartCoroutine( OffUI(0f) );
+        obj_stageStartUI.transform.position = originalPos;
+        
+        CloseStageStartUI();
     }
-
-
-
-
-    //====================================================================================
-    //  게임 결과를 설정한다. 
-    //====================================================================================
-    public void SetStageClearUI()
+    //========================================
+    //  스테이지 시작 UI를 닫는다.
+    //========================================
+    public void CloseStageStartUI()
     {
-        text_stageName.text = string.Format("스테이지 {0} 클리어!", StageManager.sm.currStage.name_stage);
-
-        text_stageText1.text = string.Format("클리어 시간 {0}", text_stageTime.text);
-
+        obj_stageStartUI.SetActive(false);
     }
 
+    //===================================================================================================================
 
-    //====================================================================================
+
+    //=========================================
     //  스테이지 클리어 UI를 보여준다
-    //==================================================================================== 
+    //=========================================
     public void ShowStageClearUI()
     {
-        stageName.SetActive(true);
-        stageText1.SetActive(true);
+        obj_stageClearUI.SetActive(true);
 
-        SetStageClearUI();
+        text_stageClear.text = string.Format("{0} 클리어!", StageManager.sm.currStage.name_stage);
     }
 
 
-    //====================================================================================
+    //========================================
     //  스테이지 클리어 UI를 닫는다.
-    //==================================================================================== 
+    //========================================
     public void CloseStageClearUI()
     {
-        stageName.SetActive(false);
-        stageText1.SetActive(false);
+        obj_stageClearUI.SetActive(false);
     }
 }

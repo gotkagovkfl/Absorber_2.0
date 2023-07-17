@@ -13,11 +13,11 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CSVReader = transform.GetComponent<CSVReader>();
-        data1 = CSVReader.Read("LevelUpTable1");
-        data2 = CSVReader.Read("LevelUpTable2");
-        data3 = CSVReader.Read("LevelUpTable3");
-        data4 = CSVReader.Read("LevelUpTable4");
-        Status_data = CSVReader.ReadCsvFile("StatusTable");
+        // CSVReader = transform.GetComponent<CSVReader>();
+        // data1 = CSVReader.Read("LevelUpTable1");
+        // data2 = CSVReader.Read("LevelUpTable2");
+        // data3 = CSVReader.Read("LevelUpTable3");
+        // data4 = CSVReader.Read("LevelUpTable4");
+        // Status_data = CSVReader.ReadCsvFile("StatusTable");
     }
 }

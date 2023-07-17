@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     // 해당 스테이지 전용 정보
     Stage _currStage;                     // 현재 스테이지 정보 
     //
+    [SerializeField]
     float _currStageTimer; 
     string _currStageId;
     
@@ -104,8 +105,6 @@ public class StageManager : MonoBehaviour
     //=================================================
     public void GoToNextStage()
     {        
-        StageUI.su.CloseStageClearUI();  // 이벤트 체인에 넣자****************
-        // DirectingManager.dm.onDirecting = true;  // 이벤트 체인에 넣자****************
 
         DirectingManager.dm.FadeOut( ChangeStage );  
         
@@ -136,8 +135,7 @@ public class StageManager : MonoBehaviour
     //---------------------------------------------------------------------------------------------------------------------
 
     //===================================
-    // 다음 스테이지 세팅 : 다음 스테이지 번호를 설정한다. 
-    // 현재는 그냥 스테이지 번호 증가로 되어있지만, 최종적으로 랜덤으로 설정할것임. 
+    // 다음 스테이지 세팅 : 다음 스테이지 번호를 설정한다.   :현재는 그냥 스테이지 번호 증가로 되어있지만, 최종적으로 랜덤으로 설정할것임. 
     //===================================
     void SetNextStage()
     {
