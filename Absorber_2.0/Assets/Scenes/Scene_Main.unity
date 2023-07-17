@@ -7978,7 +7978,7 @@ GameObject:
   - component: {fileID: 656788209}
   - component: {fileID: 656788210}
   m_Layer: 0
-  m_Name: EffectPoolManager
+  m_Name: SomethingPoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8008,7 +8008,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 656788208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee1b3d4021c3ae044b87bdb5118d88c0, type: 3}
+  m_Script: {fileID: 11500000, guid: ee622a04ac349e143b9ba1468b7efffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pools: []
@@ -16810,7 +16810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4296ce5295ea4a5448d50de7413a4810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currStageTimer: 0
 --- !u!114 &1416105902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16823,9 +16822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9415e515a1c934ba81a77e415bb779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageUI: {fileID: 0}
-  obj_stageStartUI: {fileID: 0}
-  obj_stageClearUI: {fileID: 0}
 --- !u!114 &1416105903
 MonoBehaviour:
   m_ObjectHideFlags: 0

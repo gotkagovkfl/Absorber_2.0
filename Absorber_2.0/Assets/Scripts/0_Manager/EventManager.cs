@@ -34,6 +34,7 @@ public class EventManager : MonoBehaviour
 
     public UnityEvent onStageChange;
 
+
     public UnityEvent onAppearance_elite;
     public UnityEvent onAppearance_boss;
 

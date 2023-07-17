@@ -13,7 +13,6 @@ public class StageManager : MonoBehaviour
     // 해당 스테이지 전용 정보
     Stage _currStage;                     // 현재 스테이지 정보 
     //
-    [SerializeField]
     float _currStageTimer; 
     string _currStageId;
     
@@ -143,7 +142,7 @@ public class StageManager : MonoBehaviour
         {
             // 최종 스테이지를 클리어 했다면,
             GameManager.gm.FinishGame(true);
-            // Debug.Log("게임 클리어!");
+
             return;
         }
 

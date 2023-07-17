@@ -30,7 +30,7 @@ public class ResourceManager : MonoBehaviour
     string dir_projs = "02_Prefabs/01_Projectiles";        // 01
     string dir_enemies = "02_Prefabs/02_Enemies";          // 02
     string dir_enemyProjs = "02_Prefabs/03_EnemyProjs";    // 03
-    string dir_effects = "02_Prefabs/04_Effects";          // 04
+    string dir_somethings = "02_Prefabs/04_Somethings";          // 04
     string dir_items = "02_Prefabs/05_DropItems";          // 05
     string dir_stages = "02_Prefabs/06_Stages";            // 06
 
@@ -41,7 +41,7 @@ public class ResourceManager : MonoBehaviour
     Dictionary<string, GameObject> dic_projs = new Dictionary<string, GameObject>();
     Dictionary<string, GameObject> dic_enemies = new Dictionary<string, GameObject>();
     Dictionary<string, GameObject> dic_enemyProjs = new Dictionary<string, GameObject>();
-    Dictionary<string, GameObject> dic_effects = new Dictionary<string, GameObject>();
+    Dictionary<string, GameObject> dic_somethings = new Dictionary<string, GameObject>();
     Dictionary<string, GameObject> dic_items = new Dictionary<string, GameObject>();
     Dictionary<string, GameObject> dic_stages = new Dictionary<string, GameObject>();
     
@@ -78,7 +78,7 @@ public class ResourceManager : MonoBehaviour
         dic_prefabs.Add("01",dic_projs);
         dic_prefabs.Add("02",dic_enemies);
         dic_prefabs.Add("03",dic_enemyProjs);
-        dic_prefabs.Add("04",dic_effects);
+        dic_prefabs.Add("04",dic_somethings);
         dic_prefabs.Add("05",dic_items);
         dic_prefabs.Add("06",dic_stages);
     }
@@ -92,7 +92,7 @@ public class ResourceManager : MonoBehaviour
         dic_prefabDir.Add("01", dir_projs);
         dic_prefabDir.Add("02", dir_enemies);
         dic_prefabDir.Add("03", dir_enemyProjs);
-        dic_prefabDir.Add("04", dir_effects);
+        dic_prefabDir.Add("04", dir_somethings);
         dic_prefabDir.Add("05", dir_items);
         dic_prefabDir.Add("06", dir_stages);
     }

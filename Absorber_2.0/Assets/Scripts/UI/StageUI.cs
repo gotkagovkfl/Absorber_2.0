@@ -7,10 +7,10 @@ using TMPro;
 
 public class StageUI : MonoBehaviour
 {
-    public GameObject stageUI;
+    GameObject stageUI;
 
-    public GameObject obj_stageStartUI;
-    public GameObject obj_stageClearUI;
+    GameObject obj_stageStartUI;
+    GameObject obj_stageClearUI;
 
     //--
     TextMeshProUGUI text_stageTime; // 진행 경과 시간 UI
