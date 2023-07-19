@@ -1,5 +1,5 @@
 # Absorber_2.0
-
+<img src="./title.png"  width="1700" height="700"/> 
 ---
 ## 프로젝트 소개
 
