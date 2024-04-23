@@ -41,12 +41,12 @@ public class StageUI : MonoBehaviour
         CloseStageClearUI();
         
         // 스테이지 교체시 이벤트
-        EventManager.em.onStageChange.AddListener( CloseStageClearUI);
+        GameEvent.onStageChange.AddListener( CloseStageClearUI);
         
         // 스테이지 시작시 이벤트
-        EventManager.em.onStageStart.AddListener( ShowStageStartUI );
+        GameEvent.onStageStart.AddListener( ShowStageStartUI );
         // 스테이지 클리어시 이벤트
-        EventManager.em.onStageClear.AddListener( ShowStageClearUI );
+        GameEvent.onStageClear.AddListener( ShowStageClearUI );
 
     }
 

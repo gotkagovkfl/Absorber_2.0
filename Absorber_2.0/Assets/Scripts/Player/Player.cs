@@ -663,7 +663,7 @@ public class Player : MonoBehaviour
         StartCoroutine(CreateSanctuary());
 
         // 스테이지 시작시 이벤트 
-        EventManager.em.onStageStart.AddListener( ()=> myTransform.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
+        GameEvent.onStageStart.AddListener( ()=> myTransform.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
     }
 
     void Update()
