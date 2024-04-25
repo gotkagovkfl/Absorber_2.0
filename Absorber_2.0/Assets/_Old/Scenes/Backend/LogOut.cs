@@ -8,6 +8,6 @@ public class LogOut : MonoBehaviour
   public void LogoutBtnClick()
     {
         Backend.BMember.Logout();
-        SceneManager.LoadScene("TestLogin");
+        // SceneManager.LoadScene("TestLogin");
     }
 }

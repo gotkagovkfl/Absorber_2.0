@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 
 //=============================================================
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         // GoToNextScene( "Scne_Main",1f);
         // EventManager.em.onGameStart.Invoke();
 
-        DirectingManager.dm.FadeOut(()=>SceneManager.LoadScene("Scene_Main"));
+        // DirectingManager.dm.FadeOut(()=>SceneManager.LoadScene("Scene_Main"));
     }
 
     //=============================================================================================================================
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         
 
         // Go To Next Scene to check result
-        DirectingManager.dm.FadeOut( ()=>SceneManager.LoadScene("Scene_Result") );
+        // DirectingManager.dm.FadeOut( ()=>SceneManager.LoadScene("Scene_Result") );
     }
 
     // ======================================================================================================================================================

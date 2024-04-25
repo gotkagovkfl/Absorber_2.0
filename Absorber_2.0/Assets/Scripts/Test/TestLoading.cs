@@ -12,40 +12,40 @@ public class TestLoading : MonoBehaviour
 
     public float time;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        sceneName = "Scene_Lobby";
-        StartCoroutine( LoadAsyncScene_c() );
-    }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     sceneName = "Scene_Lobby";
+    //     StartCoroutine( LoadAsyncScene_c() );
+    // }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
         
-    }
+    // }
 
-    IEnumerator LoadAsyncScene_c()
-    {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        op.allowSceneActivation = false;
+    // IEnumerator LoadAsyncScene_c()
+    // {
+    //     AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+    //     op.allowSceneActivation = false;
 
-        while (!op.isDone)
-        {
-            text.text = time.ToString();
-            time = Time.time;
-            slider.value = time/10f;
+    //     while (!op.isDone)
+    //     {
+    //         text.text = time.ToString();
+    //         time = Time.time;
+    //         slider.value = time/10f;
 
-            Debug.Log(op.isDone);
-            Debug.Log(op.progress);
-            Debug.Log("------------");
+    //         Debug.Log(op.isDone);
+    //         Debug.Log(op.progress);
+    //         Debug.Log("------------");
 
-            if (time >10 )
-            {
-                op.allowSceneActivation = true;
-            }
+    //         if (time >10 )
+    //         {
+    //             op.allowSceneActivation = true;
+    //         }
 
-            yield return null;
-        }
-    }
+    //         yield return null;
+    //     }
+    // }
 }

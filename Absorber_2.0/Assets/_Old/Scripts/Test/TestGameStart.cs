@@ -17,6 +17,6 @@ public class TestGameStart : MonoBehaviour
         // Fade.fade.FadeOut();
     
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("SampleScene");
+        // SceneManager.LoadScene("SampleScene");
     }
 }

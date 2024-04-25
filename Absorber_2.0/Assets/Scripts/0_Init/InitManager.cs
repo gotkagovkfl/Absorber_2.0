@@ -38,7 +38,7 @@ public class InitManager : MonoBehaviour
     /// </summary>
     void SetWorks()
     {
-        for(int i=0;i<10;i++)
+        for(int i=0;i<7;i++)
         {
             initWorks.Enqueue(new InitWork_TestInit());
         }
@@ -78,5 +78,7 @@ public class InitManager : MonoBehaviour
 
         //다음 화면으로 이동 
         Debug.Log("==========모든 초기화 작업 종료됨.============");
+
+        SceneHanlder.LoadScene_lobby();
     }
 }

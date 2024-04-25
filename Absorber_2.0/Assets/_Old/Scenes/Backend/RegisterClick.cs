@@ -51,7 +51,7 @@ public class RegisterClick : MonoBehaviour
 
         // Fade.fade.FadeOut();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("TestLobby");
+        // SceneManager.LoadScene("TestLobby");
     }
 
 

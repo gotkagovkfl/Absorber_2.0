@@ -17,6 +17,11 @@ public class DirectingManager : MonoBehaviour
         get => _onDirecting;
     }
 
+
+    
+
+
+
     //-------------------------------------------------------------
    void Awake()
     {
