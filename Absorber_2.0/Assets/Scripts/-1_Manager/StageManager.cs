@@ -105,7 +105,7 @@ public class StageManager : MonoBehaviour
     public void GoToNextStage()
     {        
 
-        DirectingManager.dm.FadeOut( ChangeStage );  
+        // DirectingManager.dm.FadeOut( ChangeStage );  
         
     }
 
@@ -186,7 +186,7 @@ public class StageManager : MonoBehaviour
     {
         GameEvent.onStageStart.Invoke();
 
-        DirectingManager.dm.FadeIn( ()=> _currStage.StartStageRoutine() );
+        // DirectingManager.dm.FadeIn( ()=> _currStage.StartStageRoutine() );
     }
 
 

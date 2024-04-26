@@ -41,18 +41,6 @@ public class GameManager : MonoBehaviour
     // Use in Scene_Lobbby
     // ------------------------
 
-    // =========================================
-    // Exit Game
-    // =========================================
-    public void ExitGame()
-    {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit(); 
-        #endif
-    }
-
     //==========================================
     // Init Game 
     //==========================================

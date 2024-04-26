@@ -10,9 +10,9 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class SceneHanlder : MonoBehaviour
+public class SceneHandler : MonoBehaviour
 {
-    public static SceneHanlder sh;
+    public static SceneHandler sh;
     
     [SerializeField] TextMeshProUGUI text_test;
     
@@ -88,6 +88,11 @@ public class SceneHanlder : MonoBehaviour
         sh?.LoadScene("01_Lobby");
     }
 
+
+    public static void LoadScene_main()
+    {
+        sh?.LoadScene("02_Main");
+    }
 
 
 

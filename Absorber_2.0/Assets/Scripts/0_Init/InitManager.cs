@@ -79,6 +79,6 @@ public class InitManager : MonoBehaviour
         //다음 화면으로 이동 
         Debug.Log("==========모든 초기화 작업 종료됨.============");
 
-        SceneHanlder.LoadScene_lobby();
+        SceneHandler.LoadScene_lobby();
     }
 }

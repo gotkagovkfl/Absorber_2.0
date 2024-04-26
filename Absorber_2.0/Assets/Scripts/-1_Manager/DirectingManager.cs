@@ -80,40 +80,40 @@ public class DirectingManager : MonoBehaviour
     //--------------
     // 페이드 아웃
     //-------------
-    public void FadeOut( Delegate_fadeOut d)
-    {
-        if (animator_fade!=null)
-        {
-            _onDirecting = true;
-            animator_fade.SetTrigger("fadeOut");
-        }
-        StartCoroutine(Fade_c( d ));
-    }
+    // public void FadeOut( Delegate_fadeOut d)
+    // {
+    //     if (animator_fade!=null)
+    //     {
+    //         _onDirecting = true;
+    //         animator_fade.SetTrigger("fadeOut");
+    //     }
+    //     StartCoroutine(Fade_c( d ));
+    // }
 
     //--------------
     // 페이드인
     //--------------
-    public void FadeIn( Delegate_fadeOut d )
-    {
-        if (animator_fade!=null)
-        {
-            _onDirecting = true;
-            animator_fade.SetTrigger("fadeIn");
-        }
+    // public void FadeIn( Delegate_fadeOut d )
+    // {
+    //     if (animator_fade!=null)
+    //     {
+    //         _onDirecting = true;
+    //         animator_fade.SetTrigger("fadeIn");
+    //     }
 
-        StartCoroutine(Fade_c( d) );
-    }
+    //     StartCoroutine(Fade_c( d) );
+    // }
 
     //-----------
     // 페이드 인/아웃 후에 전달받은 함수 실행 
     //-----------
-    IEnumerator Fade_c( Delegate_fadeOut d )
-    {
-        yield return new WaitForSeconds(1f);
-        _onDirecting = false;
-        d();
+    // IEnumerator Fade_c( Delegate_fadeOut d )
+    // {
+    //     yield return new WaitForSeconds(1f);
+    //     _onDirecting = false;
+    //     d();
         
-    }
+    // }
     #endregion
     // public void BtnClickSound()             ********************** 버튼 클릭 사운드는 사운드 매니저에서 합시다
     // {

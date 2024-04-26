@@ -1,14 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 
-public static class GameEvent 
+public class GameEvent : MonoBehaviour
 {
-    public static UnityEvent onInitGame;
-    public static UnityEvent<InitWork> onStartInitWork; 
-    public static UnityEvent onFinishInitWork;    
+    public static GameEvent ge; 
+
+
+    void Awake()
+    {
+        if(ge == null)
+        {
+            ge =this;
+            DontDestroyOnLoad(gameObject);
+        } 
+        else
+        {
+            Destroy(gameObject);
+        }
+   }
+    
+    public UnityEvent<bool> onChange_aimMode;      // 타게팅 모드 변경시,     bool : 자동 타게팅일경우, 
+
+
+    
+    // public static UnityEvent onInitGame;
+    // public static UnityEvent<InitWork> onStartInitWork; 
+    // public static UnityEvent onFinishInitWork;    
+
+    //
+    
+
+
+
+
+    //
+
+
 
     public static UnityEvent onAnyButtonClick;
 
