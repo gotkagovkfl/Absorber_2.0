@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public static Player player => _player;
 
     //
-    public PlayerUI playerUI;
+    // public PlayerUI playerUI;
     public List<string> chooseList = new List<string>();
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         sound_changeAuto = Resources.Load<AudioClip>("Sound/21_targetchange");
 
 
-        playerUI = GetComponent<PlayerUI>();
+        // playerUI = GetComponent<PlayerUI>();
 
         t_player = transform;
         init();
@@ -282,11 +282,11 @@ public class Player : MonoBehaviour
 
 
             LevelUpManager.GetComponent<LevelUpManager>().LevelUp();
-            playerUI.SetLevelText();
+            GameEvent.ge.onChange_level.Invoke();
         }
         #endregion
 
-        playerUI.SetMpBar();
+        GameEvent.ge.onChange_exp.Invoke();
     }
 
     public void StartInvincible()
@@ -313,7 +313,8 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0f;
         rb.velocity = rb.velocity * dashingPower;
         
-        playerUI.OnUseDash();
+        
+        GameEvent.ge.onDash.Invoke();
 
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
@@ -417,7 +418,8 @@ public class Player : MonoBehaviour
         }
 
 
-        playerUI.SetHpBar();
+        // playerUI.SetHpBar();
+        GameEvent.ge.onChange_hp.Invoke();
         // playerUI.SetBloodOverlay();
 
         string absValue = ((value >= 0) ? value : -value).ToString();

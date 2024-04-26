@@ -2217,6 +2217,18 @@ MonoBehaviour:
   onChange_aimMode:
     m_PersistentCalls:
       m_Calls: []
+  onChange_hp:
+    m_PersistentCalls:
+      m_Calls: []
+  onChange_exp:
+    m_PersistentCalls:
+      m_Calls: []
+  onChange_level:
+    m_PersistentCalls:
+      m_Calls: []
+  onDash:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &174086563
 Transform:
   m_ObjectHideFlags: 0
@@ -14024,37 +14036,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 963464581, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011881, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011882, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4971612231136011884, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011884, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011886, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011886, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1051963087
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971612231136011887, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4971612231136011887, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14096,8 +14080,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 963464581, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
+    - target: {fileID: 5323481426218010298, guid: 90d62b1e895d4704fb57cf81e329689b, type: 3}
+      propertyPath: DopplerLevel
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -21101,6 +21088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider_hp: {fileID: 1272839479}
+  text_hp: {fileID: 1428109138}
   slider_mp: {fileID: 607502811}
   text_level: {fileID: 693377244}
   slider_dash: {fileID: 531813103}
