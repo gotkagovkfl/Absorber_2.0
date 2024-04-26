@@ -59,7 +59,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {               
-            return  damage + Player.Instance.Atk * weight_damage + Player.Instance.Avoid_Atk;
+            return  damage + Player.player.Atk * weight_damage + Player.player.Avoid_Atk;
         }
         set
         {
@@ -70,7 +70,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return range * (100 + Player.Instance.Range_Plus * weight_range ) *0.01f;
+            return range * (100 + Player.player.Range_Plus * weight_range ) *0.01f;
         }
         set
         {
@@ -81,7 +81,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return attackSpeed * ( 100 + Player.Instance.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f;
+            return attackSpeed * ( 100 + Player.player.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f;
         }
         set
         {
@@ -93,7 +93,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return penetration + Player.Instance.penetration;
+            return penetration + Player.player.penetration;
         }
         set
         {
@@ -104,7 +104,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get 
         {
-            return scale  *(100 + Player.Instance.Range_Plus * weight_range ) * 0.01f;
+            return scale  *(100 + Player.player.Range_Plus * weight_range ) * 0.01f;
         }
         set
         {
@@ -151,7 +151,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return splitNum + Player.Instance.splitNum;
+            return splitNum + Player.player.splitNum;
         }
         set
         {
@@ -162,7 +162,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return projNum + Player.Instance.projNum;
+            return projNum + Player.player.projNum;
         }
         set
         {
@@ -174,7 +174,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return explosionLevel + Player.Instance.explosionLevel;
+            return explosionLevel + Player.player.explosionLevel;
         }
         set
         {
@@ -190,7 +190,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            if (notAvailable || DirectingManager.dm.onDirecting || !Player.Instance.canAttack)
+            if (notAvailable || DirectingManager.dm.onDirecting || !Player.player.canAttack)
             {
                 return false;
             }
@@ -284,7 +284,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         mouseTarget = MouseTarget.mt.myTransform;
         handTransform = transform.parent;
 
-        originalHandPosition = Player.Instance.myTransform.position + new Vector3(1,5);
+        originalHandPosition = Player.player.t_player.position + new Vector3(1,5);
 
         handTransform.position = originalHandPosition;
         handTransform.rotation = Quaternion.identity;
@@ -356,11 +356,11 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     public void SearchTarget(int searchNum)
     {
         list_targets.Clear();  // 일단 현재 타겟 리스트 초기화 
-        targets = Physics2D.CircleCastAll(Player.Instance.transform.position, rangeT, Vector2.zero, 0, targetLayer);
+        targets = Physics2D.CircleCastAll(Player.player.transform.position, rangeT, Vector2.zero, 0, targetLayer);
 
         
         // autoAim일때 
-        if (!Player.Instance.autoAim)
+        if (!Player.player.autoAim)
         {
             target = mouseTarget;
             list_targets.Add(target);
@@ -400,7 +400,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         {
             return;
         }
-        int startIdx = (Player.Instance.autoAim)?0:1;
+        int startIdx = (Player.player.autoAim)?0:1;
         
         for (int i=startIdx;i<searchNum;i++)
         {
@@ -414,7 +414,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     //==================================
     public bool InRange(Vector3 v)
     {
-        float distSqr = Vector3.SqrMagnitude(v - Player.Instance.myTransform.position);
+        float distSqr = Vector3.SqrMagnitude(v - Player.player.t_player.position);
 
         if (distSqr <= rangeT * rangeT)
         {
@@ -427,9 +427,9 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     //==================================
     public Vector3 GetMaximumRangePos(Vector3 v)
     {
-        Vector3 dir = (v - Player.Instance.myTransform.position).normalized;
+        Vector3 dir = (v - Player.player.t_player.position).normalized;
 
-        Vector3 retPos = Player.Instance.myTransform.position + dir * rangeT;
+        Vector3 retPos = Player.player.t_player.position + dir * rangeT;
         return retPos;
     }
 
@@ -444,7 +444,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
             // 타겟이 무기보다 왼쪽에 있는 경우 스프라이트 뒤집기
             if (list_targets[0] != null)
             {
-                Vector3 targetPos = (Player.Instance.autoAim)? list_targets[0].position : mouseTarget.position;
+                Vector3 targetPos = (Player.player.autoAim)? list_targets[0].position : mouseTarget.position;
                 Vector3 dir = targetPos - handTransform.position;
 
                 bool targetOnLeft = dir.x<0;    // 타겟이 왼쪽에 있는지 
@@ -483,7 +483,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     public IEnumerator SetAttackAnimation()
     {
         animator.SetTrigger("attack");
-        float asMul = ( 100 + Player.Instance.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f; ///  *********************
+        float asMul = ( 100 + Player.player.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f; ///  *********************
         animator.SetFloat("asMul",asMul ); 
 
         yield return new WaitForFixedUpdate();      // 애니메이션 전환 속도때문에 딜레이 줘야함.

@@ -41,7 +41,7 @@ public class Boss2 : MonoBehaviour
         Hp = MaxHp;
         speed = 2f;
         rigid = GetComponent<Rigidbody2D>();
-        target = Player.Instance.transform;
+        target = Player.player.transform;
         bossDied = false;
 
         positions = new Vector2[]

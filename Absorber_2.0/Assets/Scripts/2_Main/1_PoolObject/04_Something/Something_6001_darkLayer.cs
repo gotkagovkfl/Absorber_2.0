@@ -35,7 +35,7 @@ public class Something_6001_darkLayer : Something
             rb = GetComponent<Rigidbody2D>();
         }
 
-        Vector3 dir = new Vector3( -Player.Instance.inputVector.x,0);
-        rb.velocity = dir * Player.Instance.Speed * 0.6f;
+        Vector3 dir = new Vector3( -Player.player.inputVector.x,0);
+        rb.velocity = dir * Player.player.Speed * 0.6f;
     }
 }

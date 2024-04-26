@@ -57,7 +57,7 @@ public class InventoryManager : MonoBehaviour
     //======================================
     public void ChangeWeapon(GameObject weapon)
     {   
-        Player.Instance.GetComponent<PlayerWeapon>().changeWeapon(0,weapon);
+        Player.player.GetComponent<PlayerWeapon>().changeWeapon(0,weapon);
 
     }
 

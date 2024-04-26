@@ -18,7 +18,7 @@ public class Elite3_Spear : Projectile_Enemy
 
     void Start()
     {
-        target = Player.Instance.transform;
+        target = Player.player.transform;
         stopDistance = 0.3f;
         bulletPos = target.position;
         stopCheck = false;
@@ -44,7 +44,7 @@ public class Elite3_Spear : Projectile_Enemy
     {
         spear.velocity = Vector2.zero;
         yield return new WaitForSeconds(6f);
-        target = Player.Instance.transform;
+        target = Player.player.transform;
         bulletPos = target.position;
         Vector2 direction = target.position - transform.position;
         spear.velocity = direction.normalized * spearSpeed;

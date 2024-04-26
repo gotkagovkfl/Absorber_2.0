@@ -110,7 +110,7 @@ public class Proj_009_petals : Projectile
             Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
 
             float splitWeight = 0.4f + splitNum * 0.15f;            
-            proj.SetUp(damage * splitWeight , speed,  scale * splitWeight,  projNum-1, Player.Instance.penetration,  splitNum -1 , lifeTime*0.9f); 
+            proj.SetUp(damage * splitWeight , speed,  scale * splitWeight,  projNum-1, Player.player.penetration,  splitNum -1 , lifeTime*0.9f); 
             proj.SetSpecialStat(explosionLevel -1 , weight_critDamage , knockBackPower* splitWeight);
             
             proj.myTransform.rotation = Quaternion.Euler(new Vector3(0, 0, currRotation));

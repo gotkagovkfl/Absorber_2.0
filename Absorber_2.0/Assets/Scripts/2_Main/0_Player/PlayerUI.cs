@@ -14,7 +14,7 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateUIPos()
     {
-        Vector3 playerPos = Camera.main.WorldToScreenPoint(Player.Instance.myTransform.position);
+        Vector3 playerPos = Camera.main.WorldToScreenPoint(Player.player.t_player.position);
 
         transform_playerUI.position = playerPos + Vector3.up;
     }
@@ -41,10 +41,10 @@ public class PlayerUI : MonoBehaviour
     //================================================================================
     public void SetHpBar()
     {
-        slider_hp.maxValue = Player.Instance.Max_Hp;
-        slider_hp_delay.maxValue = Player.Instance.Max_Hp;
-        slider_hp.value = Player.Instance.Hp;
-        text_hp.text = ((Player.Instance.Hp).ToString() + "/" +Player.Instance.Max_Hp.ToString());
+        slider_hp.maxValue = Player.player.Max_Hp;
+        slider_hp_delay.maxValue = Player.player.Max_Hp;
+        slider_hp.value = Player.player.Hp;
+        text_hp.text = ((Player.player.Hp).ToString() + "/" +Player.player.Max_Hp.ToString());
         
         if (coroutine_delay != null)
         {
@@ -80,13 +80,13 @@ public class PlayerUI : MonoBehaviour
 
     public void SetMpBar()
     {
-        slider_mp.maxValue = Player.Instance.Exp;
-        slider_mp.value = Player.Instance.Cur_Exp;
+        slider_mp.maxValue = Player.player.Exp;
+        slider_mp.value = Player.player.Cur_Exp;
     }
 
     public void SetLevelText()
     {
-        text_playerLevel.text = Player.Instance.Level.ToString();
+        text_playerLevel.text = Player.player.Level.ToString();
     }
 
     
@@ -99,7 +99,7 @@ public class PlayerUI : MonoBehaviour
 
     public void SetDashBar()
     {
-        slider_dash.maxValue = Player.Instance.dashingCooldown;
+        slider_dash.maxValue = Player.player.dashingCooldown;
         slider_dash.value = slider_dash.maxValue;
         image_canDash.SetActive(true);
     }

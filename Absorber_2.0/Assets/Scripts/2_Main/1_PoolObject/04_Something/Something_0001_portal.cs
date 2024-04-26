@@ -44,7 +44,7 @@ public class Something_0001_portal : Something
             // audioSource.PlayOneShot( audioSource.clip );
             
             // 포탈 진입 이펙트 
-            SomethingPoolManager.spm.CreateSomething("0002", Player.Instance.myTransform.position );
+            SomethingPoolManager.spm.CreateSomething("0002", Player.player.t_player.position );
             
             // 스테이지 전환 및 포탈 1초후에 파괴 (1초는 페이드 아웃 시간)
             StageManager.sm.GoToNextStage();

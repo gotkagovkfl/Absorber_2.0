@@ -188,7 +188,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
     {
         rb.simulated = true;
         // 투사체 크기는 플레이어 크기에 맞춰 설정됨  - 기본 투사체 정보는 ppm의 dic_proj으로부터 가져옴
-        transform.localScale = Player.Instance.myTransform.localScale.x * ResourceManager.rm.GetFromDic_prefab("01", id_proj).transform.lossyScale * scale; 
+        transform.localScale = Player.player.t_player.localScale.x * ResourceManager.rm.GetFromDic_prefab("01", id_proj).transform.lossyScale * scale; 
         
         Action_custom();            // 여기서 애니메이션 등 기타 이유로 수명을 뒤늦게 설정할 수 있기 때문에, 투사체 삭제를 뒤늦게 호출
         SetLifeTime();
@@ -384,13 +384,13 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
             float weight = 1;
             float weight_lvl = 0;
                     
-            if (  Random.Range(0, 100) <= Player.Instance.Crit)
+            if (  Random.Range(0, 100) <= Player.player.Crit)
             {
                 weight *= weight_critDamage;
                 weight_lvl++;
             }
      
-            if(  Random.Range(0, 100) <= Player.Instance.Reinforce_Prob)
+            if(  Random.Range(0, 100) <= Player.player.Reinforce_Prob)
             {
                 weight *= 2;
                 weight_lvl++;
@@ -473,7 +473,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
         {
             Projectile proj = ProjPoolManager.ppm.GetFromPool("100");        
             
-            float dmg = 7 + Player.Instance.Atk;
+            float dmg = 7 + Player.player.Atk;
 
             proj.SetUp( dmg, 0,  scale,  0, 987654321, 0 , 0.25f);           
             proj.myTransform.position = pos;

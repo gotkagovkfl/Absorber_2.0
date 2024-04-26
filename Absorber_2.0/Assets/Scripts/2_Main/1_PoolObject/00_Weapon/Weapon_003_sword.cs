@@ -89,11 +89,11 @@ public class Weapon_003_sword: Weapon
                 {
                     break;
                 }
-                attackDir = (target.position - Player.Instance.myTransform.position).normalized;
+                attackDir = (target.position - Player.player.t_player.position).normalized;
 
                 // 효과생성
                 string id = id_weapon;
-                Vector3 firePoint = Player.Instance.myTransform.position + Vector3.up; 
+                Vector3 firePoint = Player.player.t_player.position + Vector3.up; 
 
                 Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
                 proj.InitProj(this, firePoint, target);

@@ -66,7 +66,7 @@ public class Enemy_000_Normal_itemBox : Enemy
         }
         else            // ruby - heal Item
         {
-            defaultItem = ItemPoolManager.ipm.SpawnItem("001", Player.Instance.Hp_item_up, myTransform.position);  
+            defaultItem = ItemPoolManager.ipm.SpawnItem("001", Player.player.Hp_item_up, myTransform.position);  
         }
         
         

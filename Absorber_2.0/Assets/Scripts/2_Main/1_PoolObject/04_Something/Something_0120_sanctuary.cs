@@ -33,7 +33,7 @@ public class Something_0120_sanctuary : Something
         lastAttackTime = -3f;
         lastHealTime = -3f;
 
-        asPlus = Player.Instance.sanctuaryLevel * 50;
+        asPlus = Player.player.sanctuaryLevel * 50;
     }
 
     // 개별 초기화 
@@ -52,7 +52,7 @@ public class Something_0120_sanctuary : Something
         {
             inCircle = true;
             
-            Player.Instance.Attack_Speed_Plus += asPlus;
+            Player.player.Attack_Speed_Plus += asPlus;
             // 공속 증가?
         }
     }
@@ -66,7 +66,7 @@ public class Something_0120_sanctuary : Something
         {
             inCircle = false;
 
-            Player.Instance.Attack_Speed_Plus -= asPlus;
+            Player.player.Attack_Speed_Plus -= asPlus;
         }
     }
 
@@ -87,7 +87,7 @@ public class Something_0120_sanctuary : Something
             //
             //힐하고 공격 
             Attack();
-            Player.Instance.ChangeHp(3 * Player.Instance.sanctuaryLevel );
+            Player.player.ChangeHp(3 * Player.player.sanctuaryLevel );
 
             //
             lastHealTime = currTime;
@@ -103,8 +103,8 @@ public class Something_0120_sanctuary : Something
         {
             // 성역 공격 투사체 생성
             Projectile proj = ProjPoolManager.ppm.GetFromPool("101");
-            proj.SetUp(  3 * Player.Instance.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
-            proj.SetSpecialStat( Player.Instance.explosionLevel, 1.5f, 15);
+            proj.SetUp(  3 * Player.player.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
+            proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
 
             proj.myTransform.position = myTransform.position;
             proj.Action();

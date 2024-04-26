@@ -78,41 +78,41 @@ public class UiScript : MonoBehaviour
         //
         Dictionary<string, string> Status_data = GameObject.Find("CSVManager").GetComponent<test>().Status_data;
         string fieldName = Status_data[status];
-        Player.Instance.chooseList.Add(img);
+        Player.player.chooseList.Add(img);
 
         FieldInfo field = typeof(Player).GetField(fieldName, BindingFlags.Instance | BindingFlags.Public);
         if (field != null)
         {
             // Player player = Player.GetComponent<Player>();
-            Type type = field.GetValue(Player.Instance).GetType();
+            Type type = field.GetValue(Player.player).GetType();
             if (type == typeof(int))
             {
-                int Current_Value = (int)field.GetValue(Player.Instance);
+                int Current_Value = (int)field.GetValue(Player.player);
                 int New_Value = Current_Value + amount;
-                field.SetValue(Player.Instance, New_Value);
+                field.SetValue(Player.player, New_Value);
             }
             else if (type == typeof(float))
             {
-                float Current_Value = (float)field.GetValue(Player.Instance);
+                float Current_Value = (float)field.GetValue(Player.player);
                 float New_Value = Current_Value + amount;
-                field.SetValue(Player.Instance, New_Value);
+                field.SetValue(Player.player, New_Value);
             }
             if (status == "최대체력")
-                Player.Instance.ChangeHp(amount);
+                Player.player.ChangeHp(amount);
             else if (status == "행운")
-                Player.Instance.Luk = Math.Min(Player.Instance.Luk, 4);
+                Player.player.Luk = Math.Min(Player.player.Luk, 4);
             else if(status == "투사체 개수")
-                Player.Instance.projNum = Math.Min(Player.Instance.projNum, 2);
+                Player.player.projNum = Math.Min(Player.player.projNum, 2);
             else if(status == "분열")
-                Player.Instance.splitNum = Math.Min(Player.Instance.splitNum, 2);
+                Player.player.splitNum = Math.Min(Player.player.splitNum, 2);
         }
         else
         {
             MethodInfo method = typeof(Player).GetMethod(fieldName, BindingFlags.Instance | BindingFlags.Public);
             if(method != null)
-                method.Invoke(Player.Instance, null);
+                method.Invoke(Player.player, null);
         }
-        Player.Instance.OnSelecting = false;
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.OnSelecting = false;
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 }

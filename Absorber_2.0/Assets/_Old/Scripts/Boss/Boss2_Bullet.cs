@@ -32,7 +32,7 @@ public class Boss2_Bullet : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        target = Player.Instance.transform;
+        target = Player.player.transform;
 
         forSpearList = new List<string>();
 

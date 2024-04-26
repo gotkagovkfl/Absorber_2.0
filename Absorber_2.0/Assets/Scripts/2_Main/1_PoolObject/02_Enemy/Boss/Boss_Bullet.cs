@@ -65,7 +65,7 @@ public class Boss_Bullet : MonoBehaviour
         sound_normal = Resources.Load<AudioClip>("Sound/18_Boss_bloodbullet");
         sound_halfBullet = Resources.Load<AudioClip>("Sound/18_Boss_halfbullet");
         
-        target = Player.Instance.myTransform;
+        target = Player.player.t_player;
         // bunbPrefab = Resources.Load<GameObject>("Prefabs/Boss/Boss_bunB");
         // bombPrefab = Resources.Load<GameObject>("Prefabs/Boss/Boss_Bomb");
         // normalPrefab = Resources.Load<GameObject>("Prefabs/Boss/Boss_Bullet");
@@ -280,7 +280,7 @@ public class Boss_Bullet : MonoBehaviour
         Projectile_Enemy throwBullet = EnemyProjPoolManager.eppm.GetFromPool("103");
         throwBullet.SetUp( 15, ranSpeed, 1, 0, 0, 10f );
         throwBullet.transform.position = new Vector3(ranX, ranY, 0f);
-        throwBullet.SetDirection(Player.Instance.myTransform);
+        throwBullet.SetDirection(Player.player.t_player);
         throwBullet.RotateProj();
         throwBullet.Action();
 

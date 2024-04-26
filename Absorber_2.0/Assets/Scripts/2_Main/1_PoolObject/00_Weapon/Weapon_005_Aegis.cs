@@ -76,7 +76,7 @@ public class Weapon_005_Aegis : Weapon
             string id = id_weapon;
             Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
             proj.SetUp(this);
-            proj.myTransform.position = new Vector3(transform.position.x, Player.Instance.myTransform.position.y);
+            proj.myTransform.position = new Vector3(transform.position.x, Player.player.t_player.position.y);
 
             
             proj.Action();

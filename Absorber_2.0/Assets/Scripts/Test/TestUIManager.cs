@@ -24,10 +24,10 @@ public class TestUIManager : MonoBehaviour
 
     public void SetProjNum(float value)
     {
-        Player.Instance.projNum = (int)value;
-        text_projNum.text = Player.Instance.projNum.ToString();
+        Player.player.projNum = (int)value;
+        text_projNum.text = Player.player.projNum.ToString();
         
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 
 
@@ -37,10 +37,10 @@ public class TestUIManager : MonoBehaviour
 
     public void SetSplitNum(float value)
     {
-        Player.Instance.splitNum = (int)value;
-        text_splitNum.text = Player.Instance.splitNum.ToString();
+        Player.player.splitNum = (int)value;
+        text_splitNum.text = Player.player.splitNum.ToString();
 
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 
 
@@ -50,10 +50,10 @@ public class TestUIManager : MonoBehaviour
 
     public void SetExplosionLevel(float value)
     {
-        Player.Instance.explosionLevel = (int)value;
-        text_explosionLevel.text = Player.Instance.explosionLevel.ToString();
+        Player.player.explosionLevel = (int)value;
+        text_explosionLevel.text = Player.player.explosionLevel.ToString();
 
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 
      //---------------------------------- 출혈 레벨 -------------------------------------------------
@@ -62,10 +62,10 @@ public class TestUIManager : MonoBehaviour
 
     public void SetBleedingLevel(float value)
     {
-        Player.Instance.bleedingLevel = (int)value;
-        text_bleedingLevel.text = Player.Instance.bleedingLevel.ToString();
+        Player.player.bleedingLevel = (int)value;
+        text_bleedingLevel.text = Player.player.bleedingLevel.ToString();
 
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 
     //---------------------------------- 성역 레벨 -------------------------------------------------
@@ -74,10 +74,10 @@ public class TestUIManager : MonoBehaviour
 
     public void SetSanctuaryLevel(float value)
     {
-        Player.Instance.sanctuaryLevel = (int)value;
-        text_sanctuaryLevel.text = Player.Instance.sanctuaryLevel.ToString();
+        Player.player.sanctuaryLevel = (int)value;
+        text_sanctuaryLevel.text = Player.player.sanctuaryLevel.ToString();
 
-        Player.Instance.GetComponent<PlayerWeapon>().InitWeapons();
+        Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
 
 

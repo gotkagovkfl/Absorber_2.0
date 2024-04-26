@@ -8,7 +8,7 @@ using System;
 using TMPro;
 
 //====================================================================================
-//  °ÔÀÓ °á°ú µîÀ» È­¸é¿¡ Ç¥½ÃÇÑ´Ù. (  °ÔÀÓ Å¬¸®¾î / °ÔÀÓ ¿À¹ö )
+//  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ Ç¥ï¿½ï¿½ï¿½Ñ´ï¿½. (  ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ )
 //====================================================================================
 public class PauseUI : MonoBehaviour
 {
@@ -44,23 +44,23 @@ public class PauseUI : MonoBehaviour
 
 
     //====================================================================================
-    // GameManagerÀÇ °ÔÀÓÅ¬¸®¾î ¿©ºÎ¿¡ µû¶ó °ÔÀÓ °á°ú¸¦ ¼³Á¤ÇÑ´Ù.  
+    // GameManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.  
     //====================================================================================
     public void SetStatus()
     {
-        Player_Level.text = "Level " + Player.Instance.Level;
+        Player_Level.text = "Level " + Player.player.Level;
         Player_KillCount.text = "Kill " + GameManager.gm.KillCount.ToString();
         Player_Score.text = "Score " + GameManager.gm.Score.ToString();
-        Player_Weapon.text = "Weapon\n" + Player.Instance.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0,11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)","");
-        Player_Hp.text = "Hp " + Player.Instance.Max_Hp;
-        Player_Damage.text = "Damage " + Player.Instance.Atk;
-        Player_Attack_Speed.text = "Attack_Speed " + (Player.Instance.Attack_Speed + Player.Instance.Attack_Speed * Player.Instance.Attack_Speed_Plus / 100f);
-        Player_Range.text = "Range " + (Player.Instance.Range + Player.Instance.Range * Player.Instance.Range_Plus / 100f);
-        Player_Speed.text = "Speed " + (Player.Instance.Speed + Player.Instance.Speed * Player.Instance.Speed_Plus / 100f);
-        Player_Crit.text = "Crit " + Player.Instance.Crit + "%";
-        for (int i = 0; i < Player.Instance.chooseList.Count; i++)
+        Player_Weapon.text = "Weapon\n" + Player.player.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0,11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)","");
+        Player_Hp.text = "Hp " + Player.player.Max_Hp;
+        Player_Damage.text = "Damage " + Player.player.Atk;
+        Player_Attack_Speed.text = "Attack_Speed " + (Player.player.Attack_Speed + Player.player.Attack_Speed * Player.player.Attack_Speed_Plus / 100f);
+        Player_Range.text = "Range " + (Player.player.Range + Player.player.Range * Player.player.Range_Plus / 100f);
+        Player_Speed.text = "Speed " + (Player.player.Speed + Player.player.Speed * Player.player.Speed_Plus / 100f);
+        Player_Crit.text = "Crit " + Player.player.Crit + "%";
+        for (int i = 0; i < Player.player.chooseList.Count; i++)
         {
-            Abilities[i].sprite = Resources.Load<Sprite>("Pictogram/" + Player.Instance.chooseList[i]);
+            Abilities[i].sprite = Resources.Load<Sprite>("Pictogram/" + Player.player.chooseList[i]);
             Abilities[i].color = new Color(1, 1, 1, 1);
         }
     }

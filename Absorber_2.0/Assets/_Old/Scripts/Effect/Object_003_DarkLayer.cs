@@ -14,8 +14,8 @@ public class Object_003_DarkLayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dir = new Vector3( -Player.Instance.inputVector.x,0);
+        Vector3 dir = new Vector3( -Player.player.inputVector.x,0);
 
-        rb.velocity = dir * Player.Instance.Speed * 0.6f;
+        rb.velocity = dir * Player.player.Speed * 0.6f;
     }
 }

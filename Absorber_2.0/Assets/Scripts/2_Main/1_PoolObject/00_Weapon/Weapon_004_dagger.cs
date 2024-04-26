@@ -85,7 +85,7 @@ public class Weapon_004_dagger : Weapon
             
             animator.SetTrigger("attack");  // 자연스러운 애니메이션
 
-            Vector3 firePoint = Player.Instance.transform.position + Vector3.up * 2 * (i%2);
+            Vector3 firePoint = Player.player.transform.position + Vector3.up * 2 * (i%2);
             bool flip = (i%2==0)? true:false;
             spriter.flipX = flip;
             if (targetOnLeft) 

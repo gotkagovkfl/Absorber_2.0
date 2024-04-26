@@ -78,7 +78,7 @@ public class Weapon_006_magicCircle : Weapon
                 Vector3 firePoint  = target.position;
 
                 // 최대 사거리 
-                if(!Player.Instance.autoAim)
+                if(!Player.player.autoAim)
                 {
                     if ( !InRange(firePoint) )
                     {

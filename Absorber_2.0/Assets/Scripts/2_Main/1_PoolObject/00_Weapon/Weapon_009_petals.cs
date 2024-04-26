@@ -86,7 +86,7 @@ public class Weapon_009_petals: Weapon
             Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
 
             proj.SetUp(this);
-            proj.SetTarget(Player.Instance.myTransform);       // 플레이어 주위를 회전함 .
+            proj.SetTarget(Player.player.t_player);       // 플레이어 주위를 회전함 .
             proj.targetProj = proj;
             proj.mainTransform = proj.myTransform;
             proj.rotAngle = currRotation;

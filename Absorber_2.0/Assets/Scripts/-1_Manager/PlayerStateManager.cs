@@ -26,12 +26,12 @@ public class PlayerStateManager : MonoBehaviour
         {
             return;
         }
-        Type t = field.GetValue(Player.Instance).GetType();
+        Type t = field.GetValue(Player.player).GetType();
 
         if (t == typeof(int))
         {
             Debug.Log(t);
-            int originalValue = (int) (field.GetValue(Player.Instance));
+            int originalValue = (int) (field.GetValue(Player.player));
 
 
             // type 에 따라 새 능력치 값 결정
@@ -49,7 +49,7 @@ public class PlayerStateManager : MonoBehaviour
                     break;
             }
             // 결정한 새 능력치 값 적용
-            field.SetValue(Player.Instance, newValue);
+            field.SetValue(Player.player, newValue);
             
             // time 후에 다시 원래 값으로 복구 
             StartCoroutine(SetDuration(field, originalValue, time));
@@ -59,7 +59,7 @@ public class PlayerStateManager : MonoBehaviour
     public IEnumerator SetDuration(FieldInfo field, int originalValue, float time)
     {
         yield return new WaitForSeconds( time ) ;
-        field.SetValue(Player.Instance, originalValue);
+        field.SetValue(Player.player, originalValue);
     }
     
 
@@ -68,8 +68,8 @@ public class PlayerStateManager : MonoBehaviour
     // ======================================
     public void Stunned(float time)
     {
-        Player.Instance.canMove = false;
-        Player.Instance.canAttack = false;
+        Player.player.canMove = false;
+        Player.player.canAttack = false;
 
         StartCoroutine( SetDuration_stun(time));
     }
@@ -78,8 +78,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        Player.Instance.canMove = true;
-        Player.Instance.canAttack = true;
+        Player.player.canMove = true;
+        Player.player.canAttack = true;
     }
     
     

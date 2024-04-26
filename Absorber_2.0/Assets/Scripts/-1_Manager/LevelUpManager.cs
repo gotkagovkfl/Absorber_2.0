@@ -29,10 +29,10 @@ public class LevelUpManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        Player.Instance.OnSelecting = true;
+        Player.player.OnSelecting = true;
 
-        int Luk         = Player.Instance.Luk;
-        int[,] Luk_Table = Player.Instance.Luk_Table;
+        int Luk         = Player.player.Luk;
+        int[,] Luk_Table = Player.player.Luk_Table;
         int grade = 0;
         int tmp = Random.Range(1, 101); // 1단계 2단계 3단계 확률이 90 7 3 이라면 1~90은 1단계 91~97은 2단계 98 ~ 100은 3단계로 되도록 난수 추출
         if (tmp <= Luk_Table[Luk, 0])

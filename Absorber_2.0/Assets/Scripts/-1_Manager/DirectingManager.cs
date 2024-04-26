@@ -173,7 +173,7 @@ public class DirectingManager : MonoBehaviour
     {
         Cinemachine.CinemachineVirtualCamera c = GameObject.Find("Virtual Camera").GetComponent<Cinemachine.CinemachineVirtualCamera>();
         
-        c.Follow = Player.Instance.myTransform.Find("CameraTarget");
+        c.Follow = Player.player.t_player.Find("CameraTarget");
     }
     #endregion
 

@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
             // Debug.Log("다음 스테이지로 ~");
 
             Effect effect = EffectPoolManager.epm.GetFromPool("008");
-            effect.InitEffect(Player.Instance.myTransform.position );
+            effect.InitEffect(Player.player.t_player.position );
             effect.ActionEffect();
             
             // 스테이지 전환 및 포탈 1초후에 파괴 (1초는 페이드 아웃 시간)

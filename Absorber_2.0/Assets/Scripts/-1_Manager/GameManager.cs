@@ -114,14 +114,14 @@ public class GameManager : MonoBehaviour
         onPlay = false;
         gameClear = clear;
 
-        Player_Level = "Level " + Player.Instance.Level;
-        Player_Weapon = "Weapon\n" + Player.Instance.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0, 11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)", ""); ;
-        Player_Hp = "Hp " + Player.Instance.Max_Hp;
-        Player_Atk = "Damage " + Player.Instance.Atk;
-        Player_Atk_Speed = "Attack_Speed " + (Player.Instance.Attack_Speed + Player.Instance.Attack_Speed * Player.Instance.Attack_Speed_Plus / 100f);
-        Player_Range = "Range " + (Player.Instance.Range + Player.Instance.Range * Player.Instance.Range_Plus / 100f);
-        Player_Speed = "Speed " + (Player.Instance.Speed + Player.Instance.Speed * Player.Instance.Speed_Plus / 100f);
-        Player_Crit = "Crit " + Player.Instance.Crit + "%";
+        Player_Level = "Level " + Player.player.Level;
+        Player_Weapon = "Weapon\n" + Player.player.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0, 11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)", ""); ;
+        Player_Hp = "Hp " + Player.player.Max_Hp;
+        Player_Atk = "Damage " + Player.player.Atk;
+        Player_Atk_Speed = "Attack_Speed " + (Player.player.Attack_Speed + Player.player.Attack_Speed * Player.player.Attack_Speed_Plus / 100f);
+        Player_Range = "Range " + (Player.player.Range + Player.player.Range * Player.player.Range_Plus / 100f);
+        Player_Speed = "Speed " + (Player.player.Speed + Player.player.Speed * Player.player.Speed_Plus / 100f);
+        Player_Crit = "Crit " + Player.player.Crit + "%";
         Stage1_PlayerTime = StageManager.sm.currStageTimer;
 
         // when kill final boss

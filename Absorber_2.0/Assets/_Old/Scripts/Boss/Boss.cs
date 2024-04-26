@@ -47,7 +47,7 @@ public class Boss : MonoBehaviour
         Hp = MaxHp;
         speed = 2f;
         rigid = GetComponent<Rigidbody2D>();
-        target = Player.Instance.myTransform;
+        target = Player.player.t_player;
         bossDied = false;
 
 
@@ -148,7 +148,7 @@ public class Boss : MonoBehaviour
             if (dmg != 0 )
             { 
                 // Player.player.OnDamage(dmg);
-                Player.Instance.OnDamage(dmg, hitPoint, false);
+                Player.player.OnDamage(dmg, hitPoint, false);
             }
          
         }

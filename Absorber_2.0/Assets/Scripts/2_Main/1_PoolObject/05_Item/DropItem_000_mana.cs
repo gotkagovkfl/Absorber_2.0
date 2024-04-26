@@ -75,6 +75,6 @@ public class DropItem_000_mana : DropItem
     //==============================================
     public override void PickupEffect()
     {
-        Player.Instance.ChangeExp(effectValue);
+        Player.player.ChangeExp(effectValue);
     }
 }

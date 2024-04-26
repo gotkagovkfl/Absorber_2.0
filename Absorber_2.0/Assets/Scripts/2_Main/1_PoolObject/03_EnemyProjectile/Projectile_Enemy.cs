@@ -273,7 +273,7 @@ public abstract class Projectile_Enemy : MonoBehaviour , IPoolObject
 
             Vector3 hitPoint = other.ClosestPoint(myTransform.position);     // 타격지점
 
-            Player.Instance.OnDamage(damage, hitPoint, strongAttack);
+            Player.player.OnDamage(damage, hitPoint, strongAttack);
 
             OnHit();        // 히트시 효과
 
@@ -281,7 +281,7 @@ public abstract class Projectile_Enemy : MonoBehaviour , IPoolObject
 
             Vector3 hitPoint = other.ClosestPoint(myTransform.position);     // 타격지점
             
-            Player.Instance.OnDamage(damage, hitPoint, strongAttack);
+            Player.player.OnDamage(damage, hitPoint, strongAttack);
 
             OnHit();        // 히트시 효과
 
@@ -316,7 +316,7 @@ public abstract class Projectile_Enemy : MonoBehaviour , IPoolObject
         {
             Vector3 hitPoint = other.ClosestPoint(myTransform.position);     // 타격지점
 
-            Player.Instance.OnDamage(damage, hitPoint, strongAttack);
+            Player.player.OnDamage(damage, hitPoint, strongAttack);
 
             OnHit();
         }

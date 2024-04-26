@@ -11,16 +11,17 @@ using UnityEngine.UI;
 //============================================
 public class Player : MonoBehaviour
 {
-    private static Player instance;
-    public static Player Instance { get { return instance; } }
+    private static Player _player;
+    public static Player player => _player;
 
+    //
     public PlayerUI playerUI;
     public List<string> chooseList = new List<string>();
     private void Awake()
     {
-        if (instance == null)
+        if (_player == null)
         {
-            instance = this;
+            _player = this;
             //DontDestroyOnLoad(gameObject);
         }
         else
@@ -46,11 +47,11 @@ public class Player : MonoBehaviour
 
         playerUI = GetComponent<PlayerUI>();
 
-        myTransform = transform;
+        t_player = transform;
         init();
     }
 
-    public Transform myTransform;
+    public Transform t_player;
     public Transform center;
     
     #region 기초스텟
@@ -329,7 +330,7 @@ public class Player : MonoBehaviour
         for (int i=0; i< 5; i++)
         {
             Effect effect = EffectPoolManager.epm.GetFromPool("012");
-            effect.InitEffect(myTransform.position);
+            effect.InitEffect(t_player.position);
             effect.ActionEffect();
             effect.GetComponent<SpriteRenderer>().flipX = spriter.flipX;
 
@@ -380,8 +381,8 @@ public class Player : MonoBehaviour
         Stop_Def = 0;
         explosionLevel = 0;
         is_explosion = false;
-        myTransform = transform;
-        center = myTransform.Find("Center");
+        t_player = transform;
+        center = t_player.Find("Center");
 
         sanctuaryLevel = 0;
 
@@ -427,7 +428,7 @@ public class Player : MonoBehaviour
         if (value >0)
         {
             Effect effect =EffectPoolManager.epm.GetFromPool("003");
-            effect.InitEffect(myTransform.position);
+            effect.InitEffect(t_player.position);
             effect.ActionEffect();
         }
     }
@@ -663,7 +664,7 @@ public class Player : MonoBehaviour
         StartCoroutine(CreateSanctuary());
 
         // 스테이지 시작시 이벤트 
-        GameEvent.onStageStart.AddListener( ()=> myTransform.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
+        GameEvent.onStageStart.AddListener( ()=> t_player.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
     }
 
     void Update()
@@ -685,27 +686,27 @@ public class Player : MonoBehaviour
         }
         
         
-        if (DirectingManager.dm.onDirecting )
-        {
-            rb.velocity = Vector3.zero;
-            animator.SetFloat("speed", 0f);
-            return;
-        }
+        // if (DirectingManager.dm.onDirecting )
+        // {
+        //     rb.velocity = Vector3.zero;
+        //     animator.SetFloat("speed", 0f);
+        //     return;
+        // }
         
-        if (!DirectingManager.dm.onDirecting && canMove )     // 움직일 수 있을 때에만 
+        if ( canMove )     // 움직일 수 있을 때에만 
         {
             animator.SetFloat("speed", inputVector.magnitude);
             if (inputVector.x != 0) // 스프라이트 뒤집기(입력에 따라) 
             {
                 spriter.flipX = inputVector.x < 0;
             }
-            animator.speed = 0.7f;
             
             if (isDashing)
                 return;
+
             inputVector.x = Input.GetAxisRaw("Horizontal");
             inputVector.y = Input.GetAxisRaw("Vertical");
-            float final_speed = Speed + Speed * Speed_Plus / 100f;
+            float final_speed = Speed + Speed * Speed_Plus *0.01f;
             rb.velocity = new Vector2(inputVector.x * final_speed, inputVector.y * final_speed);
 
             if (Input.GetKeyDown(KeyCode.Space) && canDash && Time.timeScale == 1)

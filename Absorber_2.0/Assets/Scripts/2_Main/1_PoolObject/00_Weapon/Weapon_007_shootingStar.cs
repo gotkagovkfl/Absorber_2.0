@@ -106,7 +106,7 @@ public class Weapon_007_shootingStar : Weapon
         Vector3 targetHitPoint = target.position;
     
         // 최대 사거리 
-        if(!Player.Instance.autoAim)
+        if(!Player.player.autoAim)
         {
             if ( !InRange(targetHitPoint) )
             {

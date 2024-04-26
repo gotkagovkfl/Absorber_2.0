@@ -149,9 +149,9 @@ public class UIGameResult : MonoBehaviour
         Player_Range.text = GameManager.gm.Player_Range;
         Player_Speed.text = GameManager.gm.Player_Speed;
         Player_Crit.text = GameManager.gm.Player_Crit;
-        for(int i=0; i<Player.Instance.chooseList.Count; i++)
+        for(int i=0; i<Player.player.chooseList.Count; i++)
         {
-            Abilities[i].sprite = Resources.Load<Sprite>("Pictogram/" + Player.Instance.chooseList[i]);
+            Abilities[i].sprite = Resources.Load<Sprite>("Pictogram/" + Player.player.chooseList[i]);
             Abilities[i].color = new Color(1, 1, 1, 1);
         }
     }

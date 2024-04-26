@@ -167,7 +167,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         animator = GetComponent<Animator>();
         
 
-        target = Player.Instance.gameObject; // ���� ��� = �÷��̾�
+        target = Player.player.gameObject; // ���� ��� = �÷��̾�
 
         
 
@@ -200,7 +200,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         if (Random.Range(0,100) < itemProb)
         {
             // drop heal item if you are 'lucky'
-            DropItem luckyItem = ItemPoolManager.ipm.SpawnItem("001", Player.Instance.Hp_item_up, transform.position);
+            DropItem luckyItem = ItemPoolManager.ipm.SpawnItem("001", Player.player.Hp_item_up, transform.position);
         }
     }
 
@@ -450,7 +450,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         }
         
         int num = Random.Range(0, 100);
-        if ( num < Player.Instance.bleedingLevel * 25)
+        if ( num < Player.player.bleedingLevel * 25)
         {
             // Debug.Log("출혈");
             int tickNum = 6;
@@ -711,7 +711,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
             if (dmg != 0 )
             { 
                 // Player.player.OnDamage(dmg);
-                Player.Instance.OnDamage(damage, hitPoint, strongAttack);
+                Player.player.OnDamage(damage, hitPoint, strongAttack);
             }
         }
     }
@@ -727,7 +727,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
             if (dmg != 0 )
             { 
                 // Player.player.OnDamage(dmg);
-                Player.Instance.OnDamage(damage, hitPoint, strongAttack);
+                Player.player.OnDamage(damage, hitPoint, strongAttack);
             }
         }
     }

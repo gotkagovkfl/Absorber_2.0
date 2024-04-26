@@ -39,7 +39,7 @@ public class Elite_003 : Enemy
         proj.GetComponent<Projectile_Enemy>().SetDirection(target.transform);
         //proj.GetComponent<Projectile_Enemy>().RotateProj();
         //proj.GetComponent<Projectile_Enemy>().Action();
-        tar = Player.Instance.transform;
+        tar = Player.player.transform;
         Vector2 dir = tar.position - transform.position;
         Rigidbody2D spearRigid = proj.GetComponent<Rigidbody2D>();
         float spearSpeed = 10f;

@@ -31,8 +31,8 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
     {
         get
         {
-            float dist = Vector3.Distance(Player.Instance.myTransform.position, myTransform.position);
-            float pickupRange = itemRange *(100 + weight_range * Player.Instance.Range_Plus) *0.01f;
+            float dist = Vector3.Distance(Player.player.t_player.position, myTransform.position);
+            float pickupRange = itemRange *(100 + weight_range * Player.player.Range_Plus) *0.01f;
 
             
             if (dist <= pickupRange  && !captured) // 25는 획득범위의 제곱 - 나중에 수정해야함. 
@@ -202,7 +202,7 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
         {
             
             // 방향구하기
-            Vector3 dir = (Player.Instance.myTransform.position - transform.position).normalized;
+            Vector3 dir = (Player.player.t_player.position - transform.position).normalized;
             
             rb.velocity = dir * speed;
 
@@ -222,7 +222,7 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
             string id = (id_dropItem.Equals("000"))?"013":"004";
 
             Effect effect = EffectPoolManager.epm.GetFromPool(id);
-            effect.InitEffect(Player.Instance.center.position);
+            effect.InitEffect(Player.player.center.position);
             effect.ActionEffect();
 
             
