@@ -69,6 +69,11 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         ChangeStage();
+
+
+
+
+
     }
 
 
@@ -96,7 +101,7 @@ public class StageManager : MonoBehaviour
         numStageLeft--;
         
         // 스테이지 종료 이벤트 발생시키기 - 풀링오브젝트 제거, UI 호출, 포탈생성
-        GameEvent.onStageClear.Invoke();
+        GameEvent.ge.onStageClear.Invoke();
     }
 
     //==============================================
@@ -116,7 +121,7 @@ public class StageManager : MonoBehaviour
     //=================================================
     public void ChangeStage()
     {   
-        GameEvent.onStageChange.Invoke();
+        GameEvent.ge.onStageChange.Invoke();
         
         // 다음 스테이지 세팅
         SetNextStage();
@@ -146,7 +151,16 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        _currStageId = (list_playStages.Count ==0)?"000":StagePoolManager.spm.GetRandomStageId();
+
+
+        if( GameConstant.isDebugMode)
+        {
+            _currStageId = "999";
+        }
+        else
+        {
+            _currStageId = (list_playStages.Count ==0)?"000":StagePoolManager.spm.GetRandomStageId();
+        }
     }
 
     //===================================================================
@@ -184,7 +198,7 @@ public class StageManager : MonoBehaviour
     //======================================================================
     void StartStage()
     {
-        GameEvent.onStageStart.Invoke();
+        GameEvent.ge.onStageStart.Invoke();
 
         // DirectingManager.dm.FadeIn( ()=> _currStage.StartStageRoutine() );
     }

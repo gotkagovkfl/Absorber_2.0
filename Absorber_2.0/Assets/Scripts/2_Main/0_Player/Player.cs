@@ -118,11 +118,11 @@ public class Player : MonoBehaviour
     public bool canAttack = true;
 
     public bool autoAim = true;
-    public GameObject obj_directAim;
-    public GameObject obj_autoAim;
+    // public GameObject obj_directAim;
+    // public GameObject obj_autoAim;
     
     //===================================
-    public GameObject pauseUI;
+    // public GameObject pauseUI;
     public bool OnSelecting;        //true when levelup popup set active
  
     // 애니메이션을 위한 스프라이트 렌더러 
@@ -274,17 +274,12 @@ public class Player : MonoBehaviour
             Exp = (int)(Exp * 1.18f);
             Level++;
 
-            
-            Effect effect = EffectPoolManager.epm.GetFromPool("006");
-            effect.InitEffect(center.position);
-            effect.ActionEffect();
-
-
-
-            LevelUpManager.GetComponent<LevelUpManager>().LevelUp();
+        
+            LevelUpManager.GetComponent<LevelUpManager>().LevelUp();    //수정해야함.
             GameEvent.ge.onChange_level.Invoke();
         }
         #endregion
+
 
         GameEvent.ge.onChange_exp.Invoke();
     }
@@ -392,13 +387,14 @@ public class Player : MonoBehaviour
 		//
         autoAim = true;
 
-		obj_directAim =GameObject.Find("Aim");
-        obj_autoAim = obj_directAim.transform.GetChild(0).gameObject;
+		// obj_directAim =GameObject.Find("Aim");
+        // obj_autoAim = obj_directAim.transform.GetChild(0).gameObject;
 
-        ChangeAimImage();
+        // ChangeAimImage();
+        GameEvent.ge.onChange_aimMode.Invoke(autoAim);
         //
-        pauseUI = GameObject.Find("Canvas").transform.Find("PauseUI").gameObject;
-        pauseUI.SetActive(false);		
+        // pauseUI = GameObject.Find("Canvas").transform.Find("PauseUI").gameObject;
+        // pauseUI.SetActive(false);		
 		//
         foreach (Coroutine C in RunningCoroutines)
             StopCoroutine(C);
@@ -648,11 +644,11 @@ public class Player : MonoBehaviour
     //
     //
     //
-    public void ChangeAimImage()
-    {
+    // public void ChangeAimImage()
+    // {
         // obj_directAim.SetActive(!autoAim);
-        obj_autoAim.SetActive(autoAim);
-    }
+        // obj_autoAim.SetActive(autoAim);
+    // }
 
 
     //=========================================================================================================================================
@@ -666,7 +662,7 @@ public class Player : MonoBehaviour
         StartCoroutine(CreateSanctuary());
 
         // 스테이지 시작시 이벤트 
-        GameEvent.onStageStart.AddListener( ()=> t_player.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
+        GameEvent.ge.onStageStart.AddListener( ()=> t_player.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
     }
 
     void Update()
@@ -674,17 +670,17 @@ public class Player : MonoBehaviour
         // for aim set
         if (Input.GetKeyDown(KeyCode.C))
         {
-            
             audioSource.PlayOneShot(sound_changeAuto);
 
             autoAim = !autoAim;
-            ChangeAimImage();
+
+            GameEvent.ge.onChange_aimMode.Invoke(autoAim);
         }
 
         // pause   
         if (Input.GetKeyDown(KeyCode.Escape) && !OnSelecting) 
         {
-            Pause();
+            GameManager.gm.PauseGame(!GameManager.gm.isPaused);   
         }
         
         
@@ -718,14 +714,4 @@ public class Player : MonoBehaviour
         }
     }
     
-
-    //
-    public void Pause()
-    {
-        // Fade.fade.BtnClickSound();                      *************************
-        
-        GameManager.gm.PauseGame(!GameManager.gm.isPaused);
-        pauseUI.SetActive(GameManager.gm.isPaused);
-        pauseUI.GetComponent<PauseUI>().SetStatus();
-    }
 }

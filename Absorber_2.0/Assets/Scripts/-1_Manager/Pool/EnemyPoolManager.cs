@@ -21,7 +21,7 @@ public class EnemyPoolManager : PoolManager<Enemy>
     void Start()
     {
         // 스테이지 종료 이벤트 발생시 일반 적 제거 (아이템 드랍 없이 그냥 지우기)
-        GameEvent.onStageClear.AddListener( CleanEveryObjects_enemy );   
+        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemy );   
     }
 
     protected override void SetCategory()

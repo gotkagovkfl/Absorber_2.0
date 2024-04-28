@@ -79,6 +79,15 @@ public class GameManager : MonoBehaviour
         isPaused = flag;
         Time.timeScale = (isPaused) ? 0 : gameSpeed;   
         // OnApplicationPause(isPaused);
+
+        if (isPaused)
+        {
+            GameEvent.ge.onPause.Invoke();
+        }
+        else
+        {
+            GameEvent.ge.onResume.Invoke();
+        }
     }
     
     //test *************************

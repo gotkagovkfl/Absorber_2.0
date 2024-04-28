@@ -38,10 +38,10 @@ public class EffectPoolManager : PoolManager<Effect>
     void Start()
     {
         // 스테이지 시작시 이벤트
-        GameEvent.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
+        GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
         
         // 스테이지 클리어 시 이벤트
-        GameEvent.onStageClear.AddListener( CreatePortal );       // 포탈생성
+        GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
 
 
     }

@@ -16,7 +16,7 @@ public class ItemPoolManager : PoolManager<DropItem>
     void Start()
     {
         // 스테이지 종료 이벤트 발생시 필드위 아이템 제거
-        GameEvent.onStageClear.AddListener( CleanEveryObjects_item );
+        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_item );
     }
 
     

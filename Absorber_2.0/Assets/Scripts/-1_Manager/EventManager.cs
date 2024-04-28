@@ -23,15 +23,27 @@ public class GameEvent : MonoBehaviour
         }
    }
     
-    public UnityEvent<bool> onChange_aimMode;      // 타게팅 모드 변경시,     bool : 자동 타게팅일경우, 
+
+
+    // system 
+
+    public UnityEvent onPause;
+    public UnityEvent onResume;
 
 
     // player
+    public UnityEvent<bool> onChange_aimMode;      // 타게팅 모드 변경시,     bool : 자동 타게팅일경우, 
+
+
     public UnityEvent onChange_hp;
     public UnityEvent onChange_exp;
     public UnityEvent onChange_level;
-
     public UnityEvent onDash;
+
+
+    
+
+    
 
     
     // public static UnityEvent onInitGame;
@@ -48,25 +60,25 @@ public class GameEvent : MonoBehaviour
 
 
 
-    public static UnityEvent onAnyButtonClick;
+    public  UnityEvent onAnyButtonClick;
 
-    public static UnityEvent onSceneChange;
+    public  UnityEvent onSceneChange;
 
-    public static UnityEvent onGameStart;
-    public static UnityEvent onGameFinish;
+    public  UnityEvent onGameStart;
+    public  UnityEvent onGameFinish;
     
-    public static UnityEvent onStageStart;
-    public static UnityEvent onStageClear;
+    public  UnityEvent onStageStart;
+    public  UnityEvent onStageClear;
 
-    public static UnityEvent onStageChange;
-
-
-    public static UnityEvent onAppearance_elite;
-    public static UnityEvent onAppearance_boss;
+    public UnityEvent onStageChange;
 
 
-    public static UnityEvent onDead_player;
-    public static UnityEvent onDead_enemy;
+    public  UnityEvent onAppearance_elite;
+    public  UnityEvent onAppearance_boss;
+
+
+    public  UnityEvent onDead_player;
+    public  UnityEvent onDead_enemy;
 
 
 }

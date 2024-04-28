@@ -15,7 +15,7 @@ public class EnemyProjPoolManager : PoolManager<Projectile_Enemy>
     void Start()
     {
         // 스테이지 종료 이벤트 발생시 모든 적 투사체 제거
-        GameEvent.onStageClear.AddListener( CleanEveryObjects_enemyProj);
+        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemyProj);
     }
 
     protected override void SetCategory()

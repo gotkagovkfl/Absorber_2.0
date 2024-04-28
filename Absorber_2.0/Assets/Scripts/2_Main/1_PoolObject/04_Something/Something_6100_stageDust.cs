@@ -19,7 +19,7 @@ public class Something_6100_stageDust : Something
         speed = 0f;
         lifeTime = -1;
 
-        GameEvent.onStageChange.AddListener( ()=> _isDead = true );   // 특수효과 제거
+        GameEvent.ge.onStageChange.AddListener( ()=> _isDead = true );   // 특수효과 제거
     }
 
     // 개별 초기화 

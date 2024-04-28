@@ -28,10 +28,13 @@ public class SomethingPoolManager : PoolManager<Something>
     void Start()
     {
         // 스테이지 시작시 이벤트
-        GameEvent.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
+        GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
         
         // 스테이지 클리어 시 이벤트
-        GameEvent.onStageClear.AddListener( CreatePortal );       // 포탈생성
+        GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
+
+        //
+        GameEvent.ge.onChange_level.AddListener(OnLevelUp );
 
 
     }
@@ -144,5 +147,13 @@ public class SomethingPoolManager : PoolManager<Something>
 
         currStageEffect.InitSomething( Vector3.zero );
         currStageEffect.ActionSomething();
+    }
+
+
+    void OnLevelUp()
+    {
+        Effect effect = EffectPoolManager.epm.GetFromPool("006");
+        effect.InitEffect(Player.player.center.position);
+        effect.ActionEffect();
     }
 }
