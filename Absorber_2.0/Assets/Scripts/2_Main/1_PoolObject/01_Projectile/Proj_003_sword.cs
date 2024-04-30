@@ -70,7 +70,7 @@ public class Proj_003_sword : Projectile
             for (int i=0;i<splitCount;i++)
             {
                 // 효과 생성하기 
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);
 
                 // 맞고 살아있으면 공격 불가 대상으로 지정
                 if( !target_hit.GetComponent<Enemy>().isDead)

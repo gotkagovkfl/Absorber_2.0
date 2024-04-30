@@ -20,18 +20,18 @@ public class DropItem_005_amethyst : DropItem
     public override void PickupEffect()
     {
         // 마비 effect
-        Effect effect = EffectPoolManager.epm.GetFromPool("005");
+        Effect effect = EffectPoolManager.instance.GetFromPool("005");
         effect.InitEffect(myTransform.position);
         effect.ActionEffect();
 
 
         // 모든 적 마비
-        Enemy[] enemies = EnemyPoolManager.epm.GetComponentsInChildren<Enemy>();
+        Enemy[] enemies = EnemyPoolManager.instance.GetComponentsInChildren<Enemy>();
         foreach(var enemy in enemies)
         {
-            EffectPoolManager.epm.CreateText(enemy.center.position, "STUNNED!", Color.gray, 2);
+            EffectPoolManager.instance.CreateText(enemy.center.position, "STUNNED!", Color.gray, 2);
             //
-            effect = EffectPoolManager.epm.GetFromPool("009");
+            effect = EffectPoolManager.instance.GetFromPool("009");
             effect.InitEffect(enemy.myTransform.position);
             effect.SetTarget(enemy.center);
             effect.SetDependency(enemy);
@@ -39,7 +39,7 @@ public class DropItem_005_amethyst : DropItem
             //
             enemy.Stunned( 5f );
 
-            // EffectPoolManager.epm.CreateHitEffect(enemy.myTransform.position);       // 총알 위치에 이펙트 생성 
+            // EffectPoolManager.instance.CreateHitEffect(enemy.myTransform.position);       // 총알 위치에 이펙트 생성 
             
             // enemy.Damaged(effectValue);
         }

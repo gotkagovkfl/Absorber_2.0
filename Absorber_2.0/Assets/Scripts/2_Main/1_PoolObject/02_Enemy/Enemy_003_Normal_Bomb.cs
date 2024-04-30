@@ -76,7 +76,7 @@ public class Enemy_003_Normal_Bomb : Enemy
 
     public void Explode()
     {
-        Projectile_Enemy proj = EnemyProjPoolManager.eppm.GetFromPool("001");
+        Projectile_Enemy proj = EnemyProjPoolManager.instance.GetFromPool("001");
 
         proj.SetUp(damage*5, 0, 1f, -99, 0, 0.4f);
         proj.myTransform.position = transform.position;
@@ -118,7 +118,7 @@ public class Enemy_003_Normal_Bomb : Enemy
         // GameObject explosion = Instantiate(particle_Boom, transform.position, Quaternion.identity);
         // yield return new WaitForSeconds(1f);
         // Destroy(explosion);
-        Projectile_Enemy proj = EnemyProjPoolManager.eppm.GetFromPool("001");
+        Projectile_Enemy proj = EnemyProjPoolManager.instance.GetFromPool("001");
 
         proj.SetUp(2, 0, 1f, -99, 0, 0.4f);
         proj.myTransform.position = transform.position;

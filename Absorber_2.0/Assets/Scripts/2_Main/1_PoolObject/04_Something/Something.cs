@@ -121,7 +121,7 @@ public abstract class Something : MonoBehaviour, IPoolObject
         yield return new WaitUntil( ()=> _isDead ); 
 
         //
-        EffectPoolManager.epm.TakeToPool(GetComponent<Effect>());
+        EffectPoolManager.instance.TakeToPool(GetComponent<Effect>());
         
         _isDead = false;
     }

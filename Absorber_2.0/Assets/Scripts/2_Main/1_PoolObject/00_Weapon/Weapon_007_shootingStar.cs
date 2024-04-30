@@ -96,10 +96,10 @@ public class Weapon_007_shootingStar : Weapon
 
 
         // 필요 오브젝트들 생성 후 셋업
-        Projectile proj_hitPoint = ProjPoolManager.ppm.GetFromPool(id_weapon+"_p");
+        Projectile proj_hitPoint = ProjPoolManager.instance.GetFromPool(id_weapon+"_p");
         proj_hitPoint.SetUp(this);
 
-        Projectile proj = ProjPoolManager.ppm.GetFromPool(id_weapon);
+        Projectile proj = ProjPoolManager.instance.GetFromPool(id_weapon);
         proj.SetUp(this);
         
         // 위치설정

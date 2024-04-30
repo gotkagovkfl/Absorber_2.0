@@ -46,7 +46,7 @@ public class BossAnimationController_001 : MonoBehaviour
 
     public void OnEnter2Phase()
     {
-        Effect effect =EffectPoolManager.epm.GetFromPool("211");    // 안광 
+        Effect effect =EffectPoolManager.instance.GetFromPool("211");    // 안광 
         effect.InitEffect( transform_eye.position );
         effect.ActionEffect();                                                
 
@@ -62,7 +62,7 @@ public class BossAnimationController_001 : MonoBehaviour
 
     public void ShowEffect_bat()
     {
-        Effect effect = EffectPoolManager.epm.GetFromPool("200");
+        Effect effect = EffectPoolManager.instance.GetFromPool("200");
         effect.InitEffect( transform.position );
         effect.ActionEffect();
     }
@@ -71,7 +71,7 @@ public class BossAnimationController_001 : MonoBehaviour
 
     public void ShowEffect_eye_useSkill()
     {
-        Effect effect = EffectPoolManager.epm.GetFromPool("210");
+        Effect effect = EffectPoolManager.instance.GetFromPool("210");
         effect.InitEffect( transform_eye.position );
         effect.SetTarget(transform_eye);
         effect.ActionEffect();
@@ -82,7 +82,7 @@ public class BossAnimationController_001 : MonoBehaviour
     {
         ShowEffect_eye_useSkill();
 
-        Effect effect = EffectPoolManager.epm.GetFromPool("201");
+        Effect effect = EffectPoolManager.instance.GetFromPool("201");
         effect.InitEffect(transform_weapon.position);
         effect.ActionEffect();
     }
@@ -91,7 +91,7 @@ public class BossAnimationController_001 : MonoBehaviour
     {
         ShowEffect_eye_useSkill();
 
-        Effect effect = EffectPoolManager.epm.GetFromPool("202");
+        Effect effect = EffectPoolManager.instance.GetFromPool("202");
         effect.InitEffect(transform_weapon.position);
         effect.ActionEffect();
     }
@@ -100,7 +100,7 @@ public class BossAnimationController_001 : MonoBehaviour
     {
         ShowEffect_eye_useSkill();
 
-        Effect effect = EffectPoolManager.epm.GetFromPool("203");
+        Effect effect = EffectPoolManager.instance.GetFromPool("203");
         effect.InitEffect(transform_weapon.position);
         effect.ActionEffect();
     }

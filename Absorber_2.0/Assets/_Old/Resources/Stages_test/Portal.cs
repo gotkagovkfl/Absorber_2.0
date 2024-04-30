@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour
             
             // Debug.Log("다음 스테이지로 ~");
 
-            Effect effect = EffectPoolManager.epm.GetFromPool("008");
+            Effect effect = EffectPoolManager.instance.GetFromPool("008");
             effect.InitEffect(Player.player.t_player.position );
             effect.ActionEffect();
             

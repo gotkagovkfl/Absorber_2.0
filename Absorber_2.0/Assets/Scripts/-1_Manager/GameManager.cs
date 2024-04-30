@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -169,6 +170,20 @@ public class GameManager : MonoBehaviour
         //
         Application.targetFrameRate = 70;   // set maximum fps  
     }
+
+
+    IEnumerator Start()
+    {
+        Debug.Log("리소스 초기화부터");
+        ResourceManager.Init();
+        PrefabManager.Init();
+
+        yield return new WaitUntil( ()=>ResourceManager.initialized && PrefabManager.initialized);
+        Debug.Log("리소스 초기화됨!!!!");
+        Player.player.InitPlayer();
+    }
+
+
 
     // Update is called once per frame
     void Update()

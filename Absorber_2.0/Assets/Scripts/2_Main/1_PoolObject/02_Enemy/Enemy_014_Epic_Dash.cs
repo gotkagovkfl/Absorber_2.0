@@ -92,7 +92,7 @@ public class Enemy_014_Epic_Dash : Enemy
     {
         for (int i=0; i< 5; i++)
         {
-            Effect effect = EffectPoolManager.epm.GetFromPool("400");
+            Effect effect = EffectPoolManager.instance.GetFromPool("400");
             effect.InitEffect(myTransform.position);
             effect.ActionEffect();
 

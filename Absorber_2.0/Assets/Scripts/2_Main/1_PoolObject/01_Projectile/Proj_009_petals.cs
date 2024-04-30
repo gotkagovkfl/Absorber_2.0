@@ -107,7 +107,7 @@ public class Proj_009_petals : Projectile
         for (int i=0;i<projNum;i++)
         {
             string id = id_proj;
-            Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+            Projectile proj = ProjPoolManager.instance.GetFromPool(id);
 
             float splitWeight = 0.4f + splitNum * 0.15f;            
             proj.SetUp(damage * splitWeight , speed,  scale * splitWeight,  projNum-1, Player.player.penetration,  splitNum -1 , lifeTime*0.9f); 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // ========================================================================
@@ -17,8 +18,10 @@ public class StageManager : MonoBehaviour
     string _currStageId;
     
     // 승리를 위해 남은 스테이지 클리어 횟수
-    int numStageLeft = 1;
-    int numStageLeft_total = 1;
+
+    int currStageNo = 0;
+
+    int targetStageNo = 2;
 
     // 플레이한 스테이지 목록
     List<string> list_playStages = new List<string>();
@@ -66,14 +69,12 @@ public class StageManager : MonoBehaviour
     //=============================
     // Start 호출 시 스테이지 시작
     //=============================
-    void Start()
+    IEnumerator Start()
     {
-        ChangeStage();
-
-
-
-
-
+        yield return new WaitUntil(()=>PrefabManager.initialized);
+        
+        _currStage = StagePoolManager.instance.GetFromPool("999");
+        // ChangeStage();
     }
 
 
@@ -98,7 +99,7 @@ public class StageManager : MonoBehaviour
         _currStage.FinishStageRoutine();
 
         //===============================
-        numStageLeft--;
+        currStageNo++;
         
         // 스테이지 종료 이벤트 발생시키기 - 풀링오브젝트 제거, UI 호출, 포탈생성
         GameEvent.ge.onStageClear.Invoke();
@@ -110,8 +111,6 @@ public class StageManager : MonoBehaviour
     public void GoToNextStage()
     {        
 
-        // DirectingManager.dm.FadeOut( ChangeStage );  
-        
     }
 
     //---------------------------------------------------------------------------------------------------------------------------
@@ -119,21 +118,21 @@ public class StageManager : MonoBehaviour
     //==============================================
     // 스테이지 교체작업  
     //=================================================
-    public void ChangeStage()
-    {   
-        GameEvent.ge.onStageChange.Invoke();
+    // public void ChangeStage()
+    // {   
+    //     GameEvent.ge.onStageChange.Invoke();
         
-        // 다음 스테이지 세팅
-        SetNextStage();
+    //     // 다음 스테이지 세팅
+    //     SetNextStage();
         
-        // 스테이지 오브젝트 교체 관련
-        DestroyStage();
-        GenerateStage();
+    //     // 스테이지 오브젝트 교체 관련
+    //     DestroyStage();
+    //     GenerateStage();
 
-        // 생성된 스테이지 초기화 관련
-        InitStage();
-        StartStage();
-    }
+    //     // 생성된 스테이지 초기화 관련
+    //     InitStage();
+    //     StartStage();
+    // }
 
 
     //---------------------------------------------------------------------------------------------------------------------
@@ -141,67 +140,67 @@ public class StageManager : MonoBehaviour
     //===================================
     // 다음 스테이지 세팅 : 다음 스테이지 번호를 설정한다.   :현재는 그냥 스테이지 번호 증가로 되어있지만, 최종적으로 랜덤으로 설정할것임. 
     //===================================
-    void SetNextStage()
-    {
-        if ( numStageLeft == 0)
-        {
-            // 최종 스테이지를 클리어 했다면,
-            GameManager.gm.FinishGame(true);
+    // void SetNextStage()
+    // {
+    //     if ( currStageNo == targetStageNo)
+    //     {
+    //         // 최종 스테이지를 클리어 했다면,
+    //         GameManager.gm.FinishGame(true);
 
-            return;
-        }
+    //         return;
+    //     }
 
 
 
-        if( GameConstant.isDebugMode)
-        {
-            _currStageId = "999";
-        }
-        else
-        {
-            _currStageId = (list_playStages.Count ==0)?"000":StagePoolManager.spm.GetRandomStageId();
-        }
-    }
+    //     if( GameConstant.isDebugMode)
+    //     {
+    //         _currStageId = "999";
+    //         Debug.Log("디버그 스테이지 진행");
+    //     }
+    //     else    //일단 디버그 아닐 때는 신경쓰지말자. 
+    //     {
+    //         _currStageId = $"{currStageNo:000}";
+    //         Debug.Log("정상 스테이지 진행");
+    //     }
+    // }
 
     //===================================================================
     // 현재 스테이지 오브젝트들을 파괴한다. ( 스테이지 종료 후 교체 목적)
     //===================================================================
-    void DestroyStage()
-    {
-        // 스테이지 게임오브젝트 파괴 
-        if (_currStage != null)
-        {
-            StagePoolManager.spm.TakeToPool(_currStage);
-        }
-    }
+    // void DestroyStage()
+    // {
+    //     // 스테이지 게임오브젝트 파괴 
+    //     if (_currStage != null)
+    //     {
+    //         StagePoolManager.instance.TakeToPool(_currStage);
+    //     }
+    // }
 
     //====================================================================
     // 스테이지 생성 - 현재 스테이지 번호에 맞는 스테이지를 생성한다.  
     //====================================================================
-    void GenerateStage()
-    {
-        list_playStages.Add(_currStageId);
-        
-        _currStage = StagePoolManager.spm.GetFromPool(_currStageId);
-    }
+    // void GenerateStage()
+    // {
+    //     list_playStages.Add(_currStageId);
+    //     Debug.Log("스테이지 생성 : " + _currStageId);
+    //     _currStage = StagePoolManager.instance.GetFromPool(_currStageId);
+    // }
 
     //======================================================================
     // 스테이지 초기화 
     //======================================================================
-    void InitStage()
-    {
-        _currStageTimer = 0;
-    }
+    // void InitStage()
+    // {
+    //     _currStageTimer = 0;
+    // }
 
     //======================================================================
     // 스테이지 시작 
     //======================================================================
-    void StartStage()
-    {
-        GameEvent.ge.onStageStart.Invoke();
-
-        // DirectingManager.dm.FadeIn( ()=> _currStage.StartStageRoutine() );
-    }
+    // void StartStage()
+    // {
+    //     GameEvent.ge.onStageStart.Invoke();
+    // }
 
 
     //===============================================================================================

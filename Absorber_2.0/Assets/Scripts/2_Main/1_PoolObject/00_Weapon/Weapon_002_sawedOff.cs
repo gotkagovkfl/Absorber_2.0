@@ -94,7 +94,7 @@ public class Weapon_002_sawedOff : Weapon
         for (int i=0;i<projNumT;i++)
         {
             // 총알생성
-            Projectile proj =  ProjPoolManager.ppm.GetFromPool(id_weapon);
+            Projectile proj =  ProjPoolManager.instance.GetFromPool(id_weapon);
             proj.InitProj(this, transform_muzzle.position, target);
             proj.RotateProj(Projectile.ProjDir.up);
             proj.RotateProj(currRotation + Random.Range(-1.5f,1.5f)); //탄퍼짐 + 디테일

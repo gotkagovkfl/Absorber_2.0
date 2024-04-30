@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class ItemPoolManager : PoolManager<DropItem>
 {
-    public static ItemPoolManager ipm;  // 아이템 풀 매니저 객체 
-    
-    //========================================================
-    protected override void Awake()
-    {
-        base.Awake();
-        ipm = this;
-    }
-
-    void Start()
-    {
-        // 스테이지 종료 이벤트 발생시 필드위 아이템 제거
-        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_item );
-    }
+    public static ItemPoolManager instance;  // 아이템 풀 매니저 객체 
 
     
 
     //=======================================================
-    protected override void SetCategory()
+    protected override void Init_custom()
     {
-        id_category = "05";
+        id_category = PoolType.item;
+        instance =this;
+
+        // 스테이지 종료 이벤트 발생시 필드위 아이템 제거
+        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_item );
     }
 
 

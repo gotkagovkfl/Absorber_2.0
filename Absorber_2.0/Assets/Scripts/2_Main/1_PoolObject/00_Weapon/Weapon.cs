@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     public Transform handTransform;
     public Vector3 originalHandPosition;
 
-    public Transform mouseTarget;
+    public Transform aim;
 
     
     // 기본 능력치
@@ -190,7 +190,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            if (notAvailable || DirectingManager.dm.onDirecting || !Player.player.canAttack)
+            if (notAvailable || !Player.player.canAttack)
             {
                 return false;
             }
@@ -281,7 +281,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         audioSource.playOnAwake = false;
         audioSource.loop = false;
         
-        mouseTarget = MouseTarget.mt.myTransform;
+        aim = Aim.t_aim;
         handTransform = transform.parent;
 
         originalHandPosition = Player.player.t_player.position + new Vector3(1,5);
@@ -290,7 +290,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         handTransform.rotation = Quaternion.identity;
 
 
-        if (this.gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             ResetBattleFlow();
         }
@@ -362,7 +362,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         // autoAim일때 
         if (!Player.player.autoAim)
         {
-            target = mouseTarget;
+            target = aim;
             list_targets.Add(target);
             // searchNum--;
         }
@@ -444,7 +444,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
             // 타겟이 무기보다 왼쪽에 있는 경우 스프라이트 뒤집기
             if (list_targets[0] != null)
             {
-                Vector3 targetPos = (Player.player.autoAim)? list_targets[0].position : mouseTarget.position;
+                Vector3 targetPos = (Player.player.autoAim)? list_targets[0].position : Aim.GetAimPos;
                 Vector3 dir = targetPos - handTransform.position;
 
                 bool targetOnLeft = dir.x<0;    // 타겟이 왼쪽에 있는지 

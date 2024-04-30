@@ -172,7 +172,7 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
             yield return new WaitForSeconds(0.05f);
         }
         myTransform.position = new Vector3(0, 40);
-        ItemPoolManager.ipm.TakeToPool(this);
+        ItemPoolManager.instance.TakeToPool(this);
     }
 
     //=========================================================================================================
@@ -221,7 +221,7 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
             //pickup effect
             string id = (id_dropItem.Equals("000"))?"013":"004";
 
-            Effect effect = EffectPoolManager.epm.GetFromPool(id);
+            Effect effect = EffectPoolManager.instance.GetFromPool(id);
             effect.InitEffect(Player.player.center.position);
             effect.ActionEffect();
 

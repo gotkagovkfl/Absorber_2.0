@@ -21,7 +21,7 @@ public class DropItem_004_topaz : DropItem
     public override void PickupEffect()
     {
         // 폭발 효과
-        Projectile proj = ProjPoolManager.ppm.GetFromPool("100");        
+        Projectile proj = ProjPoolManager.instance.GetFromPool("100");        
 
         proj.SetUp( 10 + Player.player.Atk * 4, 0,  8,  0, -99, 0 , -1);        
         proj.SetSpecialStat(0,2,10);     

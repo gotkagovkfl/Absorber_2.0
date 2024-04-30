@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class EnemyProjPoolManager : PoolManager<Projectile_Enemy>
 {
-    public static EnemyProjPoolManager eppm;  // ���ʹ̰� ����ϴ� ����ü Ǯ �Ŵ��� ��ü
+    public static EnemyProjPoolManager instance;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        eppm = this;
-    }
     
-    void Start()
-    {
-        // 스테이지 종료 이벤트 발생시 모든 적 투사체 제거
-        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemyProj);
-    }
 
-    protected override void SetCategory()
+    protected override void Init_custom()
     {
-        id_category = "03";
+        id_category = PoolType.enemyProj;
+        instance = this;
+
+
+                // 스테이지 종료 이벤트 발생시 모든 적 투사체 제거
+        GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemyProj);
     }
     // public override void SetDir()
     // {

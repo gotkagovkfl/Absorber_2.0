@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class BossProjPoolManager : PoolManager<Projectile_Enemy>
 {
-    public static BossProjPoolManager bppm;
+    public static BossProjPoolManager instance;    
     
-    protected override void Awake()
+    
+    protected override void Init_custom()
     {
-        base.Awake();
+        id_category = PoolType.enemyProj;
 
-        bppm = this;
-    }
-    
-    protected override void SetCategory()
-    {
-        id_category = "03";
+        instance = this;
     }
 
     // public override void SetDir()

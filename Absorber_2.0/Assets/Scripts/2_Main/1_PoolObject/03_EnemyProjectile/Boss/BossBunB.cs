@@ -51,7 +51,7 @@ public class BossBunB : Projectile_Enemy
         float ranTime = Random.Range(baseTime, baseTime + 3.0f);
         for (int i = 0; i < ranNum; i++)
         {
-            Projectile_Enemy splitBullet = EnemyProjPoolManager.eppm.GetFromPool("100");
+            Projectile_Enemy splitBullet = EnemyProjPoolManager.instance.GetFromPool("100");
             
             float ranSpeed = Random.Range(baseSpeed +2 , baseSpeed +2 + 3.0f);
             splitBullet.SetUp(6, ranSpeed, 1,0,0, 6f );  

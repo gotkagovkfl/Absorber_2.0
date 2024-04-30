@@ -78,7 +78,7 @@ public class Effect_101_sanctuary : Effect
         if (currTime >= lastHealTime + 2f)
         {
             // 힐 이펙트 생성
-            Effect effect = EffectPoolManager.epm.GetFromPool("101_b");
+            Effect effect = EffectPoolManager.instance.GetFromPool("101_b");
             effect.InitEffect(myTransform.position);
             effect.ActionEffect();
             //
@@ -100,7 +100,7 @@ public class Effect_101_sanctuary : Effect
         if (currTime >= lastAttackTime + 1f)
         {
             // 성역 공격 투사체 생성
-            Projectile proj = ProjPoolManager.ppm.GetFromPool("101");
+            Projectile proj = ProjPoolManager.instance.GetFromPool("101");
             proj.SetUp(  3 * Player.player.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
             proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
 

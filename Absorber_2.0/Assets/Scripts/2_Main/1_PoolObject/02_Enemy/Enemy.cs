@@ -195,12 +195,12 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     public void DropItem()
     {
         // default : drop mana.
-        DropItem item = ItemPoolManager.ipm.SpawnItem("000", manaValue, transform.position);
+        DropItem item = ItemPoolManager.instance.SpawnItem("000", manaValue, transform.position);
 
         if (Random.Range(0,100) < itemProb)
         {
             // drop heal item if you are 'lucky'
-            DropItem luckyItem = ItemPoolManager.ipm.SpawnItem("001", Player.player.Hp_item_up, transform.position);
+            DropItem luckyItem = ItemPoolManager.instance.SpawnItem("001", Player.player.Hp_item_up, transform.position);
         }
     }
 
@@ -217,7 +217,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
         if (!isBoss)
         {
-            Effect effect = EffectPoolManager.epm.GetFromPool("007");
+            Effect effect = EffectPoolManager.instance.GetFromPool("007");
             effect.InitEffect(center.position);
             effect.ActionEffect();
             if(audioSource !=null)
@@ -283,7 +283,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         // wait until animation end 
         yield return new WaitUntil(() => deathAnimationEnd);    
 
-        EnemyPoolManager.epm.TakeToPool(this);
+        EnemyPoolManager.instance.TakeToPool(this);
     }
     
     //==============================================
@@ -534,13 +534,13 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         }
         
         Vector3 hitPoint = center.position;
-        EffectPoolManager.epm.CreateText(hitPoint, totalTickDmg.ToString(), new Color(0.9f,0.5f,0.5f,1), 1);
+        EffectPoolManager.instance.CreateText(hitPoint, totalTickDmg.ToString(), new Color(0.9f,0.5f,0.5f,1), 1);
         // bleeding effect
-        Effect effect = EffectPoolManager.epm.GetFromPool("102");
+        Effect effect = EffectPoolManager.instance.GetFromPool("102");
         effect.InitEffect(center.position);
         effect.ActionEffect();
         //
-        // EffectPoolManager.epm.CreateText(hitPoint, num.ToString(), Color.red);
+        // EffectPoolManager.instance.CreateText(hitPoint, num.ToString(), Color.red);
         Damaged(totalTickDmg);
     }
 
@@ -550,11 +550,11 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     {
         // 1. 마지막 공격받은 시간에서 일정시간 지나면 스스로 힐
         // 2. 버프몬스터 근처에 있다가 힐 받음
-        Effect effect = EffectPoolManager.epm.GetFromPool("010");
+        Effect effect = EffectPoolManager.instance.GetFromPool("010");
         effect.InitEffect(center.position);
         effect.ActionEffect();
 
-        EffectPoolManager.epm.CreateText(myTransform.position, heal.ToString(), new Color(0.2f, 0.4f, 0.1f, 1.0f), 2);
+        EffectPoolManager.instance.CreateText(myTransform.position, heal.ToString(), new Color(0.2f, 0.4f, 0.1f, 1.0f), 2);
         hp += heal;
         if (id_enemy.Equals("b_001"))
         {

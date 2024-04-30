@@ -9,16 +9,23 @@ using TMPro;            //텍스트매쉬프로
 
 public class EffectPoolManager : PoolManager<Effect>
 {
-    public static EffectPoolManager epm;
+    public static EffectPoolManager instance;
     
     public enum valueType {dmg_e_n, dmg_e_c, dmg_,e}
 
     
 
     //========================================================================================
-    protected override void SetCategory()
+    protected override void Init_custom()
     {
-        id_category = "04";
+        instance = this;
+        id_category = PoolType.something;
+
+                // 스테이지 시작시 이벤트
+        GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
+        
+        // 스테이지 클리어 시 이벤트
+        GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
     }
     
     
@@ -29,22 +36,18 @@ public class EffectPoolManager : PoolManager<Effect>
     // }
 
     
-    protected override void Awake()
-    {
-        base.Awake();
-        epm = this;
-    }
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     epm = this;
+    // }
 
-    void Start()
-    {
-        // 스테이지 시작시 이벤트
-        GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
-        
-        // 스테이지 클리어 시 이벤트
-        GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
+    // void Start()
+    // {
 
 
-    }
+
+    // }
     //============================================================================================
 
     

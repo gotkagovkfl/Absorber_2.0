@@ -50,8 +50,10 @@ public class PlayerWeapon : MonoBehaviour
     //=========================================================================    
     
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitUntil( ()=>PrefabManager.initialized);
+        
         h[0] = transform.Find("hand0");
         
         currWeapon[0] = h[0].GetChild(0).gameObject;

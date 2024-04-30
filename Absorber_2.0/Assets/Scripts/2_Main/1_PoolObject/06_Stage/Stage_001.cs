@@ -154,7 +154,7 @@ public class Stage_001 : Stage
                 }
 
                 // spawn enemy
-                EnemyPoolManager.epm.SpawnEnemy(id, 1, spawnPos);
+                EnemyPoolManager.instance.SpawnEnemy(id, 1, spawnPos);
             }
 
             // check break
@@ -177,7 +177,7 @@ public class Stage_001 : Stage
             // ������ Ȯ���� ���� ������ ���� �ð����� ���� ������ �ʰ� ������ ����
 
 
-            Enemy box = EnemyPoolManager.epm.GetFromPool("000");
+            Enemy box = EnemyPoolManager.instance.GetFromPool("000");
             box.InitEnemyStatus();
             box.myTransform.position = GetRandomSpawnPos_spawnRange();
             yield return new WaitForSeconds( Random.Range(20, 50) );
@@ -202,7 +202,7 @@ public class Stage_001 : Stage
                 for (int j = 0; j < 4; j++)
                 {
                     //j,i
-                    Enemy enemy = EnemyPoolManager.epm.GetFromPool("007");
+                    Enemy enemy = EnemyPoolManager.instance.GetFromPool("007");
                     enemy.InitEnemyStatus();
                     enemy.myTransform.position = new Vector3(newX, newY + (j));
                 }

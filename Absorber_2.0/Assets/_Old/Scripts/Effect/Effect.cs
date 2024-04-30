@@ -105,7 +105,7 @@ public abstract class Effect : MonoBehaviour , IPoolObject
     {
         yield return StartCoroutine( ReadyDestroy() );
         
-        EffectPoolManager.epm.TakeToPool(GetComponent<Effect>());
+        EffectPoolManager.instance.TakeToPool(this);
         
         isDead = false;
 

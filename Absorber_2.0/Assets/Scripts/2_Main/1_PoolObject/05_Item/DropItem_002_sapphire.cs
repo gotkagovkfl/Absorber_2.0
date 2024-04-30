@@ -27,7 +27,7 @@ public class DropItem_002_sapphire: DropItem
     {
         //Debug.Log("magnet");
 
-        DropItem[] items = ItemPoolManager.ipm.GetComponentsInChildren<DropItem>();
+        DropItem[] items = ItemPoolManager.instance.GetComponentsInChildren<DropItem>();
         foreach(var item in items)
         {
             item.captured = true;

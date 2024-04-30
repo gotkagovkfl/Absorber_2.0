@@ -9,25 +9,17 @@ using TMPro;            //텍스트매쉬프로
 
 public class SomethingPoolManager : PoolManager<Something>
 {
-    public static SomethingPoolManager spm;
+    public static SomethingPoolManager instance;
 
 
     //========================================================================================
-    protected override void SetCategory()
+    protected override void Init_custom()
     {
-        id_category = "04";
-    }
-    
-    
-    protected override void Awake()
-    {
-        base.Awake();
-        spm = this;
-    }
+        id_category = PoolType.something;
+        instance = this;
 
-    void Start()
-    {
-        // 스테이지 시작시 이벤트
+
+                // 스테이지 시작시 이벤트
         GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
         
         // 스테이지 클리어 시 이벤트
@@ -35,9 +27,14 @@ public class SomethingPoolManager : PoolManager<Something>
 
         //
         GameEvent.ge.onChange_level.AddListener(OnLevelUp );
-
-
     }
+    
+    
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     spm = this;
+    // }
     //============================================================================================
 
 
@@ -152,8 +149,8 @@ public class SomethingPoolManager : PoolManager<Something>
 
     void OnLevelUp()
     {
-        Effect effect = EffectPoolManager.epm.GetFromPool("006");
-        effect.InitEffect(Player.player.center.position);
-        effect.ActionEffect();
+        // Effect effect = EffectPoolManager.epm.GetFromPool("006");
+        // effect.InitEffect(Player.player.center.position);
+        // effect.ActionEffect();
     }
 }

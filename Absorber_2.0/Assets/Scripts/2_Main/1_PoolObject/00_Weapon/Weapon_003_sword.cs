@@ -95,7 +95,7 @@ public class Weapon_003_sword: Weapon
                 string id = id_weapon;
                 Vector3 firePoint = Player.player.t_player.position + Vector3.up; 
 
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);
                 proj.InitProj(this, firePoint, target);
 
                 proj.RotateProj(Projectile.ProjDir.up);

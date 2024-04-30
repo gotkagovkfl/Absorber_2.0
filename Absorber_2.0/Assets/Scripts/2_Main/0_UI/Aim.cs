@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {    
-    static Transform t_aim;
+    public static Transform t_aim;
     Camera mainCamera;
 
     [SerializeField] GameObject autoText;

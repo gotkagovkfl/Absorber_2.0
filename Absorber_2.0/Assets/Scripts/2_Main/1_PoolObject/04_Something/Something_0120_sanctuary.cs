@@ -82,7 +82,7 @@ public class Something_0120_sanctuary : Something
             // Effect effect = EffectPoolManager.epm.GetFromPool("101_b");
             // effect.InitEffect(myTransform.position);
             // effect.ActionEffect();
-            SomethingPoolManager.spm.CreateSomething("0121",myTransform.position);
+            SomethingPoolManager.instance.CreateSomething("0121",myTransform.position);
 
             //
             //힐하고 공격 
@@ -102,7 +102,7 @@ public class Something_0120_sanctuary : Something
         if (currTime >= lastAttackTime + 1f)
         {
             // 성역 공격 투사체 생성
-            Projectile proj = ProjPoolManager.ppm.GetFromPool("101");
+            Projectile proj = ProjPoolManager.instance.GetFromPool("101");
             proj.SetUp(  3 * Player.player.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
             proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
 

@@ -62,39 +62,39 @@ public class Enemy_000_Normal_itemBox : Enemy
         // default dropItem 
         if (num <50)    // big mana
         {
-            defaultItem = ItemPoolManager.ipm.SpawnItem("000", manaValue * 3, myTransform.position);
+            defaultItem = ItemPoolManager.instance.SpawnItem("000", manaValue * 3, myTransform.position);
         }
         else            // ruby - heal Item
         {
-            defaultItem = ItemPoolManager.ipm.SpawnItem("001", Player.player.Hp_item_up, myTransform.position);  
+            defaultItem = ItemPoolManager.instance.SpawnItem("001", Player.player.Hp_item_up, myTransform.position);  
         }
         
         
         // 추가로 드랍할 아이템 선택
         num = Random.Range(0,100); // 확률
 
-        // luckyItem = ItemPoolManager.ipm.SpawnItem("005", manaValue * 3, myTransform.position);
-        // luckyItem = ItemPoolManager.ipm.SpawnItem("002", manaValue * 3, myTransform.position);
-        // luckyItem = ItemPoolManager.ipm.SpawnItem("003", manaValue * 3, myTransform.position);
-        // luckyItem = ItemPoolManager.ipm.SpawnItem("004", manaValue * 3, myTransform.position);
-        // luckyItem = ItemPoolManager.ipm.SpawnItem("005", manaValue * 3, myTransform.position);
+        // luckyItem = ItemPoolManager.instance.SpawnItem("005", manaValue * 3, myTransform.position);
+        // luckyItem = ItemPoolManager.instance.SpawnItem("002", manaValue * 3, myTransform.position);
+        // luckyItem = ItemPoolManager.instance.SpawnItem("003", manaValue * 3, myTransform.position);
+        // luckyItem = ItemPoolManager.instance.SpawnItem("004", manaValue * 3, myTransform.position);
+        // luckyItem = ItemPoolManager.instance.SpawnItem("005", manaValue * 3, myTransform.position);
         
         // // 20 % 확률로 럭키 아이템 생성 
         if (num <= 7)  // sapphire -  magnet
         {   
-            luckyItem = ItemPoolManager.ipm.SpawnItem("002", manaValue, myTransform.position); 
+            luckyItem = ItemPoolManager.instance.SpawnItem("002", manaValue, myTransform.position); 
         }
         // else if (num <= 10) // opal - strengthen
         // {
-            // luckyItem = ItemPoolManager.ipm.SpawnItem("003", manaValue, myTransform.position);
+            // luckyItem = ItemPoolManager.instance.SpawnItem("003", manaValue, myTransform.position);
         // }
         else if (num <= 14 )    // topaz- explosion
         {
-            luckyItem = ItemPoolManager.ipm.SpawnItem("004", manaValue * 3, myTransform.position);
+            luckyItem = ItemPoolManager.instance.SpawnItem("004", manaValue * 3, myTransform.position);
         }
         else if (num <= 21)    // amethyst - paralysis
         {
-            luckyItem = ItemPoolManager.ipm.SpawnItem("005", manaValue * 3, myTransform.position);
+            luckyItem = ItemPoolManager.instance.SpawnItem("005", manaValue * 3, myTransform.position);
         }
     }
 

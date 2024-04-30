@@ -8,16 +8,17 @@ using UnityEngine;
 //==============================================================
 public class ProjPoolManager : PoolManager<Projectile>
 {
-    public static ProjPoolManager ppm;  // 투사체 풀 매니저 객체 
+    public static ProjPoolManager instance;  // 투사체 풀 매니저 객체 
     
-    protected override void Awake()
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     ppm = this;
+    // }
+    protected override void Init_custom()
     {
-        base.Awake();
-        ppm = this;
-    }
-    protected override void SetCategory()
-    {
-        id_category = "01";
+        id_category = PoolType.proj;
+        instance = this;
     }
 
     // public override void SetDir()

@@ -176,7 +176,7 @@ public class Boss_Bullet : MonoBehaviour
             norCheck = true;
         }
 
-        Projectile_Enemy normalBullet = EnemyProjPoolManager.eppm.GetFromPool("100");
+        Projectile_Enemy normalBullet = EnemyProjPoolManager.instance.GetFromPool("100");
         normalBullet.SetUp(8, norSpeed, 1, 0, 0, 5f );
         normalBullet.transform.position = transform.position;
         normalBullet.SetDirection( direction);
@@ -200,7 +200,7 @@ public class Boss_Bullet : MonoBehaviour
         for (int i = 0; i < baseBunbNum; i++)
         {
             
-            Projectile_Enemy bunbBullet = EnemyProjPoolManager.eppm.GetFromPool("101");
+            Projectile_Enemy bunbBullet = EnemyProjPoolManager.instance.GetFromPool("101");
             bunbBullet.SetUp(10 ,baseBunbSpeed, 1, 0, 0, 10f);
             bunbBullet.transform.position = transform.position;
             
@@ -237,14 +237,14 @@ public class Boss_Bullet : MonoBehaviour
         
         /*for (int i = 0; i < ranNum; i++)
         {
-            Projectile_Enemy bombBullet = EnemyProjPoolManager.eppm.GetFromPool("102");
+            Projectile_Enemy bombBullet = EnemyProjPoolManager.instance.GetFromPool("102");
             bombBullet.SetUp( 2,baseBombSpeed, 1, -99, 0, 5f  );
             bombBullet.transform.position = transform.position;
             bombBullet.SetDirection( Quaternion.AngleAxis(360f / ranNum * i, Vector3.forward) * transform.right );
             bombBullet.Action();
 
         }*/
-        Projectile_Enemy bombBullet = EnemyProjPoolManager.eppm.GetFromPool("102");
+        Projectile_Enemy bombBullet = EnemyProjPoolManager.instance.GetFromPool("102");
         bombBullet.SetUp(10, ranSpeed, 1, -99, 0, 5f);
         bombBullet.transform.position = transform.position;
         bombBullet.SetDirection(Quaternion.AngleAxis(30f * i, Vector3.forward) * transform.right);
@@ -277,7 +277,7 @@ public class Boss_Bullet : MonoBehaviour
             ranY = Random.Range(-1f, 1f) < 0f ? -20f : 20f;
         } 
 
-        Projectile_Enemy throwBullet = EnemyProjPoolManager.eppm.GetFromPool("103");
+        Projectile_Enemy throwBullet = EnemyProjPoolManager.instance.GetFromPool("103");
         throwBullet.SetUp( 15, ranSpeed, 1, 0, 0, 10f );
         throwBullet.transform.position = new Vector3(ranX, ranY, 0f);
         throwBullet.SetDirection(Player.player.t_player);
@@ -313,7 +313,7 @@ public class Boss_Bullet : MonoBehaviour
             Vector3 position = Vector3.zero + direction * distance;
             // GameObject bulletObject = Instantiate(aroundPrefab, position, Quaternion.Euler(0, 0, angle));
 
-            Projectile_Enemy bulletObject = EnemyProjPoolManager.eppm.GetFromPool("104");
+            Projectile_Enemy bulletObject = EnemyProjPoolManager.instance.GetFromPool("104");
             bulletObject.SetUp(24, 3,1, 0, 0, -1);
             bulletObject.caster = transform;
             bulletObject.transform.position = position;

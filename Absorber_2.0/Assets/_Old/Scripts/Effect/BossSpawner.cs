@@ -36,7 +36,7 @@ public class BossSpawner : MonoBehaviour
         string id ="b_001";
 
 
-        boss = EnemyPoolManager.epm.SpawnBoss(id);
+        boss = EnemyPoolManager.instance.SpawnBoss(id);
         boss.InitEnemyStatus();
         boss.myTransform.position = transform.position;
     }
@@ -69,7 +69,7 @@ public class BossSpawner : MonoBehaviour
     //     float dmg = 9999999f;
         
     //     // EntityEffectController.eec.CreateValueText(currBoss, dmg);
-    //     EffectPoolManager.epm.CreateText(boss.transform.position, dmg.ToString(), Color.white);
+    //     EffectPoolManager.instance.CreateText(boss.transform.position, dmg.ToString(), Color.white);
         
     //     boss.GetComponent<Enemy>().hp -= dmg;
     // }

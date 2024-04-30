@@ -44,7 +44,7 @@ public class Proj_007_shootingStar :Projectile
 
             for (int i=0;i<splitCount;i++)
             {
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);       // 풀에서 생성
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);       // 풀에서 생성
                 
                 lifeTime = 1f;
                 // 풀에서 생성한 투사체 세팅 

@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class WeaponPoolManager : PoolManager<Weapon>
 {
-    public static WeaponPoolManager wpm;  // 투사체 풀 매니저 객체 
+    public static WeaponPoolManager instance;  // 투사체 풀 매니저 객체 
 
 
 
-    //==================================================================================================
-    protected override void Awake()
+    // //==================================================================================================
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     wpm = this;
+    // }
+
+    protected override void Init_custom()
     {
-        base.Awake();
-        wpm = this;
-    }
-
-    protected override void SetCategory()
-    {
-        id_category = "00";
+        id_category = PoolType.weapon;
+        instance = this;
     }
 
 

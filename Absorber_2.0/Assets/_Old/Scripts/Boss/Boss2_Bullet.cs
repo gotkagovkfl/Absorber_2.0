@@ -74,10 +74,10 @@ public class Boss2_Bullet : MonoBehaviour
             if (i != ranNum - 1)
             {
                 int ranIndex = Random.Range(0, 4);
-                Projectile_Enemy warning = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex]);
+                Projectile_Enemy warning = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex]);
                 warning.SetUp(0, 0, 1, 0, 0, 1f);
                 yield return new WaitForSeconds(1.5f);
-                Projectile_Enemy forSpear = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex + 4]);
+                Projectile_Enemy forSpear = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex + 4]);
                 forSpear.SetUp(2, 0, 1, 0, 0, 3f);
                 yield return new WaitForSeconds(ranTime);
 
@@ -85,10 +85,10 @@ public class Boss2_Bullet : MonoBehaviour
             else
             {
                 int ranIndex = Random.Range(0, 4);
-                Projectile_Enemy warning = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex]);
+                Projectile_Enemy warning = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex]);
                 warning.SetUp(0, 0, 1, 0, 0, 1f);
                 yield return new WaitForSeconds(1.5f);
-                Projectile_Enemy forSpear = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex + 4]);
+                Projectile_Enemy forSpear = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex + 4]);
                 forSpear.SetUp(2, 0, 1, 0, 0, 3f);
             }
         }
@@ -108,14 +108,14 @@ public class Boss2_Bullet : MonoBehaviour
                 {
                     ranIndex2 = Random.Range(0, 4);
                 }
-                Projectile_Enemy warning = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex]);
+                Projectile_Enemy warning = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex]);
                 warning.SetUp(0, 0, 1, 0, 0, 1f);
-                Projectile_Enemy warning2 = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex2]);
+                Projectile_Enemy warning2 = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex2]);
                 warning2.SetUp(0, 0, 1, 0, 0, 1f);
                 yield return new WaitForSeconds(1.5f);
-                Projectile_Enemy forSpear = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex + 4]);
+                Projectile_Enemy forSpear = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex + 4]);
                 forSpear.SetUp(2, 0, 1, 0, 0, 3f);
-                Projectile_Enemy forSpear2 = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex2 + 4]);
+                Projectile_Enemy forSpear2 = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex2 + 4]);
                 forSpear2.SetUp(2, 0, 1, 0, 0, 3f);
                 yield return new WaitForSeconds(ranTime);
 
@@ -128,14 +128,14 @@ public class Boss2_Bullet : MonoBehaviour
                 {
                     ranIndex2 = Random.Range(0, 4);
                 }
-                Projectile_Enemy warning = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex]);
+                Projectile_Enemy warning = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex]);
                 warning.SetUp(0, 0, 1, 0, 0, 1f);
-                Projectile_Enemy warning2 = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex2]);
+                Projectile_Enemy warning2 = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex2]);
                 warning2.SetUp(0, 0, 1, 0, 0, 1f);
                 yield return new WaitForSeconds(1.5f);
-                Projectile_Enemy forSpear = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex + 4]);
+                Projectile_Enemy forSpear = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex + 4]);
                 forSpear.SetUp(2, 0, 1, 0, 0, 3f);
-                Projectile_Enemy forSpear2 = EnemyProjPoolManager.eppm.GetFromPool(forSpearList[ranIndex2 + 4]);
+                Projectile_Enemy forSpear2 = EnemyProjPoolManager.instance.GetFromPool(forSpearList[ranIndex2 + 4]);
                 forSpear2.SetUp(2, 0, 1, 0, 0, 3f);
             }
         }
@@ -143,7 +143,7 @@ public class Boss2_Bullet : MonoBehaviour
     
     void FireSpear()
     {
-        Projectile_Enemy spearBullet = EnemyProjPoolManager.eppm.GetFromPool("201");
+        Projectile_Enemy spearBullet = EnemyProjPoolManager.instance.GetFromPool("201");
         spearBullet.SetUp(1, spearSpeed, 1, 0, 0, -1f);
         spearBullet.transform.position = transform.position;
         spearBullet.SetDirection(target);
@@ -160,7 +160,7 @@ public class Boss2_Bullet : MonoBehaviour
     void Firenormal2()
     {
 
-        Projectile_Enemy normal2Bullet = EnemyProjPoolManager.eppm.GetFromPool("200");
+        Projectile_Enemy normal2Bullet = EnemyProjPoolManager.instance.GetFromPool("200");
         normal2Bullet.SetUp(1, nor2Speed, 1, 0, 0, 5f);
         normal2Bullet.transform.position = transform.position;
         normal2Bullet.SetDirection(target);
@@ -191,14 +191,14 @@ public class Boss2_Bullet : MonoBehaviour
     {
         foreach (Vector2 position in ranPositions)
         {
-            Projectile_Enemy stopSpawn = EnemyProjPoolManager.eppm.GetFromPool("202");
+            Projectile_Enemy stopSpawn = EnemyProjPoolManager.instance.GetFromPool("202");
             stopSpawn.SetUp(0, 0, 1, 0, 0, 2f);
             stopSpawn.transform.position = position;
         }
         yield return new WaitForSeconds(2f);
         foreach (Vector2 position in ranPositions)
         {
-            Projectile_Enemy stopBullet = EnemyProjPoolManager.eppm.GetFromPool("203");
+            Projectile_Enemy stopBullet = EnemyProjPoolManager.instance.GetFromPool("203");
             stopBullet.SetUp(1, 0, 1, 0, 0, 5f);
             stopBullet.transform.position = position;
         }

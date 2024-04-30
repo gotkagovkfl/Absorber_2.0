@@ -94,7 +94,7 @@ public class Weapon_006_magicCircle : Weapon
                 Vector3 offset = new Vector3(xOffset, yOffset, 0);      // offset 은 좀더 자연스러움을 위함 
                 offset = Vector3.zero;
 
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);
                 proj.InitProj(this,firePoint + offset, target);
                 proj.Action();
             }

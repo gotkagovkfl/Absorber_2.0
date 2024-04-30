@@ -74,7 +74,7 @@ public class Weapon_005_Aegis : Weapon
             audioSource.PlayOneShot(audioSource.clip);
             
             string id = id_weapon;
-            Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+            Projectile proj = ProjPoolManager.instance.GetFromPool(id);
             proj.SetUp(this);
             proj.myTransform.position = new Vector3(transform.position.x, Player.player.t_player.position.y);
 

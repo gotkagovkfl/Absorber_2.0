@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 // using System;
 
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
 {
     private static Player _player;
     public static Player player => _player;
+
+    public static bool initialized;
 
     //
     // public PlayerUI playerUI;
@@ -29,9 +32,6 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-        penetration = 0;
-        projScale = 0f;
-        projLifeTime = 0f;
         rb = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>(); 
         animator = GetComponent<Animator>();
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         // playerUI = GetComponent<PlayerUI>();
 
         t_player = transform;
-        init();
+
     }
 
     public Transform t_player;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     public float Attack_Speed; // 공격속도
     public int Attack_Speed_Plus;
     public int Def; // 방어력
-    public bool inv = false; // 무적
+    public bool invincible = false; // 무적
     public int Drain; // 흡혈
     public int Drain_prob; // 흡혈확률
     public int penetration; // 총알 관통
@@ -97,13 +97,7 @@ public class Player : MonoBehaviour
     public int bleedingLevel;
 
     public int sanctuaryLevel;
-    // 대쉬 //
-    public bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 4f;
-    private float dashingTime = 0.2f;
-    public float dashingCooldown = 3f;
-    // 대쉬 //
+
     public int Luk; // 행운
     public List<Coroutine> RunningCoroutines = new List<Coroutine>();
 
@@ -118,8 +112,7 @@ public class Player : MonoBehaviour
     public bool canAttack = true;
 
     public bool autoAim = true;
-    // public GameObject obj_directAim;
-    // public GameObject obj_autoAim;
+
     
     //===================================
     // public GameObject pauseUI;
@@ -139,6 +132,9 @@ public class Player : MonoBehaviour
     public AudioClip sound_createSanctuary;
 
     public AudioClip sound_changeAuto;
+
+    //=====================================================
+    public Dictionary<KeyCode, PlayerSkill> skills = new();
 
 
     //====================================
@@ -198,7 +194,7 @@ public class Player : MonoBehaviour
     }
     public void Random_Stat()
     {
-        init();
+        InitPlayer();
         for(int i = 1; i < Level; i++)
         {
             LevelUpManager.GetComponent<LevelUpManager>().AutoLevelUp();
@@ -290,55 +286,20 @@ public class Player : MonoBehaviour
     }
     IEnumerator Invincible(float time)
     {
-        inv = true;
+        invincible = true;
         yield return new WaitForSeconds(time);
-        inv = false;
+        invincible = false;
     }
-    private IEnumerator Dash()
+
+    public void GetInivincible(float duration)
     {
-        StartCoroutine(Invincible(dashingTime));
-        StartCoroutine(OnDashEffect());
-
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Vector3 dir = (worldPosition - transform.position).normalized;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
-        canDash = false;
-        isDashing = true;
-        rb.gravityScale = 0f;
-        rb.velocity = rb.velocity * dashingPower;
-        
-        
-        GameEvent.ge.onDash.Invoke();
-
-        yield return new WaitForSeconds(dashingTime);
-        isDashing = false;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
-        //StartCoroutine(Dash_CoolTime(dashingCooldown + 1f));
-        yield return new WaitForSeconds(dashingCooldown);
-
-        canDash = true;
+        StartCoroutine(Invincible(duration));
     }
 
-    public IEnumerator OnDashEffect()
-    {
-        audioSource.PlayOneShot(sound_playerDash);
-        for (int i=0; i< 5; i++)
-        {
-            Effect effect = EffectPoolManager.epm.GetFromPool("012");
-            effect.InitEffect(t_player.position);
-            effect.ActionEffect();
-            effect.GetComponent<SpriteRenderer>().flipX = spriter.flipX;
-
-            yield return null;
-            yield return null;
-            yield return null;
-        }
-    }
 
 
     // 스텟 초기화
-    public void init()
+    public void InitPlayer()
     {
         Atk = 0;
         Max_Hp = 100;
@@ -371,8 +332,6 @@ public class Player : MonoBehaviour
         Crit = 0;
         Reinforce_Prob = 0;
 
-        autoAim = true;
-
 
         Stop_Def = 0;
         explosionLevel = 0;
@@ -400,6 +359,19 @@ public class Player : MonoBehaviour
             StopCoroutine(C);
         RunningCoroutines.Clear();
         chooseList.Clear();
+
+
+
+        // 스킬 초기화.
+        skills = new()
+        {
+            {KeyCode.Space, new PlayerSkill_Dash()}
+        };
+
+
+        initialized =true;
+
+        
     }
     //====================================
     // 플레이어의 체력에 변동이 생겼을 때 
@@ -421,11 +393,11 @@ public class Player : MonoBehaviour
         string absValue = ((value >= 0) ? value : -value).ToString();
         Color color = ((value >= 0) ? Color.green : Color.red);
         
-        EffectPoolManager.epm.CreateText(center.position, absValue, color,2);
+        EffectPoolManager.instance.CreateText(center.position, absValue, color,2);
 
         if (value >0)
         {
-            Effect effect =EffectPoolManager.epm.GetFromPool("003");
+            Effect effect =EffectPoolManager.instance.GetFromPool("003");
             effect.InitEffect(t_player.position);
             effect.ActionEffect();
         }
@@ -447,7 +419,7 @@ public class Player : MonoBehaviour
         
         Avoid_Time = Time.time;
         //무적
-        if (inv)
+        if (invincible)
             return;	
         else if(protection)
         {
@@ -464,7 +436,7 @@ public class Player : MonoBehaviour
 		int prob = Random.Range(1, 101);
         if (prob <= Avoid_prob)
         {
-            EffectPoolManager.epm.CreateText(hitPoint, "MISS", Color.gray,0);
+            EffectPoolManager.instance.CreateText(hitPoint, "MISS", Color.gray,0);
             return;
         }
         // 방어 계산
@@ -477,7 +449,7 @@ public class Player : MonoBehaviour
             finalDamage = (int)Mathf.Max(dmg * (100f / (100 + Def)), 0);      // 공격의 경우 방어력 계산하여 피해량이 0보다 작아지면 방어하기 위해 0으로 설정 
         if (finalDamage <= 0)
         {
-            EffectPoolManager.epm.CreateText(hitPoint, "GUARD", Color.gray,0);
+            EffectPoolManager.instance.CreateText(hitPoint, "GUARD", Color.gray,0);
             return;
         }
         // 데미지 처리 
@@ -515,7 +487,7 @@ public class Player : MonoBehaviour
     public void OnDamageEffect(Vector3 hitPoint)
     {
         //effect
-        Effect effect =  EffectPoolManager.epm.GetFromPool("011");
+        Effect effect =  EffectPoolManager.instance.GetFromPool("011");
         effect.InitEffect(hitPoint);
         effect.ActionEffect();
         
@@ -630,7 +602,7 @@ public class Player : MonoBehaviour
             
             Vector3 randPos = StageManager.sm.currStage.GetRandomSpawnPos_spawnRange();
             // 101 is id of sanctuary
-            Effect effect = EffectPoolManager.epm.GetFromPool("101");
+            Effect effect = EffectPoolManager.instance.GetFromPool("101");
             effect.InitEffect(randPos);
             effect.ActionEffect();
 
@@ -650,6 +622,8 @@ public class Player : MonoBehaviour
         // obj_autoAim.SetActive(autoAim);
     // }
 
+
+    
 
     //=========================================================================================================================================
   
@@ -699,19 +673,36 @@ public class Player : MonoBehaviour
                 spriter.flipX = inputVector.x < 0;
             }
             
-            if (isDashing)
-                return;
 
             inputVector.x = Input.GetAxisRaw("Horizontal");
             inputVector.y = Input.GetAxisRaw("Vertical");
             float final_speed = Speed + Speed * Speed_Plus *0.01f;
             rb.velocity = new Vector2(inputVector.x * final_speed, inputVector.y * final_speed);
 
-            if (Input.GetKeyDown(KeyCode.Space) && canDash && Time.timeScale == 1)
-            {
-                StartCoroutine(Dash());
-            }
         }
-    }
+
+        // 스킬 사용 여부
+        foreach( var kv in skills )
+        {
+            KeyCode keyCode = kv.Key;
+            PlayerSkill skill = kv.Value;
+
+            //
+            if (Input.GetKeyDown(keyCode) )
+            
+                if (skill.IsAvailable()) 
+                {
+                    
+                    Debug.LogWarning("스킬 사용! " + skill.skillName);                    
+                    skill.UseSkill();
+                    GameEvent.ge.onUseSkill.Invoke(keyCode);
+                }
+                else
+                {
+                    Debug.LogError("스킬 사용 불가!! " + skill.skillName);
+                }
+            }
+
+        }
     
 }

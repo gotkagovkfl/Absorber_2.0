@@ -251,7 +251,7 @@ public abstract class Projectile_Enemy : MonoBehaviour , IPoolObject
             myTransform.localScale = originalScale * 0.1f * i;
             yield return new WaitForSeconds(0.05f);
         }*/
-        EnemyProjPoolManager.eppm.TakeToPool(this);         // 풀링 - 중복 반납이 일어나면 에러발생
+        EnemyProjPoolManager.instance.TakeToPool(this);         // 풀링 - 중복 반납이 일어나면 에러발생
         EnemyProjDestroy_custom();
     }
 

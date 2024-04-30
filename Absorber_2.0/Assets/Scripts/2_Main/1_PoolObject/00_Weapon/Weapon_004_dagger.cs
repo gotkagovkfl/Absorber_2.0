@@ -98,7 +98,7 @@ public class Weapon_004_dagger : Weapon
 
             // 효과생성
             string id = id_weapon;
-            Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+            Projectile proj = ProjPoolManager.instance.GetFromPool(id);
             proj.InitProj(this, firePoint, target);    
             proj.RotateProj(Projectile.ProjDir.up);
             proj.Action();

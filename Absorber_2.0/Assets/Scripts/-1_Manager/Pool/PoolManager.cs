@@ -44,12 +44,14 @@ internal struct PoolData
 /// </summary>
 public abstract class PoolManager<T> : MonoBehaviour where T : Component, IPoolObject
 {
+    // public static PoolManager<T> instance;
+    
     [SerializeField]
     private List<PoolData> _pools;
     
     protected readonly List<IPool<Component>> _poolsObjects = new();
     //=======================================================================================
-    protected string id_category;
+    protected PoolType id_category;
 
     // pooling objects 사전
     // public Dictionary<string, GameObject> dic_objs  = new Dictionary<string, GameObject>();
@@ -57,9 +59,13 @@ public abstract class PoolManager<T> : MonoBehaviour where T : Component, IPoolO
     //============================================================================================================
     
     // 프리팹 주소 설정 후, 풀링 컨테이너 초기화 
-    protected virtual void Awake()
+    IEnumerator Start()
     {
-        SetCategory();
+        yield return new WaitUntil( ()=> PrefabManager.initialized);
+        // instance = this;
+
+
+        Init_custom();
         
         // SetDir();
         InitPoolData();
@@ -68,7 +74,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : Component, IPoolO
 
     //================================================================
     // 풀링 오브젝트를 참고할 사전의 키 설정
-    protected abstract void SetCategory();
+    protected abstract void Init_custom();
 
 
     // 해당 오브젝트의 아이디를 받아옴
@@ -79,7 +85,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : Component, IPoolO
     //========================================================================
     public void InitPoolData() 
     {   
-        Dictionary<string, GameObject> dic_prefabs = ResourceManager.rm.dic_prefabs[ id_category ];
+        Dictionary<string, GameObject> dic_prefabs = PrefabManager.dic_prefabs[ id_category ];
 
         foreach(var i in dic_prefabs)
         {
@@ -131,6 +137,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : Component, IPoolO
             poolsAddMethod.Invoke(_poolsObjects, new object[] { pool });
         }
     }
+
     //====================================================================================================================================
 
     #region Get pool

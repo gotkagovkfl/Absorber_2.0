@@ -86,7 +86,7 @@ public class Enemy_006_Normal_Healing : Enemy
 
         //    }
         //}
-        Projectile_Enemy proj = EnemyProjPoolManager.eppm.GetFromPool("002");
+        Projectile_Enemy proj = EnemyProjPoolManager.instance.GetFromPool("002");
         proj.SetUp(heal_hp, 0, 1, -99, 0, 5);
         proj.myTransform.position = myTransform.position;
         proj.caster = myTransform;

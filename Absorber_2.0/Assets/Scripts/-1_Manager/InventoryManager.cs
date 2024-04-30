@@ -34,7 +34,7 @@ public class InventoryManager : MonoBehaviour
             
             string currId = "00"+(i+1).ToString();
             
-            btns[i].onClick.AddListener( ()=> ChangeWeapon( ResourceManager.rm.GetFromDic_prefab("00", currId) ) );
+            btns[i].onClick.AddListener( ()=> ChangeWeapon( PrefabManager.GetWeapon(currId) ) );
         }
 
 

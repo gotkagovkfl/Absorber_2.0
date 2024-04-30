@@ -80,7 +80,7 @@ public class Proj_004_dagger : Projectile
             {   
                 float splitWeight = 0.5f + 0.1f * splitNum;
 
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);
                 proj.SetUp(base.damage* splitWeight, base.speed, base.scale *splitWeight, base.projNum,  base.penetration,  base.splitNum-1 , -1f);
                 proj.SetSpecialStat(explosionLevel -1 , weight_critDamage , knockBackPower* splitWeight);
 

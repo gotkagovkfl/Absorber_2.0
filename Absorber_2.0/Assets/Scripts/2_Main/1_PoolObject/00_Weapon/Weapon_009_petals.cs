@@ -83,7 +83,7 @@ public class Weapon_009_petals: Weapon
         for (int i=0;i<base.projNumT;i++)
         {
             string id = id_weapon;
-            Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+            Projectile proj = ProjPoolManager.instance.GetFromPool(id);
 
             proj.SetUp(this);
             proj.SetTarget(Player.player.t_player);       // 플레이어 주위를 회전함 .
@@ -106,12 +106,12 @@ public class Weapon_009_petals: Weapon
         notAvailable = false;
 
         // 현재 생성된 투사체들 파괴
-        Projectile[] projs = ProjPoolManager.ppm.transform.GetComponentsInChildren<Projectile>();
+        Projectile[] projs = ProjPoolManager.instance.transform.GetComponentsInChildren<Projectile>();
         for (int i=0;i< projs.Length;i++)
         {
             if (projs[i].id_proj == id_weapon)
             {
-                ProjPoolManager.ppm.TakeToPool(projs[i]);
+                ProjPoolManager.instance.TakeToPool(projs[i]);
             }
         }
 

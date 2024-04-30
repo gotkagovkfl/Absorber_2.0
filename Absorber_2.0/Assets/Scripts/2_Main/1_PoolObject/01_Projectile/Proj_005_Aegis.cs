@@ -70,7 +70,7 @@ public class Proj_005_Aegis : Projectile
        
             // 효과 생성하기 
             string id = id_proj;
-            Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+            Projectile proj = ProjPoolManager.instance.GetFromPool(id);
             proj.transform.position = splitPoint;
             
             float splitWeight = 0.45f + 0.15f * (splitNum+1);

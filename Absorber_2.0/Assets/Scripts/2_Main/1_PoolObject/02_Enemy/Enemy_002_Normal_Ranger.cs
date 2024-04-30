@@ -46,7 +46,7 @@ public class Enemy_002_Normal_Ranger : Enemy
     {
         yield return new WaitForSeconds(1f);
         
-        Projectile_Enemy proj = EnemyProjPoolManager.eppm.GetFromPool("000");
+        Projectile_Enemy proj = EnemyProjPoolManager.instance.GetFromPool("000");
         proj.SetUp(damage*2, 6, 1, 0, 0, 3.5f);
         proj.transform.position = firePoint.position;
         //proj.RotateProj(Projectile_Enemy.ProjDir.up);

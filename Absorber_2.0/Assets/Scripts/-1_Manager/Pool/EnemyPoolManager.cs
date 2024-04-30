@@ -4,29 +4,22 @@ using UnityEngine;
 
 public class EnemyPoolManager : PoolManager<Enemy>
 {
-    public static EnemyPoolManager epm;
+    public static EnemyPoolManager instance;
 
     // public Transform[] makePoints;
     float spawnRate = 1f;
     public GameObject spawnInfo;
 
-    protected override void Awake()
+
+    protected override void Init_custom()
     {
-        base.Awake();
-        epm = this;
+        id_category = PoolType.enemy;
+        instance = this;
 
         spawnInfo = Resources.Load<GameObject>("Prefabs/02_Enemies/SpawnInfo");
-    }
 
-    void Start()
-    {
         // 스테이지 종료 이벤트 발생시 일반 적 제거 (아이템 드랍 없이 그냥 지우기)
         GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemy );   
-    }
-
-    protected override void SetCategory()
-    {
-        id_category = "02";
     }
 
     public override void GetFromPool_custom(Enemy obj)

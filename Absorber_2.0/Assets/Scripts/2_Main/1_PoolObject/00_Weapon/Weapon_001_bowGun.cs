@@ -79,7 +79,7 @@ public class Weapon_001_bowGun : Weapon
             Transform transform_muzzle = transform.GetChild(0);             // 총구 위치 정보 
 
             // 총알 생성 
-            Projectile proj =  ProjPoolManager.ppm.GetFromPool(id_weapon);
+            Projectile proj =  ProjPoolManager.instance.GetFromPool(id_weapon);
             proj.InitProj(this, transform_muzzle.position, target);           // 새로 생긴 투사체 초기화 
             proj.RotateProj(Projectile.ProjDir.up);
             float extraAngle = Random.Range(-2.5f, 2.5f);   

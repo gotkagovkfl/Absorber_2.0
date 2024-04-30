@@ -40,13 +40,13 @@ public class Something_1100_boss1_spawnEffect : Something
     }
 
 
-    // 보스 생성              *********************** 이거 epm으로 옮기자 
+    // 보스 생성              *********************** 이거 instance으로 옮기자 
     public void SpawnBoss()              
     {
         string id ="b_001";
 
 
-        boss = EnemyPoolManager.epm.SpawnBoss(id);
+        boss = EnemyPoolManager.instance.SpawnBoss(id);
         boss.InitEnemyStatus();
         boss.myTransform.position = transform.position;
     }

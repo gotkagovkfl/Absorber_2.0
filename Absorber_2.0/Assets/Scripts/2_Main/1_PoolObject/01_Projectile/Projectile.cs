@@ -187,8 +187,8 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
     public void Action()
     {
         rb.simulated = true;
-        // 투사체 크기는 플레이어 크기에 맞춰 설정됨  - 기본 투사체 정보는 ppm의 dic_proj으로부터 가져옴
-        transform.localScale = Player.player.t_player.localScale.x * ResourceManager.rm.GetFromDic_prefab("01", id_proj).transform.lossyScale * scale; 
+        // 투사체 크기는 플레이어 크기에 맞춰 설정됨  - 기본 투사체 정보는 instance의 dic_proj으로부터 가져옴
+        transform.localScale = Player.player.t_player.localScale.x * PrefabManager.GetProj(id_proj).transform.lossyScale * scale; 
         
         Action_custom();            // 여기서 애니메이션 등 기타 이유로 수명을 뒤늦게 설정할 수 있기 때문에, 투사체 삭제를 뒤늦게 호출
         SetLifeTime();
@@ -218,7 +218,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
     //============================================    
     public void ProjDestroy(float time)
     {
-        // ProjPoolManager.ppm.TakeToPool(this);         // 풀링 - 중복 반납이 일어나면 에러발생
+        // ProjPoolManager.instance.TakeToPool(this);         // 풀링 - 중복 반납이 일어나면 에러발생
         StartCoroutine( ProjDestroy_c(time) );
     }
 
@@ -227,7 +227,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
         yield return new WaitForSeconds(time);
         rb.simulated = false;
         yield return StartCoroutine(Shrink());
-        ProjPoolManager.ppm.TakeToPool(this); 
+        ProjPoolManager.instance.TakeToPool(this); 
         ProjDestroy_custom(); 
     }
 
@@ -402,8 +402,8 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
             Color color = new Color( 1.0f , 1.0f * (1 - weight_lvl*0.25f) , (weight_lvl==0)?1.0f:0.5f , 1.0f );             //255,255,255 / 255, 255, 0 / 255, 200, 0
             int tn = weight_lvl>0?3:0;
 
-            EffectPoolManager.epm.CreateText(hitPoint, finalDamage.ToString(), color,  tn);
-            EffectPoolManager.epm.CreateHitEffect(hitPoint);       // 총알 위치에 이펙트 생성 
+            EffectPoolManager.instance.CreateText(hitPoint, finalDamage.ToString(), color,  tn);
+            EffectPoolManager.instance.CreateHitEffect(hitPoint);       // 총알 위치에 이펙트 생성 
 
 
             //
@@ -471,7 +471,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
         int num = Random.Range(0,100);
         if (num < explosionLevel*25)
         {
-            Projectile proj = ProjPoolManager.ppm.GetFromPool("100");        
+            Projectile proj = ProjPoolManager.instance.GetFromPool("100");        
             
             float dmg = 7 + Player.player.Atk;
 

@@ -48,14 +48,14 @@ public class Elite1_Bullet : MonoBehaviour
         }
         
         //
-        Effect effect = EffectPoolManager.epm.GetFromPool("666");
+        Effect effect = EffectPoolManager.instance.GetFromPool("666");
         effect.InitEffect(transform.position);
         effect.ActionEffect();
         //
         for (int i = 0; i < baseBunbNum; i++)
         {
 
-            Projectile_Enemy bunbBullet = EnemyProjPoolManager.eppm.GetFromPool("101");
+            Projectile_Enemy bunbBullet = EnemyProjPoolManager.instance.GetFromPool("101");
             bunbBullet.SetUp(7, baseBunbSpeed, 1, 0, 0, 10f);
             bunbBullet.transform.position = transform.position;
 
@@ -85,7 +85,7 @@ public class Elite1_Bullet : MonoBehaviour
         }
         
         //
-        Effect effect = EffectPoolManager.epm.GetFromPool("666");
+        Effect effect = EffectPoolManager.instance.GetFromPool("666");
         effect.InitEffect(transform.position);
         effect.ActionEffect();
         
@@ -106,7 +106,7 @@ public class Elite1_Bullet : MonoBehaviour
             ranY = Random.Range(-1f, 1f) < 0f ? -20f : 20f;
         }
 
-        Projectile_Enemy throwBullet = EnemyProjPoolManager.eppm.GetFromPool("103");
+        Projectile_Enemy throwBullet = EnemyProjPoolManager.instance.GetFromPool("103");
         throwBullet.SetUp(15, 15f, 1, 0, 0, 10f);
         throwBullet.transform.position = new Vector3(ranX, ranY, 0f);
         throwBullet.SetDirection(Player.player.t_player);

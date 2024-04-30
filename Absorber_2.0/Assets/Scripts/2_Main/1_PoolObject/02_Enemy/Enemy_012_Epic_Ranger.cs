@@ -44,7 +44,7 @@ public class Enemy_012_Epic_Ranger : Enemy
     {
         yield return new WaitForSeconds(1f);
         
-        Projectile_Enemy proj = EnemyProjPoolManager.eppm.GetFromPool("000");
+        Projectile_Enemy proj = EnemyProjPoolManager.instance.GetFromPool("000");
         proj.SetUp(damage*2, 8, 1.25f, 0, 0, 5f);
         proj.transform.position = firePoint.position;
         //proj.RotateProj(Projectile_Enemy.ProjDir.up);

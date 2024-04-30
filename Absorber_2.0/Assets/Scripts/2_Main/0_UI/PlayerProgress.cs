@@ -106,7 +106,7 @@ public class PlayerProgress : MonoBehaviour
 
     void SetDashBar()
     {
-        slider_dash.maxValue = Player.player.dashingCooldown;
+        // slider_dash.maxValue = Player.player.dashingCooldown;
         slider_dash.value = slider_dash.maxValue;
         dashIndicator.SetActive(true);
     }

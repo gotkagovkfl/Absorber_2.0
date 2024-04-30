@@ -41,6 +41,7 @@ public class GameEvent : MonoBehaviour
     public UnityEvent onDash;
 
 
+    public UnityEvent<KeyCode> onUseSkill;
     
 
     

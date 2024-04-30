@@ -58,7 +58,7 @@ public class Weapon_008_beam : Weapon
 
 
 
-        // Projectile proj = ProjPoolManager.ppm.GetFromPool(id_weapon);
+        // Projectile proj = ProjPoolManager.instance.GetFromPool(id_weapon);
 
         // proj.InitProj(this, transform.position, target);           
         // proj.RotateProj(Projectile.ProjDir.up);
@@ -90,7 +90,7 @@ public class Weapon_008_beam : Weapon
                 string id = id_weapon;
                 Vector3 firePoint = transform.position;
 
-                Projectile proj = ProjPoolManager.ppm.GetFromPool(id);
+                Projectile proj = ProjPoolManager.instance.GetFromPool(id);
                 proj.InitProj(this, firePoint, target);
 
                 proj.RotateProj(Projectile.ProjDir.up);
