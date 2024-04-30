@@ -8,6 +8,8 @@ using BackEnd.Socketio;
 
 public class UI_PlayerSkill : MonoBehaviour
 {
+    bool initialized = false;
+    
     PlayerSkill playerSkill;
     KeyCode keyCode;
     
@@ -20,8 +22,20 @@ public class UI_PlayerSkill : MonoBehaviour
 
     //================================================================
 
+
+    void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     void Update()
     {
+        
+        if (!initialized)
+            return;
+        
+
+
         bool isAvailable = playerSkill.IsAvailable();
         
         if (!isAvailable)
@@ -57,6 +71,10 @@ public class UI_PlayerSkill : MonoBehaviour
         slider_skill.value = 0;
 
         text_coolTime.gameObject.SetActive(false);
+
+
+        gameObject.SetActive(true);
+        initialized = true;
     }
 
     public void OnUseSkill()

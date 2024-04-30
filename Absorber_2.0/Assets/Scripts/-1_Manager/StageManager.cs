@@ -72,7 +72,7 @@ public class StageManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitUntil(()=>PrefabManager.initialized);
-        
+        yield return null;
         _currStage = StagePoolManager.instance.GetFromPool("999");
         // ChangeStage();
     }

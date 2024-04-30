@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_PlayerSkills : MonoBehaviour
 {
+    bool initialized;
+    
     [SerializeField] GameObject prefab_playerSkill;
     
     [SerializeField] Dictionary<KeyCode,UI_PlayerSkill> playerSkills=new();
@@ -45,6 +48,8 @@ public class UI_PlayerSkills : MonoBehaviour
         //
 
         GameEvent.ge.onUseSkill.AddListener( OnUseSkill );
+
+        initialized = true;
     }
 
 
