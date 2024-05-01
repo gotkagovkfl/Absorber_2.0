@@ -43,10 +43,10 @@ public class Boss_001 : Enemy
         //
         isBoss = true;          //**************************
 
-        hpFull = baseHp + Random.Range(-500,500);      
+        hp_max = baseHp + Random.Range(-500,500);      
         damage = baseAtk + Random.Range(-5,5);
         def =  baseDef + Random.Range(-1, 1);
-        speed = 3;
+        movementSpeed = 3;
 
         attackSpeed = 0f; 
 
@@ -57,6 +57,9 @@ public class Boss_001 : Enemy
         canKnockBack = false;
 
         bossDied = false;
+
+
+        battleType = BattleType.melee;
     }
 
     // 맞을때 보스 체력바 설정 
@@ -64,7 +67,7 @@ public class Boss_001 : Enemy
     {
         bossUI.SetHpBar();
 
-        float ratioHp = hp/hpFull;
+        float ratioHp = hp_curr/hp_max;
         if (ratioHp <= 0.8f && !hpCheck[4])
         {
             hpCheck[4] = true;
@@ -105,17 +108,17 @@ public class Boss_001 : Enemy
     }
 
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        distance = Vector3.Distance(transform.position, base.target.transform.position);
+        distance = Vector3.Distance(transform.position, base.target.position);
         //dirVec = base.target.transform.position - transform.position; 
         //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = dirVec.normalized * speed;
+        Vector3 dirVec = base.target.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
+        rb.velocity = dirVec.normalized * movementSpeed;
         //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.fixedDeltaTime);
     }
 
-    public override void DieCustom()  // *****************************************************
+    protected override void DieCustom()  // *****************************************************
     {
         audioSource.PlayOneShot( Resources.Load<AudioClip>("Sound/13_bossdeath") );
         
@@ -141,7 +144,7 @@ public class Boss_001 : Enemy
         deltaScale = 0;
         
         rb.simulated = false;
-        StopCoroutine(MoveAnimation());
+        StopCoroutine(PlayAnim_move());
         yield return new WaitForSeconds(3.5f);
         
         audioSource.PlayOneShot( Resources.Load<AudioClip>("Sound/18_Boss_half")  );
@@ -154,13 +157,13 @@ public class Boss_001 : Enemy
         deltaScale = 0.001f;
         
         rb.simulated = true;
-        StartCoroutine(MoveAnimation());
+        StartCoroutine(PlayAnim_move());
         StartCoroutine(bullet.HalfAround());
     }
 
     IEnumerator Die()   // 보스 체력 0 이하로 내려갈 시 3초 뒤 보스 오브젝트 파괴
     {
-        speed = 0f;
+        movementSpeed = 0f;
         
 
         Player.player.GetInvincible(30f);
@@ -179,7 +182,7 @@ public class Boss_001 : Enemy
 
     void Update()
     {
-        if( hp < (hpFull * 0.6) && !bulletCheck)       // 반피 때 변신 예정. 변신 시 행동 중단 및 반피 패턴.
+        if( hp_curr < (hp_max * 0.6) && !bulletCheck)       // 반피 때 변신 예정. 변신 시 행동 중단 및 반피 패턴.
         {
             Enter2Phase();
         } 

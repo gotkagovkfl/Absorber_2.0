@@ -84,6 +84,24 @@ public class TestUIManager : MonoBehaviour
 
 
 
+//=========================================================================================
+
+[ SerializeField ] Button btn_spawn_n0;
+[ SerializeField ] Button btn_spawn_box;
+[ SerializeField ] Button btn_spawn_dummy;
+
+
+
+
+    void OnClick_btn_spawn(string id)
+    {
+
+        EnemyPoolManager.instance.SpawnEnemy(id)  ;
+    }
+
+
+
+
 
 
 
@@ -96,8 +114,12 @@ public class TestUIManager : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        
+        yield return new WaitUntil(()=>Player.initialized);
+        
+
 
         #region gameProgress ----------------------------------------------------------
 
@@ -131,6 +153,11 @@ public class TestUIManager : MonoBehaviour
         slider_sanctuaryLevel.onValueChanged.AddListener(SetSanctuaryLevel);
         
         #endregion
+
+
+        btn_spawn_n0.onClick.AddListener(()=>OnClick_btn_spawn("001"));
+        btn_spawn_box.onClick.AddListener(()=>OnClick_btn_spawn("000"));
+        btn_spawn_dummy.onClick.AddListener(()=>OnClick_btn_spawn("777"));
     }
 
 }

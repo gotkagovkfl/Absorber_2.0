@@ -22,19 +22,19 @@ public class Enemy_007_groupBat : Enemy
 
 
     
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         
     }
 
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 8;
-        hp = hpFull;
+        hp_max = 8;
+        hp_curr = hp_max;
 
         damage = 2;
         attackSpeed = 3f;
-        speed = 3f;
+        movementSpeed = 3f;
         dashPower = 15f;
         dashTime = 5f;
         coolTime = 10f;
@@ -48,11 +48,13 @@ public class Enemy_007_groupBat : Enemy
 
         itemProb = 5;
         manaValue = 3;
+
+        battleType = BattleType.special;
     }
 
 
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
 
     }

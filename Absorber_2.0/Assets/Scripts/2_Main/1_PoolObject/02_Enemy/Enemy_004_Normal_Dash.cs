@@ -18,15 +18,15 @@ public class Enemy_004_Normal_Dash : Enemy
     
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 50;
-        hp = 50;
+        hp_max = 50;
+        hp_curr = 50;
 
         damage = 6;
 
         itemProb = 15;
         manaValue = 25;
 
-        speed = 2.75f;
+        movementSpeed = 2.75f;
         attackSpeed = 0.2f;
         cooltime = 10f;
         dashPower = 12f;
@@ -34,20 +34,20 @@ public class Enemy_004_Normal_Dash : Enemy
         canDash = true;
 
         hasAttackCustom = true;
+
+        battleType = BattleType.melee;
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-        rb.velocity = dirVec.normalized * speed;
+
     }
     protected override void AttackCustom()
     {
         StartCoroutine(Dash());
     }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         // gameObject.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;

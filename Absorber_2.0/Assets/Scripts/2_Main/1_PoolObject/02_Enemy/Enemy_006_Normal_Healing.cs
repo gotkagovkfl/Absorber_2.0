@@ -18,40 +18,23 @@ public class Enemy_006_Normal_Healing : Enemy
 
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 25;
-        hp = hpFull;
+        hp_max = 25;
+        hp_curr = hp_max;
 
         damage = 2;
         attackSpeed = 0.1f;
-        speed = 3f;
+        movementSpeed = 3f;
         heal_hp = 5;
 
         itemProb = 50;
         manaValue = 18;
         //lastAttackTime = -8f;
+        battleType = BattleType.range;
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        // �������� : �÷��̾ ���������� �ֺ� ���� ����� �Ϲݸ��� or ���� ���ִ� �Ϲ� ���� ���󰡼� �ӹ�����
 
-        distance = Vector3.Distance(transform.position, base.target.transform.position);
-        //dirVec = base.target.transform.position - transform.position; // ���� = Ÿ�� ��ġ - �� ��ġ
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // ���� ��ġ
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-
-
-        if (distance >= 10)
-        {
-            //rb.MovePosition(transform.position + nextVec);
-            rb.velocity = dirVec.normalized * speed;
-        }
-        else
-        {
-            //rb.MovePosition(transform.position - nextVec);
-            rb.velocity = dirVec.normalized * -speed;
-        }
     }
 
     protected override void AttackCustom()
@@ -59,7 +42,7 @@ public class Enemy_006_Normal_Healing : Enemy
         StartCoroutine(HealEnemy());
     }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         // gameObject.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;

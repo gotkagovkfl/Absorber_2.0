@@ -1739,19 +1739,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 145982157}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 001
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &145982157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4799,19 +4787,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386066695}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 000
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &386066695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7043,19 +7019,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 575099808}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 002
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &575099808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8580,19 +8544,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 684912318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 004
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &684912318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13097,19 +13049,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1034632503}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 367957215}
-        m_TargetAssemblyTypeName: Dummy, Assembly-CSharp
-        m_MethodName: SpawnDummy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1034632503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16344,19 +16284,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1272945216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 003
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1272945216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17256,19 +17184,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1359759918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 006
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1359759918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19333,19 +19249,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1567368641}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 481114062}
-        m_TargetAssemblyTypeName: EnemyPoolManager, Assembly-CSharp
-        m_MethodName: SpawnEnemy
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 005
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1567368641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22545,6 +22449,9 @@ MonoBehaviour:
   text_bleedingLevel: {fileID: 2094057420}
   slider_sanctuaryLevel: {fileID: 1099422246}
   text_sanctuaryLevel: {fileID: 1429491640}
+  btn_spawn_n0: {fileID: 145982156}
+  btn_spawn_box: {fileID: 386066694}
+  btn_spawn_dummy: {fileID: 1034632502}
 --- !u!114 &1850740498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25202,19 +25109,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2108032654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 647569393}
-        m_TargetAssemblyTypeName: BossSpawnManager, Assembly-CSharp
-        m_MethodName: SpawnBoss
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2108032654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25339,7 +25234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5998900055359751233, guid: a5993321f2fdd2f48b88674ab3b3137e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5998900055359751233, guid: a5993321f2fdd2f48b88674ab3b3137e, type: 3}
       propertyPath: m_AnchoredPosition.y

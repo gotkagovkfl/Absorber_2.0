@@ -14,11 +14,11 @@ public class Enemy_000_Normal_itemBox : Enemy
     // ===================================
     public override void InitEnemyStatusCustom()
     {     
-        hpFull =15;
+        hp_max =15;
 
         damage = 0;
-
-        speed = 0;      //움직이지않음
+        range = 0;
+        movementSpeed = 0;      //움직이지않음
         attackSpeed = 0;    //공격하지 않음
 
 
@@ -28,6 +28,11 @@ public class Enemy_000_Normal_itemBox : Enemy
 
         canKnockBack = false;
         hasAttackCustom = false;
+
+        
+
+
+        battleType = BattleType.none;
     }
 
     // =========== 오버라이드 =============
@@ -41,7 +46,7 @@ public class Enemy_000_Normal_itemBox : Enemy
     // =========== 오버라이드 =============
     // 상자는 움직이지 않음
     // ===================================
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
 
     }
@@ -50,7 +55,7 @@ public class Enemy_000_Normal_itemBox : Enemy
     // =========== 오버라이드 =============
     // 죽으면 아이템 드랍 
     // ===================================
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         // lucky mana
         int num = Random.Range(0,100); // 확률

@@ -14,10 +14,10 @@ public class Enemy_001_Normal : Enemy
     
     public override void InitEnemyStatusCustom()
     {
-        hpFull =12;
+        hp_max =12;
 
         damage = 4;
-        speed = 1.5f;
+        movementSpeed = 1.5f;
         attackSpeed = 0.1f; // *****************************************************
 
         itemProb = 1;
@@ -31,15 +31,15 @@ public class Enemy_001_Normal : Enemy
     {
         
     }
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
         Vector3 dirVec = base.target.transform.position - transform.position; // 방향 = 타겟 위치 - 내 위치
-        Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // 다음 위치
+        Vector3 nextVec = dirVec.normalized * movementSpeed * Time.fixedDeltaTime; // 다음 위치
         rb.MovePosition(transform.position + nextVec);
         rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
     }
 
-    public override void DieCustom()  // *****************************************************
+    protected override void DieCustom()  // *****************************************************
     {
         // obj.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;

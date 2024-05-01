@@ -20,18 +20,22 @@ public class Enemy_003_Normal_Bomb : Enemy
 
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 25;
-        hp = 25;
+        hp_max = 25;
+        hp_curr = 25;
         damage = 3;
         attackSpeed = 0.1f; // *****************************************************
-        speed = 1.25f;
+        movementSpeed = 1.25f;
 
         itemProb = 10;
         manaValue = 12;
 
+        range = 3;
+
         hasAttackCustom = false;
         // 폭파중 죽은 애 살아났을때 안터지게 
         boooom = false;
+
+        battleType = BattleType.melee;
         StopAllCoroutines();
     }
 
@@ -39,17 +43,13 @@ public class Enemy_003_Normal_Bomb : Enemy
     {
         
     }
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        //dirVec = base.target.transform.position - transform.position; // ���� = Ÿ�� ��ġ - �� ��ġ
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // ���� ��ġ
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-        rb.velocity = dirVec.normalized * speed;
+
     }
 
 
-    public override void DieCustom() // *****************************************************
+    protected override void DieCustom() // *****************************************************
     {     
         // obj.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;
@@ -63,7 +63,7 @@ public class Enemy_003_Normal_Bomb : Enemy
     {
         distance = Vector2.Distance(transform.position, base.target.transform.position);
         
-        if (distance < 3f && !boooom)               // *****************************************************
+        if (distance < range && !boooom)               // *****************************************************
         {
             boooom =true;
             // gameObject.GetComponent<Collider2D>().enabled = true;

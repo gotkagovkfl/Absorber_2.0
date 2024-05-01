@@ -11,7 +11,7 @@ public class Enemy_dummy : Enemy
     }
     
     
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         float animationLength = base.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;  // 애니메이션 길이 측정
 
@@ -20,15 +20,15 @@ public class Enemy_dummy : Enemy
 
     public override void InitEnemyStatusCustom()
     {
-        base.hp = 10000000000;    
-        hpFull =10000000000;
+        base.hp_curr = 10000000000;    
+        hp_max =10000000000;
 
-        base.speed = 0;
+        base.movementSpeed = 0;
         base.attackSpeed = 0;
     }
 
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
         
     }

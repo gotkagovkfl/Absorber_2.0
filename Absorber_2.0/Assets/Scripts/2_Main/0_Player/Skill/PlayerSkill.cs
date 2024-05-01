@@ -9,11 +9,11 @@ public abstract class PlayerSkill
     public string skillName;
 
     public int useCount; 
-    public DateTime lastUseTime;
+    public float lastUseTime;   // 스킬 마지막 사용시간 
 
     public float coolTime;      //쿨타임 ( 초 ) 
 
-    public double coolTime_remain => (lastUseTime.AddSeconds(coolTime) - DateTime.Now).TotalSeconds;
+    public float coolTime_remain => lastUseTime +coolTime - Time.time;
     public bool isCoolTimeOk => coolTime_remain <= 0;
 
     public float duration;      // 지속시간이 있는 경우, 
@@ -36,7 +36,7 @@ public abstract class PlayerSkill
     public void UseSkill()
     {
         //
-        lastUseTime = DateTime.Now; //시간기록
+        lastUseTime = Time.time; //시간기록
         PlaySFX();          //효과음
         ShowEffect();       // 이펙트
         UseSkill_custom();  // 효과

@@ -42,7 +42,7 @@ public class Elite1_Bullet : MonoBehaviour
 
     void Firebunb()
     {
-        if (GetComponent<Enemy>().hp <=0 )
+        if (GetComponent<Enemy>().hp_curr <=0 )
         {
             return;
         }
@@ -79,7 +79,7 @@ public class Elite1_Bullet : MonoBehaviour
 
     void FireThrow()
     {
-        if (GetComponent<Enemy>().hp <=0 )
+        if (GetComponent<Enemy>().hp_curr <=0 )
         {
             return;
         }

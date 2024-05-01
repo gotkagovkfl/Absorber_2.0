@@ -16,7 +16,7 @@ public class EnemyPoolManager : PoolManager<Enemy>
         id_category = PoolType.enemy;
         instance = this;
 
-        spawnInfo = Resources.Load<GameObject>("Prefabs/02_Enemies/SpawnInfo");
+        spawnInfo = Resources.Load<GameObject>("02_Prefabs/04_Somethings/Something_0203_enemySpawnInfo");
 
         // 스테이지 종료 이벤트 발생시 일반 적 제거 (아이템 드랍 없이 그냥 지우기)
         GameEvent.ge.onStageClear.AddListener( CleanEveryObjects_enemy );   
@@ -81,7 +81,7 @@ public class EnemyPoolManager : PoolManager<Enemy>
 
     public IEnumerator create_SpawnInfo(string id, Vector3 pos)
     {
-        // Debug.Log("표식 생성");
+        Debug.Log("표식 생성" );
         GameObject info = Instantiate(spawnInfo, transform.position, Quaternion.identity);
         info.transform.position = pos;
         yield return new WaitForSeconds(1f);

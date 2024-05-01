@@ -20,17 +20,19 @@ public class Elite_001 : Enemy
     
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 1000;
+        hp_max = 1000;
         damage = 10;
-        hp = 1000;
-        speed = 2.8f;
+        hp_curr = 1000;
+        movementSpeed = 2.8f;
         attackSpeed = 0.01f;
-
+        range = 1;
         itemProb = 100;
         manaValue = 550;
 
         //firePoint = transform.Find("FirePoint");
         prefabBullet = Resources.Load<GameObject>("Prefabs/Boss/Elite1_bunB");
+
+        battleType = BattleType.melee;
     }
     protected override void AttackCustom()
     {
@@ -45,20 +47,13 @@ public class Elite_001 : Enemy
     //     // }
     // }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         Instantiate( Resources.Load<GameObject>("Prefabs/W/Stages/Object_666_crown"), myTransform.position, Quaternion.identity);
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-
-        distance = Vector3.Distance(transform.position, base.target.transform.position);
-        //dirVec = base.target.transform.position - transform.position; 
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = dirVec.normalized * speed;
-
 
     }
 

@@ -19,10 +19,10 @@ public class Elite_004 : Enemy
     }
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 500;
+        hp_max = 500;
         damage = 3;
-        hp = 500;
-        speed = 3;
+        hp_curr = 500;
+        movementSpeed = 3;
         attackSpeed = 0.2f;
 
         itemProb = 20;
@@ -47,14 +47,14 @@ public class Elite_004 : Enemy
         spearRigid.rotation = angle;
     }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         // gameObject.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;
         // hp = hpFull;
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
     }
 

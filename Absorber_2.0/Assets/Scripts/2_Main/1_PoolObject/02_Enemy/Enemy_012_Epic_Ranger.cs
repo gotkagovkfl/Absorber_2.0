@@ -18,16 +18,19 @@ public class Enemy_012_Epic_Ranger : Enemy
 
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 40;
+        hp_max = 40;
         damage = 6;
-        hp = hpFull;
-        speed = 2.5f;
+        hp_curr = hp_max;
+        movementSpeed = 2.5f;
         attackSpeed = 0.75f;
 
         itemProb = 15;
         manaValue = 30;
 
         firePoint = transform.Find("FirePoint");
+
+
+        battleType = BattleType.range;
 
     }    
     
@@ -56,30 +59,14 @@ public class Enemy_012_Epic_Ranger : Enemy
         proj.Action();
     }  
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
 
-        distance = Vector3.Distance(transform.position, base.target.transform.position);
-        //dirVec = base.target.transform.position - transform.position; // ���� = Ÿ�� ��ġ - �� ��ġ
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // ���� ��ġ
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-        
-
-        if (distance >= 10)
-        {
-            //rb.MovePosition(transform.position + nextVec);
-            rb.velocity = dirVec.normalized * speed;
-        }
-        else
-        {
-            //rb.MovePosition(transform.position - nextVec);
-            rb.velocity = dirVec.normalized * -speed;
-        }
+       
         
 
     }

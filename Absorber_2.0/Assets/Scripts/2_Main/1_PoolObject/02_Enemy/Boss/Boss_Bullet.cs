@@ -136,7 +136,7 @@ public class Boss_Bullet : MonoBehaviour
 
     void Firenormal()
     { 
-        if (GetComponent<Enemy>().hp <= 0)
+        if (GetComponent<Enemy>().hp_curr <= 0)
         {
             return;
         }
@@ -188,7 +188,7 @@ public class Boss_Bullet : MonoBehaviour
 
     void Firebunb()
     {
-        if (GetComponent<Enemy>().hp <= 0)
+        if (GetComponent<Enemy>().hp_curr <= 0)
         {
             return;
         }
@@ -223,7 +223,7 @@ public class Boss_Bullet : MonoBehaviour
 
     void Firebomb()
     {
-        if (GetComponent<Enemy>().hp <= 0)
+        if (GetComponent<Enemy>().hp_curr <= 0)
         {
             return;
         }
@@ -255,7 +255,7 @@ public class Boss_Bullet : MonoBehaviour
 
     void FireThrow()
     {
-        if (GetComponent<Enemy>().hp <= 0)
+        if (GetComponent<Enemy>().hp_curr <= 0)
         {
             return;
         }

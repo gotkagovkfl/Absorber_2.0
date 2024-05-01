@@ -22,18 +22,20 @@ public class Enemy_002_Normal_Ranger : Enemy
     
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 18;
+        hp_max = 18;
         damage = 3;
-        hp = 15;
-        speed = 1.8f;
+        hp_curr = 15;
+        movementSpeed = 1.8f;
         attackSpeed = 0.5f;
-
+        range = 10;
         itemProb = 5;
         manaValue = 8;
 
         firePoint = transform.Find("FirePoint");
 
         hasAttackCustom = true;
+
+        battleType = BattleType.range;
     }
     protected override void AttackCustom()
     {
@@ -58,32 +60,14 @@ public class Enemy_002_Normal_Ranger : Enemy
         proj.Action();
     }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
 
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
 
-        distance = Vector3.Distance(transform.position, base.target.transform.position);
-        //dirVec = base.target.transform.position - transform.position; // ���� = Ÿ�� ��ġ - �� ��ġ
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // ���� ��ġ
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-
-
-        if (distance >= 10)
-        {
-            //rb.MovePosition(transform.position + nextVec);
-            rb.velocity = dirVec.normalized * speed;
-        }
-        else
-        {
-            //rb.MovePosition(transform.position - nextVec);
-            rb.velocity = dirVec.normalized * -speed;
-        }
-        
 
     }
 

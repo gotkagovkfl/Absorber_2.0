@@ -18,35 +18,36 @@ public class Enemy_014_Epic_Dash : Enemy
 
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 130;
-        hp = hpFull;
+        hp_max = 130;
+        hp_curr = hp_max;
 
         damage = 10;
 
-        speed = 3.5f;
+        movementSpeed = 3.5f;
         attackSpeed = 0.25f;
         cooltime = 10f;
         dashPower = 15f;
         isDash = false;
         canDash = true;
-
+        
 
         itemProb = 33;
         manaValue = 90;
+
+
+        battleType = BattleType.melee;
     }
 
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        Vector3 dirVec = base.target.transform.position - transform.position; // ���� = Ÿ�� ��ġ - �� ��ġ
-        Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        rb.MovePosition(transform.position + nextVec);
+
     }
     protected override void AttackCustom()
     {
         StartCoroutine(Dash());
     }
 
-    public override void DieCustom()
+    protected override void DieCustom()
     {
         // gameObject.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;

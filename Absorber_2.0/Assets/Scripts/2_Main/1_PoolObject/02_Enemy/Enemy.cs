@@ -1,6 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using DG.Tweening;
+
+
+
+public  enum BattleType { none, melee, range, special };      // 움직임 제어를 위한 타입 설정
 
 public abstract class Enemy : MonoBehaviour , IPoolObject
 {
@@ -12,37 +18,48 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     public bool oneShot = false;
     public bool shot = false;
     
-    protected float speed; // �̵��ӵ�
-    
-    public float hp; // ü��
+    //
+    protected float movementSpeed; // �̵��ӵ�
 
-    public float hpFull;     // ****************
+    float moveDelay => 1/movementSpeed;
+
+    Action moveAction; 
+
+    protected BattleType battleType;
+
+    //
+    
+    public float hp_curr; // ü��
+
+    public float hp_max;     // ****************
 
     public int def;
 
     public int damage; // ���ݷ�
+    public float range;
 
     public bool strongAttack = false;
 
     public float attackSpeed;   // ���ݼӵ�(�ʴ� ���ݼӵ�)
 
-    protected bool state = true; // ���� ���� true : �⺻����, false : �����̻�
+    float attackDelay;
+    // protected bool state = true; // ���� ���� true : �⺻����, false : �����̻� 
     public float lastAttackTime;
 
     public bool canKnockBack = true;
     public float knockBack_time = 0.2f;
     public bool onKnockBack;
-    public bool hasAttackCustom;
+    protected bool hasAttackCustom;
 
     public float lastMoveTime;
     public bool stunned;
     public bool canMove = true;
-    public bool canAttack_ = true;      // can damage player 
+    // public bool canAttack_ = true;      // can damage player 
     public bool canAttack       // ���� ���� ����
     {
         get
         {
-            if (DirectingManager.dm.onDirecting || stunned || !canAttack_ || attackSpeed == 0)                
+            if (stunned || attackSpeed == 0)                
             {
                 return false;
             }            
@@ -52,9 +69,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
                 return false;
             }
 
-
-            float attackDelay = 1 / attackSpeed;
-            if (lastAttackTime + attackDelay <= GameManager.gm.totalGameTime)
+            if (lastAttackTime + attackDelay <= Time.time)
             {
                 return true;
             }
@@ -65,7 +80,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     {
         get
         {
-            if (DirectingManager.dm.onDirecting || stunned || speed == 0)
+            if (stunned || movementSpeed == 0)
             {
                 rb.velocity = Vector2.zero;
                 return false;
@@ -75,8 +90,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
                 return false;
             }
 
-            float moveDelay = 1 / speed;
-            if (lastMoveTime + moveDelay <= GameManager.gm.totalGameTime)
+            if (lastMoveTime + moveDelay <= Time.time)
             {
                 return true;
             }
@@ -95,7 +109,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     public Transform myTransform;
     public Transform center;
 
-    public GameObject target; // ���� ���
+    public Transform target; // ���� ���
     public Vector3 target_proj;
 
     public string id_enemy;
@@ -167,7 +181,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         animator = GetComponent<Animator>();
         
 
-        target = Player.player.gameObject; // ���� ��� = �÷��̾�
+        target = Player.player.transform; // ���� ��� = �÷��̾�
 
         
 
@@ -176,14 +190,23 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
 
         InitEnemyStatusCustom();                    // 개별 능력치 먼저 초기화
+        SetMoveAction();        // 움직임 함수 설정. 
 
-        hp = hpFull;
+
+
+        hp_curr = hp_max;
 
         canMove = false;
-        canAttack_ = false;
 
-        StartCoroutine(BattleFlow());
-        StartCoroutine(MoveFlow());
+
+        StartCoroutine( Grow() );
+        
+        StartCoroutine( GetDotDamage() );       // detect bleeding dmg continuously 
+
+        // ready 되면 실행됨.
+        
+        StartCoroutine( AttackFlow());
+        StartCoroutine( MoveFlow());
     }
 
     // 개별 능력치 초기화
@@ -191,13 +214,161 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
     // public abstract void InitEssentialEnemyInfo();
 
-    // ������(exp) ���
+
+    //====================================================================================================================
+
+    //===================================
+    // ������ ���� �÷ο�
+    //===================================
+    IEnumerator AttackFlow()
+    {
+        yield return new WaitUntil( ()=>ready);
+        
+        
+        while (!isDead)     // 죽은 상태가 아닐때 전투플로우 
+        {
+            if (canAttack)
+            {
+                lastAttackTime = Time.time;   // ������ ���� �ð� ����
+                
+                StartCoroutine(AttackAnimation());
+                AttackCustom();
+            }
+
+            yield return new WaitForSeconds(attackDelay);
+        }
+    }
+
+    IEnumerator MoveFlow()
+    {
+        yield return new WaitUntil( ()=>ready);
+        StartCoroutine( PlayAnim_move()); 
+
+        canMove = true;
+        while (!isDead)
+        {
+            if (canMoving)
+            {
+                lastMoveTime = Time.time;
+                // MoveCustom();
+
+                if (moveAction !=null)
+                    moveAction();
+            }
+
+            yield return new WaitForSeconds(moveDelay);
+        }
+    }
+
+    protected void SetMoveAction()
+    {
+        switch(battleType)
+        {
+            case BattleType.melee:
+                moveAction = MoveAction_melee;
+                break;
+
+            case BattleType.range:
+                moveAction = MoveAction_range;
+                break;
+
+            case BattleType.special:
+                moveAction = MoveAction_special;
+                break;
+
+            default:
+                moveAction = ()=>{};
+                break;
+        }
+    }
+
+
+    void MoveAction_melee()
+    {
+        Vector3 dirVec = target.position + new Vector3(UnityEngine.Random.Range(-2f, 2f),UnityEngine.Random.Range(-2f, 2f)) - myTransform.position;  // 위치에 약간의 오차를 준다. 
+        
+        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
+        rb.velocity = dirVec.normalized * movementSpeed;
+    }
+
+    void MoveAction_range()
+    {
+        float  distance = Vector3.Distance(myTransform.position, target.position);
+
+        Vector3 dirVec = target.transform.position + new Vector3(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(-2f, 2f)) - myTransform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
+        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
+
+
+        // 사거리 안으로 이동 
+        if (distance >= range *0.9f)
+        {
+            rb.velocity = dirVec.normalized * movementSpeed;
+        }
+        // 도망 ( 거리벌리기 )
+        else
+        {
+            rb.velocity = dirVec.normalized * -movementSpeed;
+        }
+    }
+
+    void MoveAction_special()
+    {
+
+    }
+
+
+
+    // ����
+    protected abstract void AttackCustom();
+    protected abstract void MoveCustom();
+
+    protected abstract void DieCustom(); //********************************
+
+
+    //
+    public IEnumerator AttackAnimation()
+    {
+        if (hasAttackCustom)
+        {
+            Vector3 thisScale = myTransform.localScale;
+            for (int i=0;i<10;i++)  //50%
+            {
+                thisScale.y = originScale.y*(1 - 0.05f * i);
+                myTransform.localScale = thisScale;
+                yield return new WaitForSeconds(0.02f);
+            }
+            yield return new WaitForSeconds(0.6f);
+            for (int i=0;i<5;i++)
+            {
+                thisScale.y = originScale.y* (0.5f + 0.14f * i);
+                myTransform.localScale = thisScale;
+                yield return new WaitForSeconds(0.02f);
+            }
+            for (int i=0;i<5;i++)
+            {
+                thisScale.y = originScale.y* (1.2f - 0.04f * i);
+                myTransform.localScale = thisScale;
+                yield return new WaitForSeconds(0.02f);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    // 죽을 때 아이템 드랍 ( 마나 포함)
     public void DropItem()
     {
         // default : drop mana.
         DropItem item = ItemPoolManager.instance.SpawnItem("000", manaValue, transform.position);
 
-        if (Random.Range(0,100) < itemProb)
+        if (UnityEngine.Random.Range(0,100) < itemProb)
         {
             // drop heal item if you are 'lucky'
             DropItem luckyItem = ItemPoolManager.instance.SpawnItem("001", 0, transform.position);
@@ -205,10 +376,10 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     }
 
     // ����
-    protected void Death()                                  //********************************
+    protected void Die()                                  //********************************
     {             
         GameManager.gm.KillCount += 1;
-        GameManager.gm.Score += (int)hpFull;
+        GameManager.gm.Score += (int)hp_max;
 
         isDead = true;
         ready = false;
@@ -291,50 +462,46 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     //==============================================
     public IEnumerator Grow()
     {
-        canMove = false;
-        if(!isBoss)
+        if (!isBoss)
         {
-            for (int i=0;i<25;i++)
-            {
-                myTransform.localScale = originScale * 0.04f * i;
-                yield return null;
-            }
-            ready = true;
+            float animationPlayTime = 0.5f;
+            PlayAnim_grow(animationPlayTime);
+            yield return new WaitForSeconds( animationPlayTime  + 0.2f);
         }
+
+        ready = true;   // ㄹㄷ 되면 전투 시작됨.
+    }
+
+
+    public void PlayAnim_grow(float time)
+    {
+        myTransform.localScale = Vector2.zero;
+        Sequence seq = DOTween.Sequence()
+        .Append( myTransform.DOScale( originScale, time))
+        .Play();
     }
 
 
     //========================================================================
     // 평상시 이동 애니메이션 (두근두근거림)
     //========================================================================
-    public IEnumerator MoveAnimation()
+    public IEnumerator PlayAnim_move()
     {
         yield return new WaitUntil(()=>ready);
-        canMove = true;
-        canAttack_= true;
 
-        deltaScale = (isBoss)?0.001f: 0.003f;
-        
-        while(!isDead)
-        {
-            for(int i=0;i<20;i++)
-            {
-                myTransform.localScale += originScale * deltaScale;
-                yield return null;
-            }
-            for(int i=0;i<20;i++)
-            {
-                myTransform.localScale -= originScale * deltaScale;
-                yield return null;
-            }
-        }
+        float targetScale = (isBoss)?1.02f:1.06f;
+
+        Sequence seq = DOTween.Sequence()
+        .Append( myTransform.DOScale(originScale* targetScale, 0.4f))
+        .SetLoops(-1, LoopType.Yoyo)
+        .Play();
     }
 
 
     // get dmg for direct attack ( knockback & bleed ) 
     public void Damaged(int damage, Vector3 hitPoint, float knockbackPower)
     {
-        hp -= damage;
+        hp_curr -= damage;
 
         //drain
         // int prob = Random.Range(1, 101);
@@ -356,17 +523,17 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
 
         // detect death
-        if (hp <= 0)
+        if (hp_curr <= 0)
         {
-            hp = 0;
-            Death();
+            hp_curr = 0;
+            Die();
         }
     }
 
     // get dmg for indirect attack ( not knockback)
     public void Damaged(float damage)
     {
-        hp -= damage;
+        hp_curr -= damage;
 
         //drain
         // int prob = Random.Range(1, 101);
@@ -377,9 +544,9 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         Damaged_custom();
 
         // detect death
-        if (hp <= 0)
+        if (hp_curr <= 0)
         {
-            Death();
+            Die();
         }
     }
 
@@ -449,7 +616,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
             return;
         }
         
-        int num = Random.Range(0, 100);
+        int num = UnityEngine.Random.Range(0, 100);
         if ( num < Player.player.bleedingLevel * 25)
         {
             // Debug.Log("출혈");
@@ -555,102 +722,20 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         effect.ActionEffect();
 
         EffectPoolManager.instance.CreateText(myTransform.position, heal.ToString(), new Color(0.2f, 0.4f, 0.1f, 1.0f), 2);
-        hp += heal;
+        hp_curr += heal;
         if (id_enemy.Equals("b_001"))
         {
             Damaged_custom();   // To Set Hp Bar
         }
 
-        if (hp > hpFull)
+        if (hp_curr > hp_max)
         {
-            hp = hpFull;
+            hp_curr = hp_max;
         }
     }
 
 
     //=========================================================================================
-    //===================================
-    // ������ ���� �÷ο�
-    //===================================
-    public IEnumerator BattleFlow()
-    {
-        StartCoroutine( Grow() );
-        StartCoroutine( MoveAnimation());
-        StartCoroutine( GetDotDamage() );       // detect bleeding dmg continuously 
-        while (!isDead)     // 죽은 상태가 아닐때 전투플로우 
-        {
-            Attack();
-
-            float attackDelay = 1 / attackSpeed;
-            yield return new WaitForSeconds(attackDelay);
-        }
-    }
-
-    public IEnumerator MoveFlow()
-    {
-        canMove = true;
-        while (!isDead)
-        {
-            Move();
-
-            float moveDelay = 0.5f;
-            yield return new WaitForSeconds(moveDelay);
-        }
-    }
-    public void Move()
-    {
-        if (canMoving)
-        {
-            lastMoveTime = GameManager.gm.totalGameTime;
-            MoveCustom();
-        }
-    }
-
-
-    //=======================================
-    // ����_����
-    //=======================================
-    public void Attack()
-    {
-        // ���ݰ����� ��Ȳ�϶� ����
-        if (canAttack)
-        {
-            lastAttackTime = GameManager.gm.totalGameTime;   // ������ ���� �ð� ����
-            
-            StartCoroutine(AttackAnimation());
-            AttackCustom();
-        }
-    }
-
-    // ����
-    protected abstract void AttackCustom();
-
-    public IEnumerator AttackAnimation()
-    {
-        if (hasAttackCustom)
-        {
-            Vector3 thisScale = myTransform.localScale;
-            for (int i=0;i<10;i++)  //50%
-            {
-                thisScale.y = originScale.y*(1 - 0.05f * i);
-                myTransform.localScale = thisScale;
-                yield return new WaitForSeconds(0.02f);
-            }
-            yield return new WaitForSeconds(0.6f);
-            for (int i=0;i<5;i++)
-            {
-                thisScale.y = originScale.y* (0.5f + 0.14f * i);
-                myTransform.localScale = thisScale;
-                yield return new WaitForSeconds(0.02f);
-            }
-            for (int i=0;i<5;i++)
-            {
-                thisScale.y = originScale.y* (1.2f - 0.04f * i);
-                myTransform.localScale = thisScale;
-                yield return new WaitForSeconds(0.02f);
-            }
-        }
-    }
 
 
 
@@ -670,17 +755,6 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         }
     }
 
-
-    void Start()
-    {
-        InitEnemyStatus();
-
-    }
-
-
-    public abstract void MoveCustom();
-
-    public abstract void DieCustom(); //********************************
 
 
     // void OnCollisionEnter2D(Collision2D collision)
@@ -702,7 +776,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && canAttack_)    // player get dmg when canAttack_
+        if (collision.gameObject.CompareTag("Player") )    // player get dmg when canAttack_
         { 
             Vector3 hitPoint = center.position;
             
@@ -718,7 +792,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && canAttack_)    // player get dmg when canAttack_
+        if (other.gameObject.CompareTag("Player") )    // player get dmg when canAttack_
         { 
             Vector3 hitPoint = center.position;
             

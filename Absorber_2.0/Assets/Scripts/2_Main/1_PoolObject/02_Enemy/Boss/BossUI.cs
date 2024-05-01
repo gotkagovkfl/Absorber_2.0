@@ -23,10 +23,10 @@ public class BossUI : MonoBehaviour
     {
         ActiveHpBar(true);
 
-        slider_bossHp.maxValue = boss.hpFull;
+        slider_bossHp.maxValue = boss.hp_max;
         // slider_bossHp.value = boss.hp;
 
-        slider_bossHp_delay.maxValue = boss.hpFull;
+        slider_bossHp_delay.maxValue = boss.hp_max;
         // slider_bossHp_delay.value = boss.hp;
         
         StartCoroutine(FillHpBar_start());
@@ -37,8 +37,8 @@ public class BossUI : MonoBehaviour
     {
         for (int i=1;i<=10;i++)
         {
-            slider_bossHp.value         = boss.hpFull * 0.1f * i;
-            slider_bossHp_delay.value   = boss.hpFull * 0.1f * i;
+            slider_bossHp.value         = boss.hp_max * 0.1f * i;
+            slider_bossHp_delay.value   = boss.hp_max * 0.1f * i;
 
             yield return null;
             yield return null;
@@ -49,7 +49,7 @@ public class BossUI : MonoBehaviour
     // 보스 체력 변동시 체력바 세팅
     public void SetHpBar()
     {
-        slider_bossHp.value = boss.hp;
+        slider_bossHp.value = boss.hp_curr;
 
         if (coroutine_delay != null)
         {

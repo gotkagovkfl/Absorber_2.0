@@ -11,32 +11,31 @@ public class Enemy_011_Epic_bat : Enemy
     
     public override void InitEnemyStatusCustom()
     {
-        hpFull = 35;
-        hp = hpFull;
+        hp_max = 35;
+        hp_curr = hp_max;
 
         damage = 8;
-        speed = 4f;
+        movementSpeed = 4f;
         attackSpeed = 0.1f; // *****************************************************
 
 
         itemProb = 10;
         manaValue = 20;
+
+
+        battleType = BattleType.melee;
     }
 
     protected override void AttackCustom()
     {
         
     }
-    public override void MoveCustom()
+    protected override void MoveCustom()
     {
-        Vector3 dirVec = base.target.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime; // 다음 위치
-        //rb.MovePosition(transform.position + nextVec);
-        rb.velocity = Vector2.zero; // 물리적 속도 0으로 고정
-        rb.velocity = dirVec.normalized * speed;
+
     }
 
-    public override void DieCustom()  // *****************************************************
+    protected override void DieCustom()  // *****************************************************
     {
         // obj.SetActive(false);
         // GetComponent<Collider2D>().enabled = true;
