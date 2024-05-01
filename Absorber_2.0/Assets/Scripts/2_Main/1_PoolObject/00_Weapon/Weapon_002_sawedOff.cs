@@ -107,6 +107,6 @@ public class Weapon_002_sawedOff : Weapon
 
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }

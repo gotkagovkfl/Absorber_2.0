@@ -350,6 +350,8 @@ public class Player : MonoBehaviour
 
 
         initialized =true;        
+
+        Debug.LogWarning("플레이어 초기화 완료");
     }
     //====================================
     // 플레이어의 체력에 변동이 생겼을 때 
@@ -550,7 +552,7 @@ public class Player : MonoBehaviour
         canMove = false;
         canAttack = false;
 
-        GetComponent<PlayerWeapon>().h[0].gameObject.SetActive(false);
+        GetComponent<PlayerWeapon>().hands[0].gameObject.SetActive(false);
 
         //게임 실패 호출
         StartCoroutine(WaitAndFinish());
@@ -633,7 +635,7 @@ public class Player : MonoBehaviour
     {
         LevelUpManager = GameObject.Find("LevelupManager");
         //
-        StartCoroutine(CreateSanctuary());
+        // StartCoroutine(CreateSanctuary());
 
         // 스테이지 시작시 이벤트 
         GameEvent.ge.onStageStart.AddListener( ()=> t_player.position = StageManager.sm.currStage.startPoint );   // 플레이어 위치 초기화
@@ -641,6 +643,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!initialized)
+        {
+            return;
+        }
+            
+        
         // for aim set
         if (Input.GetKeyDown(KeyCode.C))
         {

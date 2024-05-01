@@ -113,6 +113,6 @@ public class Weapon_004_dagger : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }

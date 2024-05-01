@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -514,14 +515,20 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
 
 
     // 생성되면, 
-    void Start()
+    IEnumerator Start()
     {        
+        gameObject.SetActive(Player.initialized);
+        
+        yield return new WaitUntil(()=> Player.initialized);
+        gameObject.SetActive(true);
         // 초기화 하고 전투 플로우 시작 ( 타겟 찾고, 공격 )
         InitWeapon();
+
+        
     }
 
 
-    void Destroy()
+    void OnDestroy()
     {
         onDestroyWeapon();
     }

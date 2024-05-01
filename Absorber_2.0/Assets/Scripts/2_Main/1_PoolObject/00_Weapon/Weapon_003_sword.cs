@@ -117,7 +117,7 @@ public class Weapon_003_sword: Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 
 }

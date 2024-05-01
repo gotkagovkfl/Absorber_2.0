@@ -138,6 +138,6 @@ public class Weapon_007_shootingStar : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }

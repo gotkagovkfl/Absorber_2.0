@@ -8,6 +8,6 @@ public class InventoryBtn : MonoBehaviour
 
     public void OnClick()
     {
-        InventoryManager.im.ChangeWeapon(weapon);
+        // InventoryManager.im.ChangeWeapon(weapon);
     }
 }

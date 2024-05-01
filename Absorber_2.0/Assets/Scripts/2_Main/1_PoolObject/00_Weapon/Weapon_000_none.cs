@@ -44,6 +44,6 @@ public class Weapon_000_none : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = true;
+
     }
 }

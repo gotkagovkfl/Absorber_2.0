@@ -97,6 +97,6 @@ public class Weapon_001_bowGun : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }

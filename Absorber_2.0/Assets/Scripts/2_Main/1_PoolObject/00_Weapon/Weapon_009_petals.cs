@@ -103,10 +103,8 @@ public class Weapon_009_petals: Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        notAvailable = false;
-
         // 현재 생성된 투사체들 파괴
-        Projectile[] projs = ProjPoolManager.instance.transform.GetComponentsInChildren<Projectile>();
+        Projectile[] projs = ProjPoolManager.instance.transform.GetComponentsInChildren<Projectile>(); //여기 바꿔야함;;
         for (int i=0;i< projs.Length;i++)
         {
             if (projs[i].id_proj == id_weapon)

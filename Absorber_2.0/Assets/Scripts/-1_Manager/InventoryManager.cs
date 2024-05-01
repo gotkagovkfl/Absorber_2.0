@@ -32,9 +32,9 @@ public class InventoryManager : MonoBehaviour
         {
             btns[i].onClick.AddListener( ()=> OpenInventory(false) );
             
-            string currId = "00"+(i+1).ToString();
+            string currId = "00"+(i+1).ToString();      // 이부분 수정해야함. 
             
-            btns[i].onClick.AddListener( ()=> ChangeWeapon( PrefabManager.GetWeapon(currId) ) );
+            btns[i].onClick.AddListener( ()=> ChangeWeapon( currId ));
         }
 
 
@@ -55,9 +55,9 @@ public class InventoryManager : MonoBehaviour
     //======================================
     // 무기교체 - 버튼 클릭시 버튼의 InventoryBtn 스크립트에서 호출됨
     //======================================
-    public void ChangeWeapon(GameObject weapon)
+    public void ChangeWeapon(string weaponId)
     {   
-        Player.player.GetComponent<PlayerWeapon>().changeWeapon(0,weapon);
+        Player.player.GetComponent<PlayerWeapon>().ChangeWeapon(0,weaponId);
 
     }
 

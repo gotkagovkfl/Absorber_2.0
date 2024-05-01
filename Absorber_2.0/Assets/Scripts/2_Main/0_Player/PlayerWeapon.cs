@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 //====================================
@@ -9,12 +10,12 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     // 무기 장착 위치
-    public Transform[] h = new Transform[1];   
+    public Transform[] hands = new Transform[1];   
     // public Transform h;
     
     // 현재 들고 있는 무기 
     // public GameObject currWeapon;
-    public GameObject[] currWeapon = new GameObject[1];
+    public Weapon[] currWeapon = new Weapon[1];
 
 
     //=======================================================================
@@ -22,21 +23,24 @@ public class PlayerWeapon : MonoBehaviour
     // 무기 교체 : 현재 무기를 전달받은 무기 정보로 교체한다.
     // handNum - 무기 위치 정보, weapon - 무기정보
     //==========================
-    public void changeWeapon(int handNum, GameObject weapon)
+    public void ChangeWeapon(int handNum, string weaponId)
     {
-        // 기존 무기 파괴 효과 호출
-        currWeapon[handNum].GetComponent<Weapon>().onDestroyWeapon();
-        // 기존 무기 제거
-        Destroy(currWeapon[handNum]); 
+        
+        if (currWeapon[handNum])
+        {
+            // 기존 무기 제거
+            Destroy(currWeapon[handNum].gameObject); 
+        }
+
         
         // 무기 장착 
-        GameObject newWeapon = Instantiate(weapon, h[handNum]);
-        newWeapon.transform.position = h[handNum].position;
+        GameObject newWeapon = Instantiate( PrefabManager.GetWeapon(weaponId), hands[0]);
+        newWeapon.transform.position = hands[handNum].position;
 
         // 무기 리스트 갱신
-        currWeapon[handNum] = newWeapon;
+        currWeapon[handNum] = newWeapon.GetComponent<Weapon>();
 
-        currWeapon[handNum].GetComponent<Weapon>().InitWeapon();
+        currWeapon[handNum].InitWeapon();
     }
 
     //==========================
@@ -44,7 +48,7 @@ public class PlayerWeapon : MonoBehaviour
     //==========================
     public void InitWeapons()
     {
-        currWeapon[0].GetComponent<Weapon>().InitWeapon();
+        currWeapon[0].InitWeapon();
     }
 
     //=========================================================================    
@@ -52,14 +56,22 @@ public class PlayerWeapon : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        yield return new WaitUntil( ()=>PrefabManager.initialized);
+        // hands[1] = transform.Find("hand1");
+        // hands[1].gameObject.SetActive(false);
         
-        h[0] = transform.Find("hand0");
-        
-        currWeapon[0] = h[0].GetChild(0).gameObject;
-        
-        currWeapon[0].GetComponent<Weapon>().InitEssentialInfo();
+        hands[0] = transform.Find("hand0");
+        foreach (var weapon in hands[0].GetComponentsInChildren<Weapon>())
+        {
+            Destroy(weapon.gameObject);
+        }
 
-        InitWeapons();
+
+        
+        yield return new WaitUntil( ()=>Player.initialized );
+        
+        Debug.Log("초기 무기 세팅합니다.");
+        ChangeWeapon(0, "001");
+
+        Debug.Log("초기 무기 세팅 완료 .");
     }
 }

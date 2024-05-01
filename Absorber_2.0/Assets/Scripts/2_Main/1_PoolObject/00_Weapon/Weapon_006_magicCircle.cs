@@ -108,6 +108,6 @@ public class Weapon_006_magicCircle : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }

@@ -15,40 +15,50 @@ public class PlayerProgress : MonoBehaviour
     [SerializeField] Slider slider_mp;
     [SerializeField] TextMeshProUGUI text_level;
 
-    // dash
-    [SerializeField] Slider slider_dash;
-    [SerializeField] GameObject dashIndicator;
+    // // dash
+    // [SerializeField] Slider slider_dash;
+    // [SerializeField] GameObject dashIndicator;
 
 
-    Transform t_player; // 캐싱
-    Vector3 offset;
+    // Transform t_player; // 캐싱
+    // Vector3 offset;
     
     //==================================================================
-    void Start()
+    IEnumerator Start()
     {
-        t_player = Player.player.t_player;
+        // gameObject.SetActive(false);     // 오브젝트 비활하면 아래 실행안됨 ㄷㄷ;
 
-        offset = new Vector3(0, 5, 0);
-        transform.position = Camera.main.WorldToScreenPoint( t_player.position + offset);
+
+        yield return new WaitUntil( ()=>Player.initialized );
+
+    
+        // t_player = Player.player.t_player;
+
+        // offset = new Vector3(0, 5, 0);
+        // transform.position = Camera.main.WorldToScreenPoint( t_player.position + offset);
 
 
         SetHpBar();
         SetMpBar();
-        SetDashBar();
+        // SetDashBar();
         SetLevelText();
 
         //
         GameEvent.ge.onChange_hp.AddListener(SetHpBar);
         GameEvent.ge.onChange_exp.AddListener(SetMpBar);
         GameEvent.ge.onChange_level.AddListener(SetLevelText);
-        GameEvent.ge.onDash.AddListener(OnDash);
+        // GameEvent.ge.onDash.AddListener(OnDash);
+
+
+        gameObject.SetActive(true);
+        Debug.Log("플레이어 진행바 세팅 완료 ");
     }
 
 
-    void FixedUpdate()
-    {
+    // void FixedUpdate()
+    // {
         // transform.position = Camera.main.WorldToScreenPoint( t_player.position);
-    }
+    // }
 
     //==================================================================
 
@@ -107,20 +117,8 @@ public class PlayerProgress : MonoBehaviour
 
     void SetLevelText()
     {
-        text_level.text = Player.player.level.ToString();
+        text_level.text = $"Lv.{Player.player.level}";
     }
 
     //------------------------------------------------------------------------------
-    void OnDash()
-    {
-
-    }
-
-    void SetDashBar()
-    {
-        // slider_dash.maxValue = Player.player.dashingCooldown;
-        slider_dash.value = slider_dash.maxValue;
-        dashIndicator.SetActive(true);
-    }
-
 }

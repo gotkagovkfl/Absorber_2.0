@@ -92,7 +92,7 @@ public class Weapon_005_Aegis : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
         // Destroy(proj);
     }
 }

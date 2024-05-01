@@ -115,6 +115,6 @@ public class Weapon_008_beam : Weapon
     //=======================================
     public override void onDestroyWeapon()
     {
-        base.notAvailable = false;
+
     }
 }
