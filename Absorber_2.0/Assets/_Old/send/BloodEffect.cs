@@ -20,12 +20,12 @@ public class BloodEffect : MonoBehaviour
         bloodEffect.SetBool("fatal", false); 
     }
 
-    // Ã¼·Â 30% ¹Ì¸¸ÀÏ ¶§ ºí·¯µåÀÌÆåÆ® ¹ß»ý
+    // Ã¼ï¿½ï¿½ 30% ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ß»ï¿½
     void Update()
     {
-        Debug.Log(player.Hp);
-        Debug.Log(player.Max_Hp);
-        if (player.Hp < player.Max_Hp * 0.3 && player.Hp > 0)
+        Debug.Log(player.hp_curr);
+        Debug.Log(player.hp_max);
+        if (player.hp_curr < player.hp_max * 0.3 && player.hp_curr > 0)
         {
             bloodEffect.SetBool("fatal", true);         
         }

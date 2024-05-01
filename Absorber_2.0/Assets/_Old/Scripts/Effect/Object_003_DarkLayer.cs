@@ -16,6 +16,6 @@ public class Object_003_DarkLayer : MonoBehaviour
     {
         Vector3 dir = new Vector3( -Player.player.inputVector.x,0);
 
-        rb.velocity = dir * Player.player.Speed * 0.6f;
+        // rb.velocity = dir * Player.player.Speed * 0.6f;
     }
 }

@@ -384,13 +384,13 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
             float weight = 1;
             float weight_lvl = 0;
                     
-            if (  Random.Range(0, 100) <= Player.player.Crit)
+            if (  Random.Range(0, 100) <= Player.player.crit_prob)
             {
                 weight *= weight_critDamage;
                 weight_lvl++;
             }
      
-            if(  Random.Range(0, 100) <= Player.player.Reinforce_Prob)
+            if(  Random.Range(0, 100) <= Player.player.reinforce_prob)
             {
                 weight *= 2;
                 weight_lvl++;
@@ -473,7 +473,7 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
         {
             Projectile proj = ProjPoolManager.instance.GetFromPool("100");        
             
-            float dmg = 7 + Player.player.Atk;
+            float dmg = 7 + Player.player.atk;
 
             proj.SetUp( dmg, 0,  scale,  0, 987654321, 0 , 0.25f);           
             proj.myTransform.position = pos;

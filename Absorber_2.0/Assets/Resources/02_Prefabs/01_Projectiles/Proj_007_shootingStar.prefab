@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881582405323967438}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.26, y: -0.26, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2061609162807007673
 SpriteRenderer:
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1897800143
-  m_SortingLayer: 0
+  m_SortingLayerID: -1051963087
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 87106724271ed6149a2ff29c4f67f2a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &1401844185726159371
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +108,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &7629718111119265162
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -119,6 +120,25 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -142,6 +162,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -193,7 +219,7 @@ MonoBehaviour:
   splitAngle: []
 --- !u!96 &1872010833786202761
 TrailRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -234,6 +260,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Time: 0.5
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -288,14 +315,18 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 1
+  m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
+  m_ApplyActiveColorSpace: 0

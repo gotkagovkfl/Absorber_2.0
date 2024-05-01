@@ -32,7 +32,7 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
         get
         {
             float dist = Vector3.Distance(Player.player.t_player.position, myTransform.position);
-            float pickupRange = itemRange *(100 + weight_range * Player.player.Range_Plus) *0.01f;
+            float pickupRange = itemRange *(100 + weight_range * Player.player.range_plus) *0.01f;
 
             
             if (dist <= pickupRange  && !captured) // 25는 획득범위의 제곱 - 나중에 수정해야함. 

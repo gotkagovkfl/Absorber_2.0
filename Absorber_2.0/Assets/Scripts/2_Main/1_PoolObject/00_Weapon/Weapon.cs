@@ -59,7 +59,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {               
-            return  damage + Player.player.Atk * weight_damage + Player.player.Avoid_Atk;
+            return  damage + Player.player.atk * weight_damage ; // + Player.player.avoid_atk;
         }
         set
         {
@@ -70,7 +70,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return range * (100 + Player.player.Range_Plus * weight_range ) *0.01f;
+            return range * (100 + Player.player.range_plus * weight_range ) *0.01f;
         }
         set
         {
@@ -81,7 +81,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return attackSpeed * ( 100 + Player.player.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f;
+            return attackSpeed * ( 100 + Player.player.attackSpeed_plus* weight_attackSpeed )  * 0.01f;
         }
         set
         {
@@ -104,7 +104,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get 
         {
-            return scale  *(100 + Player.player.Range_Plus * weight_range ) * 0.01f;
+            return scale  *(100 + Player.player.range_plus * weight_range ) * 0.01f;
         }
         set
         {
@@ -151,7 +151,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     {
         get
         {
-            return splitNum + Player.player.splitNum;
+            return splitNum + Player.playerStatus.split;
         }
         set
         {
@@ -483,7 +483,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     public IEnumerator SetAttackAnimation()
     {
         animator.SetTrigger("attack");
-        float asMul = ( 100 + Player.player.Attack_Speed_Plus* weight_attackSpeed )  * 0.01f; ///  *********************
+        float asMul = ( 100 + Player.player.attackSpeed_plus* weight_attackSpeed )  * 0.01f; ///  *********************
         animator.SetFloat("asMul",asMul ); 
 
         yield return new WaitForFixedUpdate();      // 애니메이션 전환 속도때문에 딜레이 줘야함.

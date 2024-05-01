@@ -52,7 +52,9 @@ public class Something_0120_sanctuary : Something
         {
             inCircle = true;
             
-            Player.player.Attack_Speed_Plus += asPlus;
+            // Player.player.Attack_Speed_Plus += asPlus;
+
+            Player.playerStatus.Increase_attackSpeedPlus(asPlus);
             // 공속 증가?
         }
     }
@@ -66,7 +68,8 @@ public class Something_0120_sanctuary : Something
         {
             inCircle = false;
 
-            Player.player.Attack_Speed_Plus -= asPlus;
+            // Player.player.Attack_Speed_Plus -= asPlus;
+            Player.playerStatus.Decrease_attackSpeedPlus(asPlus);
         }
     }
 

@@ -48,16 +48,16 @@ public class PauseUI : MonoBehaviour
     //====================================================================================
     public void SetStatus()
     {
-        Player_Level.text = "Level " + Player.player.Level;
+        Player_Level.text = "Level " + Player.player.level;
         Player_KillCount.text = "Kill " + GameManager.gm.KillCount.ToString();
         Player_Score.text = "Score " + GameManager.gm.Score.ToString();
         Player_Weapon.text = "Weapon\n" + Player.player.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0,11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)","");
-        Player_Hp.text = "Hp " + Player.player.Max_Hp;
-        Player_Damage.text = "Damage " + Player.player.Atk;
-        Player_Attack_Speed.text = "Attack_Speed " + (Player.player.Attack_Speed + Player.player.Attack_Speed * Player.player.Attack_Speed_Plus / 100f);
-        Player_Range.text = "Range " + (Player.player.Range + Player.player.Range * Player.player.Range_Plus / 100f);
-        Player_Speed.text = "Speed " + (Player.player.Speed + Player.player.Speed * Player.player.Speed_Plus / 100f);
-        Player_Crit.text = "Crit " + Player.player.Crit + "%";
+        Player_Hp.text = "Hp " + Player.player.hp_max;
+        Player_Damage.text = "Damage " + Player.player.atk;
+        Player_Attack_Speed.text = $"Attack_Speed  {100 +Player.player.attackSpeed_plus } %" ;
+        Player_Range.text = "Range " + (Player.player.range_plus / 100f);
+        Player_Speed.text = "Speed " + (Player.player.movementSpeed + Player.player.movementSpeed * Player.player.movementSpeed_plus / 100f);
+        Player_Crit.text = "Crit " + Player.player.crit_prob + "%";
         for (int i = 0; i < Player.player.chooseList.Count; i++)
         {
             Abilities[i].sprite = Resources.Load<Sprite>("Pictogram/" + Player.player.chooseList[i]);

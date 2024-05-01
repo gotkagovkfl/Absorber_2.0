@@ -98,13 +98,24 @@ public class UiScript : MonoBehaviour
                 field.SetValue(Player.player, New_Value);
             }
             if (status == "최대체력")
-                Player.player.ChangeHp(amount);
+                Player.playerStatus.Increase_maxHp(amount);
             else if (status == "행운")
-                Player.player.Luk = Math.Min(Player.player.Luk, 4);
+            {
+// Player.playerStatus.Increase_luck(1); // 이건 내가 쓴거 
+                // Player.player.Luck = Math.Min(Player.player.luck, 4);
+            }
+                
             else if(status == "투사체 개수")
-                Player.player.projNum = Math.Min(Player.player.projNum, 2);
+            {
+// Player.player.projNum = Math.Min(Player.player.projNum, 2);
+            }
+
+                
             else if(status == "분열")
-                Player.player.splitNum = Math.Min(Player.player.splitNum, 2);
+            {
+// Player.player.split = Math.Min(Player.player.split, 2);
+            }
+                
         }
         else
         {

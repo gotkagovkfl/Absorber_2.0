@@ -17,14 +17,14 @@ public class PlayerSkill_Dash : PlayerSkill
 
     protected override bool IsAvailable_custom()
     {
-        return Player.player.canMove && Player.player.rb.velocity != Vector2.zero;
+        return Player.player.canMove && Player.player.isMoving;
     }
 
 
     protected override void UseSkill_custom()
     {
         // 플레이어 무적처리 
-        Player.player.GetInivincible(duration);
+        Player.player.GetInvincible(duration);
         
         // 충돌무시 
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true); 

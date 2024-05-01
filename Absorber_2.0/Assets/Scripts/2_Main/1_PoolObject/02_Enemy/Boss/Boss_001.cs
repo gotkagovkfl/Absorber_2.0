@@ -163,7 +163,7 @@ public class Boss_001 : Enemy
         speed = 0f;
         
 
-        Player.player.StartInvincible();
+        Player.player.GetInvincible(30f);
         StartCoroutine(bullet.stopInvoke2());
 
         bac.onDeath();

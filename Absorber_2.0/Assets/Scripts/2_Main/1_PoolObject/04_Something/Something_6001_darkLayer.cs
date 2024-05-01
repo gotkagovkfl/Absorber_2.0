@@ -36,6 +36,6 @@ public class Something_6001_darkLayer : Something
         }
 
         Vector3 dir = new Vector3( -Player.player.inputVector.x,0);
-        rb.velocity = dir * Player.player.Speed * 0.6f;
+        rb.velocity = dir * Player.player.movementSpeed * 0.6f;
     }
 }

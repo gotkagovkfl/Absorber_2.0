@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079885506652384209}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8079885506652384210
 SpriteRenderer:
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1897800143
-  m_SortingLayer: 0
+  m_SortingLayerID: -1051963087
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: a247fdb3ae8a2e247934ec1828a3e877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,7 +104,7 @@ MonoBehaviour:
   spriter: {fileID: 0}
   handTransform: {fileID: 0}
   originalHandPosition: {x: 0, y: 0, z: 0}
-  mouseTarget: {fileID: 0}
+  aim: {fileID: 0}
   weaponName: "\uBC9A\uAF43"
   id_weapon: 009
   isSingleTarget: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
 --- !u!95 &-9158275125892357150
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,7 +138,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &6302842188489992505
 AudioSource:
   m_ObjectHideFlags: 0

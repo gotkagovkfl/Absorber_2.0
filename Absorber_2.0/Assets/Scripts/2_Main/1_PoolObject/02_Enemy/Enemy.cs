@@ -200,7 +200,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         if (Random.Range(0,100) < itemProb)
         {
             // drop heal item if you are 'lucky'
-            DropItem luckyItem = ItemPoolManager.instance.SpawnItem("001", Player.player.Hp_item_up, transform.position);
+            DropItem luckyItem = ItemPoolManager.instance.SpawnItem("001", 0, transform.position);
         }
     }
 

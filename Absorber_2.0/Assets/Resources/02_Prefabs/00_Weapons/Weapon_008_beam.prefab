@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551960707117263930}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.208, y: 0.893, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5551960707117263931
 SpriteRenderer:
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1897800143
-  m_SortingLayer: 0
+  m_SortingLayerID: -1051963087
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: f94fe972c8e264d459232ac4dd6b9738, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,7 +104,7 @@ MonoBehaviour:
   spriter: {fileID: 0}
   handTransform: {fileID: 0}
   originalHandPosition: {x: 0, y: 0, z: 0}
-  mouseTarget: {fileID: 0}
+  aim: {fileID: 0}
   weaponName: "\uAD11\uC120"
   id_weapon: 008
   isSingleTarget: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
 --- !u!95 &2007217124722817527
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,7 +138,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &7468520433085524212
 AudioSource:
   m_ObjectHideFlags: 0

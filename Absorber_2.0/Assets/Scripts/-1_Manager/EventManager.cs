@@ -35,7 +35,7 @@ public class GameEvent : MonoBehaviour
     public UnityEvent<bool> onChange_aimMode;      // 타게팅 모드 변경시,     bool : 자동 타게팅일경우, 
 
 
-    public UnityEvent onChange_hp;
+    public UnityEvent<int> onChange_hp;
     public UnityEvent onChange_exp;
     public UnityEvent onChange_level;
     public UnityEvent onDash;

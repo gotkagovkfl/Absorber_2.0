@@ -33,7 +33,7 @@ public class Proj_004_dagger : Projectile
     // ===================================
     public override void Action_custom()
     {
-        if (Player.player.splitNum != splitNum)
+        if (Player.player.split != splitNum)
         {
             rb.velocity = direction * speed;
         }        

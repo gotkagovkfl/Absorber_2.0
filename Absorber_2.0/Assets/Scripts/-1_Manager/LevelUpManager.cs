@@ -31,7 +31,7 @@ public class LevelUpManager : MonoBehaviour
     {
         Player.player.OnSelecting = true;
 
-        int Luk         = Player.player.Luk;
+        int Luk         = Player.player.luck;
         int[,] Luk_Table = Player.player.Luk_Table;
         int grade = 0;
         int tmp = Random.Range(1, 101); // 1단계 2단계 3단계 확률이 90 7 3 이라면 1~90은 1단계 91~97은 2단계 98 ~ 100은 3단계로 되도록 난수 추출
@@ -218,7 +218,7 @@ public class LevelUpManager : MonoBehaviour
 
     public void AutoLevelUp()
     {
-        int Luk = GameObject.Find("Player").GetComponent<Player>().Luk;
+        int Luk = Player.player.luck;
         int[,] Luk_Table = GameObject.Find("Player").GetComponent<Player>().Luk_Table;
         int grade = 0;
         int tmp = Random.Range(1, 101); // 1단계 2단계 3단계 확률이 90 7 3 이라면 1~90은 1단계 91~97은 2단계 98 ~ 100은 3단계로 되도록 난수 추출

@@ -25,7 +25,7 @@ public class TestUIManager : MonoBehaviour
 
     public void SetProjNum(float value)
     {
-        Player.player.projNum = (int)value;
+        Player.playerStatus.Set_projNum((int)value);
         text_projNum.text = Player.player.projNum.ToString();
         
         Player.player.GetComponent<PlayerWeapon>().InitWeapons();
@@ -38,8 +38,8 @@ public class TestUIManager : MonoBehaviour
 
     public void SetSplitNum(float value)
     {
-        Player.player.splitNum = (int)value;
-        text_splitNum.text = Player.player.splitNum.ToString();
+        Player.playerStatus.Set_split((int)value);
+        text_splitNum.text = Player.player.split.ToString();
 
         Player.player.GetComponent<PlayerWeapon>().InitWeapons();
     }
@@ -51,7 +51,8 @@ public class TestUIManager : MonoBehaviour
 
     public void SetExplosionLevel(float value)
     {
-        Player.player.explosionLevel = (int)value;
+        
+        Player.playerStatus.Set_explosion((int)value);
         text_explosionLevel.text = Player.player.explosionLevel.ToString();
 
         Player.player.GetComponent<PlayerWeapon>().InitWeapons();
@@ -63,7 +64,7 @@ public class TestUIManager : MonoBehaviour
 
     public void SetBleedingLevel(float value)
     {
-        Player.player.bleedingLevel = (int)value;
+        Player.playerStatus.Set_bleeding((int)value);
         text_bleedingLevel.text = Player.player.bleedingLevel.ToString();
 
         Player.player.GetComponent<PlayerWeapon>().InitWeapons();
@@ -75,7 +76,7 @@ public class TestUIManager : MonoBehaviour
 
     public void SetSanctuaryLevel(float value)
     {
-        Player.player.sanctuaryLevel = (int)value;
+        Player.playerStatus.Set_sancutary((int)value);
         text_sanctuaryLevel.text = Player.player.sanctuaryLevel.ToString();
 
         Player.player.GetComponent<PlayerWeapon>().InitWeapons();

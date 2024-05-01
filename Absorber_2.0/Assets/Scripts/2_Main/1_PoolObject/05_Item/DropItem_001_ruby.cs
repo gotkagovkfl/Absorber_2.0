@@ -22,6 +22,6 @@ public class DropItem_001_ruby : DropItem
     //==============================================
     public override void PickupEffect()
     {
-        Player.player.ChangeHp((int)Player.player.Hp_item_up);
+        Player.player.OnGet_healingItem();
     }
 }

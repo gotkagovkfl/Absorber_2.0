@@ -124,14 +124,14 @@ public class GameManager : MonoBehaviour
         onPlay = false;
         gameClear = clear;
 
-        Player_Level = "Level " + Player.player.Level;
+        Player_Level = "Level " + Player.player.level;
         Player_Weapon = "Weapon\n" + Player.player.GetComponent<PlayerWeapon>().currWeapon[0].ToString().Remove(0, 11).Replace(" (UnityEngine.GameObject)", "").Replace("(Clone)", ""); ;
-        Player_Hp = "Hp " + Player.player.Max_Hp;
-        Player_Atk = "Damage " + Player.player.Atk;
-        Player_Atk_Speed = "Attack_Speed " + (Player.player.Attack_Speed + Player.player.Attack_Speed * Player.player.Attack_Speed_Plus / 100f);
-        Player_Range = "Range " + (Player.player.Range + Player.player.Range * Player.player.Range_Plus / 100f);
-        Player_Speed = "Speed " + (Player.player.Speed + Player.player.Speed * Player.player.Speed_Plus / 100f);
-        Player_Crit = "Crit " + Player.player.Crit + "%";
+        Player_Hp = "Hp " + Player.player.hp_max;
+        Player_Atk = "Damage " + Player.player.atk;
+        Player_Atk_Speed = $"Attack_Speed  {100 +Player.player.attackSpeed_plus } %" ;
+        Player_Range = "Range " + (Player.player.range_plus / 100f);
+        Player_Speed = "Speed " + (Player.player.movementSpeed + Player.player.movementSpeed * Player.player.movementSpeed_plus / 100f);
+        Player_Crit = "Crit " + Player.player.crit_prob + "%";
         Stage1_PlayerTime = StageManager.sm.currStageTimer;
 
         // when kill final boss

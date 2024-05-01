@@ -51,7 +51,7 @@ public class Effect_101_sanctuary : Effect
         {
             inCircle = true;
             
-            Player.player.Attack_Speed_Plus += asPlus;
+            // Player.player.Attack_Speed_Plus += asPlus;
             // 공속 증가?
         }
     }
@@ -65,7 +65,7 @@ public class Effect_101_sanctuary : Effect
         {
             inCircle = false;
 
-            Player.player.Attack_Speed_Plus -= asPlus;
+            // Player.player.Attack_Speed_Plus -= asPlus;
         }
     }
 
@@ -102,7 +102,7 @@ public class Effect_101_sanctuary : Effect
             // 성역 공격 투사체 생성
             Projectile proj = ProjPoolManager.instance.GetFromPool("101");
             proj.SetUp(  3 * Player.player.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
-            proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
+            // proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
 
             proj.myTransform.position = myTransform.position;
             proj.Action();

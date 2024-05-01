@@ -52,10 +52,22 @@ public class PlayerProgress : MonoBehaviour
 
     //==================================================================
 
+    public void SetHpBar(int value)
+    {
+        int hp_max = Player.playerStatus.hp_max;
+        int hp_curr = Player.playerStatus.hp_curr;
+
+        slider_hp.maxValue = hp_max;
+        
+        slider_hp.value = hp_curr;
+        text_hp.text = $"{hp_curr}/{hp_max}";
+    }
+
+
     public void SetHpBar()
     {
-        int hp_max = Player.player.Max_Hp;
-        int hp_curr = Player.player.Hp;
+        int hp_max = Player.playerStatus.hp_max;
+        int hp_curr = Player.playerStatus.hp_curr;
 
         slider_hp.maxValue = hp_max;
         
@@ -89,13 +101,13 @@ public class PlayerProgress : MonoBehaviour
     //-------------------------------------------------------------------------------
     void SetMpBar()
     {
-        slider_mp.maxValue = Player.player.Exp;
-        slider_mp.value = Player.player.Cur_Exp;
+        slider_mp.maxValue = Player.player.exp_curr;
+        slider_mp.value = Player.player.exp_max;
     }
 
     void SetLevelText()
     {
-        text_level.text = Player.player.Level.ToString();
+        text_level.text = Player.player.level.ToString();
     }
 
     //------------------------------------------------------------------------------
