@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class MainUI : MonoBehaviour
 {
-    [SerializeField] Popup_Pause popup_pause;
+    public static MainUI mainUI {get;private set;}
+    
+    [SerializeField] public Popup_Pause popup_pause;
+    [SerializeField] public Popup_WeaponSelection popup_weaponSelection;
 
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitUntil(()=>Player.initialized);
+        
         popup_pause = transform.Find("Popup_Pause").GetComponent<Popup_Pause>();
         popup_pause.InitPopup();
+
+        popup_weaponSelection = transform.Find("Popup_WeaponSelection").GetComponent<Popup_WeaponSelection>();
+        popup_weaponSelection.InitPopup();
+
+
+        mainUI = this;
     }
 }

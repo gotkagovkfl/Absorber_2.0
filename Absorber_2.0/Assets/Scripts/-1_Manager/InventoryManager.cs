@@ -25,20 +25,20 @@ public class InventoryManager : MonoBehaviour
     //======================================
     // 리스트 세팅 : 사용 가능한 무기 목록을 설정한다.
     //======================================
-    public void  InitInventory()
-    {
-        btns = inventory.transform.GetComponentsInChildren<Button>();
-        for (int i=0;i<9;i++)
-        {
-            btns[i].onClick.AddListener( ()=> OpenInventory(false) );
+    // public void  InitInventory()
+    // {
+    //     btns = inventory.transform.GetComponentsInChildren<Button>();
+    //     for (int i=0;i<9;i++)
+    //     {
+    //         btns[i].onClick.AddListener( ()=> OpenInventory(false) );
             
-            string currId = "00"+(i+1).ToString();      // 이부분 수정해야함. 
+    //         string currId = "00"+(i+1).ToString();      // 이부분 수정해야함. 
             
-            btns[i].onClick.AddListener( ()=> ChangeWeapon( currId ));
-        }
+    //         btns[i].onClick.AddListener( ()=> ChangeWeapon( currId ));
+    //     }
 
 
-    }
+    // }
 
 
     //======================================
@@ -55,37 +55,37 @@ public class InventoryManager : MonoBehaviour
     //======================================
     // 무기교체 - 버튼 클릭시 버튼의 InventoryBtn 스크립트에서 호출됨
     //======================================
-    public void ChangeWeapon(string weaponId)
-    {   
-        Player.player.GetComponent<PlayerWeapon>().ChangeWeapon(0,weaponId);
+    // public void ChangeWeapon(string weaponId)
+    // {   
+    //     Player.player.GetComponent<PlayerWeapon>().ChangeWeapon(0,weaponId);
 
-    }
+    // }
 
 
 
     
     //=======================================================================
-    void Awake()
-    {
-        im = this;
-    }
+    // void Awake()
+    // {
+    //     im = this;
+    // }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        inventory = GameObject.Find("Canvas").transform.Find("WeaponSwap").gameObject;
-        OpenInventory(false);
-        InitInventory();
-    }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     inventory = GameObject.Find("Canvas").transform.Find("WeaponSwap").gameObject;
+    //     OpenInventory(false);
+    //     InitInventory();
+    // }
 
-    void Update()
-    {
-        // close
-        if (inventory.activeSelf && Input.GetKeyDown(KeyCode.Escape) )
-        {
-            inventory.SetActive(false);
-        }
-    }
+    // void Update()
+    // {
+    //     // close
+    //     if (inventory.activeSelf && Input.GetKeyDown(KeyCode.Escape) )
+    //     {
+    //         inventory.SetActive(false);
+    //     }
+    // }
 
 }
