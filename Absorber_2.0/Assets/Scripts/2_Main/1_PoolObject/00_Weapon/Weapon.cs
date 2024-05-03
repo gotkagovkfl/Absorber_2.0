@@ -197,7 +197,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
             }
             // 공격 간격 과 상태이상(cc기 ) 판별
             float attackDelay = 1/attackSpeedT;
-            if (lastAttackTime + attackDelay <= GameManager.gm.totalGameTime)
+            if (lastAttackTime + attackDelay <= Time.time)
             {
                 return true;
             }
@@ -207,23 +207,23 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     
     // 타겟 관련
     LayerMask targetLayer = 1<<11;           // 적 레이어
-    public RaycastHit2D[] targets;          // 사거리 내의 적 표시
+    RaycastHit2D[] targets;          // 사거리 내의 적 표시
 
-    public Transform target;                // 타겟의 위치
-    public List<Transform> list_targets;    // 타겟의 위치 정보 리스트 ( 단일 타겟의 경우 1개, 아닐경우 여러개 (투사체 수의 영향을 받음))
-    public bool hasTarget                   // 타겟이 있는지, 그리고 그 타겟이 살아있는지 
-    {
-        get
-        {
-            int requiredTargetNum = (isSingleTarget)? 1:projNumT;
-            if (list_targets.Count >= requiredTargetNum )
-            {
-                return true;
-            }
-            return false;
+    protected Transform target;                // 타겟의 위치
+    protected List<Transform> list_targets = new();    // 타겟의 위치 정보 리스트 ( 단일 타겟의 경우 1개, 아닐경우 여러개 (투사체 수의 영향을 받음))
+    // public bool hasTarget                   // 타겟이 있는지, 그리고 그 타겟이 살아있는지 
+    // {
+    //     get
+    //     {
+    //         int requiredTargetNum = (isSingleTarget)? 1:projNumT;
+    //         if (list_targets.Count >= requiredTargetNum )
+    //         {
+    //             return true;
+    //         }
+    //         return false;
 
-        }
-    }
+    //     }
+    // }
 
     Coroutine battleflow_c;
 
@@ -291,12 +291,20 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
         handTransform.rotation = Quaternion.identity;
 
 
+        InitWeapon_custom();    //개별초기화
         if (gameObject.activeSelf)
         {
             ResetBattleFlow();
+
+            // 타겟에게 회전
+            if(isRotatable)
+            {
+                StartCoroutine(RotateWeapon());
+            }
+
         }
             
-        InitWeapon_custom();    //개별초기화
+        
     }
 
     //===================================
@@ -312,24 +320,28 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     //===================================
     public IEnumerator BattleFlow()
     {
+
+        
         while (true)
         {
             SearchTarget(projNumT);     //타겟세팅
 
-            // 타겟에게 회전
-            if(isRotatable)
-            {
-                StartCoroutine(RotateWeapon());
-            }
 
             // 공격가능한 상황일때 공격
             if (canAttack && list_targets.Count !=0 )
             {
+                // Debug.Log("공격가능!");
                 Attack();                   //타겟공격
+            }
+            else
+            {
+                // Debug.Log("공격 불가");
             }
             
 
             float attackDelay = 1/attackSpeedT;
+
+            // Debug.Log(  " 무기 딜레이  "+attackDelay);
             yield return new WaitForSeconds(attackDelay);  
         }
     }
@@ -440,27 +452,51 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
     //=======================================
     IEnumerator RotateWeapon()
     {
-        while(list_targets.Count!=0)
+        while(true)
         {
-            // 타겟이 무기보다 왼쪽에 있는 경우 스프라이트 뒤집기
-            if (list_targets[0] != null)
+            if (list_targets.Count!=0 && list_targets[0] !=null)
             {
-                Vector3 targetPos = (Player.player.autoAim)? list_targets[0].position : Aim.GetAimPos;
-                Vector3 dir = targetPos - handTransform.position;
+                // 타겟이 무기보다 왼쪽에 있는 경우 스프라이트 뒤집기
+                // Vector3 targetPos = (Player.player.autoAim)? list_targets[0].position : target.position;
+                target = Player.player.autoAim ? list_targets[0] : Aim.t_aim;
+                Vector3 targetPos = target.position;
+                Vector3 dir = (targetPos - handTransform.position).normalized;
+
 
                 bool targetOnLeft = dir.x<0;    // 타겟이 왼쪽에 있는지 
                 spriter.flipX = targetOnLeft; // 타겟이 왼쪽에 있으면 플립 
 
                 // 그리고 회전 (총구가 타겟을 향하게)
-                // Vector3 rotDir =targetOnLeft? Vector3.left: Vector3.right;
                 handTransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-
-                               
             }
+            
+            
+            
+                               
             yield return null;
-
         }
     }
+
+
+    // void Update()
+    // {
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //                         // 타겟이 무기보다 왼쪽에 있는 경우 스프라이트 뒤집기
+    //             Vector3 targetPos =  Aim.worldPos;
+    //             Vector3 dir = targetPos - handTransform.position;
+
+    //             Debug.Log(targetPos);
+
+
+    //             bool targetOnLeft = dir.x<0;    // 타겟이 왼쪽에 있는지 
+    //             spriter.flipX = targetOnLeft; // 타겟이 왼쪽에 있으면 플립 
+
+    //             // 그리고 회전 (총구가 타겟을 향하게)
+    //             handTransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+    //     }
+
+    // }
 
 
 
@@ -476,7 +512,7 @@ public abstract class Weapon : MonoBehaviour , IPoolObject
             StartCoroutine(SetAttackAnimation());
         }
         
-        lastAttackTime = GameManager.gm.totalGameTime;   // 마지막 공격 시간 갱신
+        lastAttackTime = Time.time;   // 마지막 공격 시간 갱신
         Attack_custom();
     }
 

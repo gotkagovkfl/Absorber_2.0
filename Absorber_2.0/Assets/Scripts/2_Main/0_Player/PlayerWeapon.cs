@@ -60,8 +60,10 @@ public class PlayerWeapon : MonoBehaviour
         // hands[1].gameObject.SetActive(false);
         
         hands[0] = transform.Find("hand0");
-        foreach (var weapon in hands[0].GetComponentsInChildren<Weapon>())
+        for(int i=0;i<hands[0].childCount;i++)
         {
+            var weapon = hands[0].GetChild(i);
+            Debug.Log(weapon.name + " 파괴되라얍");
             Destroy(weapon.gameObject);
         }
 

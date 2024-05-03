@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 
@@ -9,23 +10,6 @@ public class Aim : MonoBehaviour
     Camera mainCamera;
 
     [SerializeField] GameObject autoText;
-
-
-    public static Vector3 GetAimPos 
-    {
-        get
-        {
-            Vector3 ret = Vector3.zero;
-
-            if (t_aim)
-            {
-                ret=t_aim.position;
-            }
-            
-            return ret;
-        }
-     }
-
 
     //======================================================
 
@@ -37,11 +21,10 @@ public class Aim : MonoBehaviour
         GameEvent.ge.onChange_aimMode.AddListener(OnChanageAimMode);   // 타게팅모드변경시 작업
     }
 
-    void Update()
+    void LateUpdate()
     {
-        t_aim.position = Input.mousePosition;
-
-        // Debug.Log(Aim.GetAimPos);
+        Vector3 mousePosRaw =  mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        t_aim.position =new Vector3(mousePosRaw.x, mousePosRaw.y, 0); 
     }
 
 
