@@ -14,7 +14,7 @@ public class Effect_999_stageDust : Effect
     {
         
         // 스테이지 교체시 이벤트 
-        GameEvent.ge.onStageChange.AddListener( ()=> isDead = true );   // 특수효과 제거
+        GameEvent.ge.onStageChange.AddListener( ()=> _isDead = true );   // 특수효과 제거
     }
 
 

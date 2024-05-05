@@ -10,6 +10,7 @@ using UnityEngine;
     /// </summary>
     public interface IPoolObject
     {
+
         //===============================================
         /// PoolObject의 ID 초기화 등 필수작업 진행
         //===============================================

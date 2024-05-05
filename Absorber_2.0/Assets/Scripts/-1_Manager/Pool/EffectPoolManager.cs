@@ -18,14 +18,17 @@ public class EffectPoolManager : PoolManager<Effect>
     //========================================================================================
     protected override void Init_custom()
     {
+        id_category = PoolType.effect;
+        
         instance = this;
-        id_category = PoolType.something;
 
-                // 스테이지 시작시 이벤트
+
+        // 스테이지 시작시 이벤트
         GameEvent.ge.onStageStart.AddListener( CreateStageSFX );     // 특수효과 생성
         
         // 스테이지 클리어 시 이벤트
         GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
+        GameEvent.ge.onChange_level.AddListener(OnLevelUp );
     }
     
     
@@ -97,9 +100,9 @@ public class EffectPoolManager : PoolManager<Effect>
     public void CreateText(Vector3 pos, string value, Color color, int typeNum)
     {       
         // id 000은 텍스트
-        Effect effect = GetFromPool("000");
+        Effect effect = GetFromPool("7000");
 
-        Effect_000_valueText text   = effect.GetComponent<Effect_000_valueText>();
+        Effect_7000_Text text   = effect.GetComponent<Effect_7000_Text>();
         TextMeshPro tmp             = effect.GetComponent<TextMeshPro>();
         
         VertexGradient textGradient = tmp.colorGradient;
@@ -188,7 +191,7 @@ public class EffectPoolManager : PoolManager<Effect>
     //========================================
     public void CreateHitEffect(Vector3 hitPoint)
     {
-        Effect hitEffect = GetFromPool("001");       // <- 001~ 003 입력하여 이펙트 교체 
+        Effect hitEffect = GetFromPool("7010");       // <- 001~ 003 입력하여 이펙트 교체 
 
         hitEffect.InitEffect(hitPoint);
         hitEffect.ActionEffect();
@@ -214,4 +217,14 @@ public class EffectPoolManager : PoolManager<Effect>
         currStageEffect.InitEffect( Vector3.zero);
         currStageEffect.ActionEffect();
     }
+    
+
+        void OnLevelUp()
+    {
+        // Effect effect = EffectPoolManager.epm.GetFromPool("006");
+        // effect.InitEffect(Player.player.center.position);
+        // effect.ActionEffect();
+    }
+
+
 }

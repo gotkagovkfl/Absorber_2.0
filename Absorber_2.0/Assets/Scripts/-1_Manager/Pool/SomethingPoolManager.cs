@@ -61,41 +61,41 @@ public class SomethingPoolManager : PoolManager<Something>
     //========================================
     // 텍스트를 화면에 생성한다. ( 생성 위치, 텍스트 내용(값), 색깔, 타입번호 )
     // //========================================    
-    public void CreateText(Vector3 pos, string value, Color color, int typeNum)
-    {       
-        // id 000은 텍스트
-        Something something = GetFromPool("000");
+    // public void CreateText(Vector3 pos, string value, Color color, int typeNum)
+    // {       
+    //     // id 000은 텍스트
+    //     Something something = GetFromPool("000");
 
-        Something_0000_valueText text   = something.GetComponent<Something_0000_valueText>();
-        TextMeshPro tmp                 = something.GetComponent<TextMeshPro>();
+    //     Something_0000_valueText text   = something.GetComponent<Something_0000_valueText>();
+    //     TextMeshPro tmp                 = something.GetComponent<TextMeshPro>();
         
-        VertexGradient textGradient = tmp.colorGradient;
-        tmp.color = Color.white;
-        textGradient.bottomLeft = Color.white;
-        textGradient.bottomRight = Color.white;
-        //
-        something.InitSomething(pos);
-        text.typeNum = typeNum;
-        something.ActionSomething();
+    //     VertexGradient textGradient = tmp.colorGradient;
+    //     tmp.color = Color.white;
+    //     textGradient.bottomLeft = Color.white;
+    //     textGradient.bottomRight = Color.white;
+    //     //
+    //     something.InitSomething(pos);
+    //     text.typeNum = typeNum;
+    //     something.ActionSomething();
 
-        tmp.text = value;
+    //     tmp.text = value;
         
-        // set color
-        switch(typeNum)
-        {
-            case 0:             // 일반 텍스트(일반공격 포함)
-            case 1:             // 도트 공격 
-            case 2:  
-                textGradient.bottomLeft = color;
-                textGradient.bottomRight = color;
-                break;      
-            case 3:
-                break;
-        }
-        textGradient.topLeft = color;
-        textGradient.topRight= color;    
-        tmp.colorGradient = textGradient;
-    }
+    //     // set color
+    //     switch(typeNum)
+    //     {
+    //         case 0:             // 일반 텍스트(일반공격 포함)
+    //         case 1:             // 도트 공격 
+    //         case 2:  
+    //             textGradient.bottomLeft = color;
+    //             textGradient.bottomRight = color;
+    //             break;      
+    //         case 3:
+    //             break;
+    //     }
+    //     textGradient.topLeft = color;
+    //     textGradient.topRight= color;    
+    //     tmp.colorGradient = textGradient;
+    // }
     //======================================================================================================
     //=======================
     // something 생성

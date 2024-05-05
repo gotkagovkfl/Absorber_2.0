@@ -12,6 +12,9 @@ public enum PoolType
     something = 4,
     item =5,
     stage = 6,
+
+
+    effect = 7,
 }
 
 
@@ -49,7 +52,8 @@ public static class PrefabManager
             {PoolType.enemyProj,new()},
             {PoolType.item,new()},
             {PoolType.something,new()},
-            {PoolType.stage,new()} 
+            {PoolType.stage,new()} ,
+            {PoolType.effect,new()}
         };
         
         
@@ -63,6 +67,7 @@ public static class PrefabManager
         string dir_somethings   = common + "04_Somethings";    // 04
         string dir_items        = common + "05_DropItems";     // 05
         string dir_stages       = common + "06_Stages";        // 06
+        string dir_effect       = common + "07_Effect";        // 06
     
         //
         Dictionary<PoolType, string> dirs  = new(){ {PoolType.weapon, dir_weapons},
@@ -71,7 +76,9 @@ public static class PrefabManager
                                                     {PoolType.enemyProj,dir_enemyProjs},
                                                     {PoolType.item,dir_items},
                                                     {PoolType.something,dir_somethings},
-                                                    {PoolType.stage,dir_stages} };
+                                                    {PoolType.stage,dir_stages},
+                                                    {PoolType.effect,dir_effect}
+                                                     };
 
         // 카테고리별로 프리팹 로드
         Debug.Log("============  프리팹 로드 ============");
