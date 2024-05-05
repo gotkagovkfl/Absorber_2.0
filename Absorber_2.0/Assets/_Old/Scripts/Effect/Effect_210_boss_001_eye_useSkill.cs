@@ -31,7 +31,7 @@ public class Effect_210_boss_001_eye_useSkill : Effect
     {
         if (targetToFollow!=null)
         {
-            myTransform.position = targetToFollow.position;
+            t_effect.position = targetToFollow.position;
         }
         
     }

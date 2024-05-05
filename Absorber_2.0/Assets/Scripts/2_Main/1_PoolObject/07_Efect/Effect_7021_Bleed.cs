@@ -11,10 +11,8 @@ public class Effect_7021_Bleed : Effect
 
     public override void InitEffect_custom(Vector3 targetPos)
     {
-        pos = targetPos;
         offset = new Vector3( Random.Range(-0.7f,0.7f), Random.Range(-0.7f,0.7f));;
- 
-        speed = 0f;
+
         lifeTime = 0.25f;
     }
 

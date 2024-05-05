@@ -12,10 +12,6 @@ public class Effect_7004_PlayerGetItem: Effect
 
     public override void InitEffect_custom(Vector3 targetPos)
     {
-         pos = targetPos;
-        offset = Vector3.zero;
- 
-        speed = 0f;
         lifeTime = 1f;
     }
 

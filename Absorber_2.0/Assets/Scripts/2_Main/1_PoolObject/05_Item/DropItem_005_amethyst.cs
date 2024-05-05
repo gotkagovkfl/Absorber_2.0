@@ -29,16 +29,10 @@ public class DropItem_005_amethyst : DropItem
         Enemy[] enemies = EnemyPoolManager.instance.GetComponentsInChildren<Enemy>();
         foreach(var enemy in enemies)
         {
-            EffectPoolManager.instance.CreateText(enemy.center.position, "STUNNED!", Color.gray, 2);
-            //
-            effect = EffectPoolManager.instance.GetFromPool("009");
-            effect.InitEffect(enemy.myTransform.position);
-            effect.SetTarget(enemy.center);
-            effect.SetDependency(enemy);
-            effect.ActionEffect();
-            //
-            enemy.Stunned( 5f );
 
+            //
+            enemy.Stunned( 5f, true );
+            
             // EffectPoolManager.instance.CreateHitEffect(enemy.myTransform.position);       // 총알 위치에 이펙트 생성 
             
             // enemy.Damaged(effectValue);

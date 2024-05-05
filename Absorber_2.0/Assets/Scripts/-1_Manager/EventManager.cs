@@ -40,18 +40,25 @@ public class GameEvent : MonoBehaviour
     public UnityEvent onChange_level;
     public UnityEvent onDash;
 
-
     public UnityEvent<KeyCode> onUseSkill;
+
+    public UnityEvent<Vector3> onPlayerGuard;
+    public UnityEvent<Vector3> onPlayerAvoid;
     
 
     
 
-    
-    // public static UnityEvent onInitGame;
-    // public static UnityEvent<InitWork> onStartInitWork; 
-    // public static UnityEvent onFinishInitWork;    
+    // enemy
+    public UnityEvent<Vector3,int,int> onEnemyHit;      // v: 피격위치, int: dmg, int: type 
+    public UnityEvent<Vector3,int> onEnemyBleeding;
 
-    //
+    public UnityEvent<Vector3,int> onEnemyheal;
+    public UnityEvent<Enemy> onEnemyStunned;
+
+
+
+
+    
     
 
 

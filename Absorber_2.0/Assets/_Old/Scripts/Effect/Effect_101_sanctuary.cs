@@ -79,7 +79,7 @@ public class Effect_101_sanctuary : Effect
         {
             // 힐 이펙트 생성
             Effect effect = EffectPoolManager.instance.GetFromPool("101_b");
-            effect.InitEffect(myTransform.position);
+            effect.InitEffect(t_effect.position);
             effect.ActionEffect();
             //
             //힐하고 공격 
@@ -104,7 +104,7 @@ public class Effect_101_sanctuary : Effect
             proj.SetUp(  3 * Player.player.sanctuaryLevel  ,0, 1, 1, 987654321, 0, 0.7f);
             // proj.SetSpecialStat( Player.player.explosionLevel, 1.5f, 15);
 
-            proj.myTransform.position = myTransform.position;
+            proj.myTransform.position = t_effect.position;
             proj.Action();
             //
             lastAttackTime = currTime;

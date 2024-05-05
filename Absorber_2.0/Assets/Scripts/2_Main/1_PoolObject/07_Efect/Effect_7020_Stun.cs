@@ -13,10 +13,6 @@ public class Effect_7020_Stun : Effect
 
     public override void InitEffect_custom(Vector3 targetPos)
     {
-         pos = targetPos;
-        offset = Vector3.zero;
- 
-        speed = 0f;
         lifeTime = 5f;
     }
 
@@ -30,7 +26,7 @@ public class Effect_7020_Stun : Effect
     {
         if (targetToFollow !=null)
         {
-            myTransform.position = targetToFollow.position  + offset;
+            t_effect.position = targetToFollow.position  + offset;
         }
         
         if (enemy_d.isDead)

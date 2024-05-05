@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 using TMPro;            //텍스트매쉬프로 
 
@@ -11,8 +11,6 @@ public class EffectPoolManager : PoolManager<Effect>
 {
     public static EffectPoolManager instance;
     
-    public enum valueType {dmg_e_n, dmg_e_c, dmg_,e}
-
     
 
     //========================================================================================
@@ -28,7 +26,20 @@ public class EffectPoolManager : PoolManager<Effect>
         
         // 스테이지 클리어 시 이벤트
         GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
+
+
+        //player
         GameEvent.ge.onChange_level.AddListener(OnLevelUp );
+        GameEvent.ge.onChange_hp.AddListener(OnPlayerChangeHp);
+        GameEvent.ge.onPlayerGuard.AddListener(OnPlayerGuard);
+        GameEvent.ge.onPlayerAvoid.AddListener(OnPlayerAvoid);
+
+
+        //
+        GameEvent.ge.onEnemyHit.AddListener( OnEnemyHit );
+        GameEvent.ge.onEnemyBleeding.AddListener( OnEnemyBleeding );
+        GameEvent.ge.onEnemyheal.AddListener( OnEnemyHeal );
+        GameEvent.ge.onEnemyStunned.AddListener( OnEnemyStunned );
     }
     
     
@@ -77,125 +88,148 @@ public class EffectPoolManager : PoolManager<Effect>
     }
 
     //============================================================ 생성 부분 ==================================================================================
-    //========================================
-    // 텍스트를 화면에 생성한다. ( 생성 위치, 텍스트 내용(값), 색깔 )
-    // //========================================    
-    // public void CreateText(Vector3 pos, string value, Color color)
-    // {       
-    //     // id 000은 텍스트
-    //     Effect effect = GetFromPool("000");
-    //     effect.InitEffect(pos);
-    //     effect.ActionEffect();
 
-    //     TextMeshPro tmp = effect.GetComponent<TextMeshPro>();
-    //     tmp.text = value;
-        
-    //     tmp.color = color;
-    // }
+    //=========================================================
+    // 풀레이어 체력 변경시
+    //========================================================
+    void OnPlayerChangeHp(int value)
+    {
+        Vector3 pos = Player.player.center.position;
+        Color color =  Color.red;        
 
+        // 힐되는 경우엔 치유 이펙트
+        if (value >=0)
+        {
+            Effect healEffect =GetFromPool("003");
+            healEffect.InitEffect(pos);
+            healEffect.ActionEffect();
 
-    //========================================
-    // 텍스트를 화면에 생성한다. ( 생성 위치, 텍스트 내용(값), 색깔, 타입번호 )
-    // //========================================    
-    public void CreateText(Vector3 pos, string value, Color color, int typeNum)
-    {       
-        // id 000은 텍스트
-        Effect effect = GetFromPool("7000");
+            color= Color.green ;
+        }
 
-        Effect_7000_Text text   = effect.GetComponent<Effect_7000_Text>();
-        TextMeshPro tmp             = effect.GetComponent<TextMeshPro>();
-        
-        VertexGradient textGradient = tmp.colorGradient;
-        tmp.color = Color.white;
-        textGradient.bottomLeft = Color.white;
-        textGradient.bottomRight = Color.white;
-        
-        effect.InitEffect(pos);
-        text.typeNum = typeNum;
+        // -------- 텍스트 ------------------------
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(Player.player.center.position);
+        effect.SetText(2, Math.Abs(value).ToString(), color);
         effect.ActionEffect();
 
-        tmp.text = value;
-        
-        switch(typeNum)
-        {
-            case 0:             // 일반 텍스트(일반공격 포함)
-            case 1:             // 도트 공격 
-            case 2:  
-                textGradient.bottomLeft = color;
-                textGradient.bottomRight = color;
-                break;      
-            case 3:
-                break;
-        }
-        textGradient.topLeft = color;
-        textGradient.topRight= color;    
-        tmp.colorGradient = textGradient;
+
+    }
+
+    //=========================================================
+    // 풀레이어 방어시
+    //========================================================
+
+    void OnPlayerGuard(Vector3 pos)
+    {
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(pos);
+        effect.SetText(0, "GUARD", Color.gray);
+        effect.ActionEffect();
+    }
+    //=========================================================
+    // 풀레이어 회피시
+    //========================================================
+
+    void OnPlayerAvoid(Vector3 pos)
+    {
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(pos);
+        effect.SetText(0, "MISS", Color.gray);
+        effect.ActionEffect();
     }
 
 
+    //=========================================================
+    // 적 피격시
+    //========================================================
 
-
-
-    
-    //=============================================================  텍스트  ===============================================================
-    //========================================
-    // 값 생성 - 개체의 체력에 변동이 생겼을 때 그 값을 화면에 출력한다.
-    // //========================================
-    // public void CreateValueText(Transform target, float value)
-    // {                 
-    //     // 풀에서 생성
-    //     Effect text = GetFromPool("000");
-    //     // 초기화 후 작동
-    //     text.InitEffect(target.position);
-    //     text.ActionEffect();
-        
-    //     //
-    //     TextMeshPro tmp = text.GetComponent<TextMeshPro>();
-
-    //     // 텍스트에 값 작성 (절대값으로) - 삼항연산자가 Mathf.abs보다 성능이 좋음
-    //     tmp.text = ((value >= 0) ? value : -value).ToString();
-
-    //     // 텍스트 발생하는 대상에 따라 설정 ( 색깔, 애니메이션 등 )
-    //     if (target.CompareTag("Player"))    // 플레이어에게 발생시 
-    //     {
-    //         tmp.color = (value<0)? Color.red: Color.green;             // 음수(피해)는 red, 양수(회복)는 green
-    //     }
-    //     else    // 나머지 (적, 보스, 구조물 등)
-    //     {
-    //         tmp.color = Color.white;
-    //     } 
- 
-    // }
-
-    // //========================================
-    // // 글씨 생성 - 수치로 표시할 수 없는 문자열을 표시할 때 사용한다. 
-    // //========================================
-    // public void CreateText(GameObject target, string content)
-    // {
-    //     // 풀에서 생성
-    //     Effect text = GetFromPool("000");
-    //     // 초기화 후 작동
-    //     text.InitEffect(target.transform.position);
-    //     text.ActionEffect();
-        
-    //     //
-    //     TextMeshPro tmp = text.GetComponent<TextMeshPro>();
-    //     tmp.text = content;
-    //     tmp.color = new Color(200,200,200);
-
-    // }
-
-    //============================================================= 피격 이펙트============================================================
-    //========================================
-    // hit 이펙트 생성
-    //========================================
-    public void CreateHitEffect(Vector3 hitPoint)
+    void OnEnemyHit(Vector3 pos, int dmg, int level)
     {
-        Effect hitEffect = GetFromPool("7010");       // <- 001~ 003 입력하여 이펙트 교체 
+        // ---------텍스트 세팅---------------
+        Color color = new Color( 1.0f , 1.0f * (1 - level*0.25f) , (level==0)?1.0f:0.5f , 1.0f );             //255,255,255 / 255, 255, 0 / 255, 200, 0
+        int tn = level>0?3:0;
+        string value = dmg.ToString();
+        
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(pos);
+        effect.SetText(tn,value, color);
+        effect.ActionEffect();
 
-        hitEffect.InitEffect(hitPoint);
+
+        // -------피격 이펙트 세팅 -----------
+        Effect hitEffect = GetFromPool("7010");      
+        hitEffect.InitEffect(pos);
         hitEffect.ActionEffect();
     }
+
+    //=========================================================
+    // 적 출혈시
+    //========================================================
+
+    void OnEnemyBleeding(Vector3 pos, int dmg)
+    {
+        // ---------텍스트 세팅---------------
+        string value = dmg.ToString();
+        Color color = new Color(0.9f,0.5f,0.5f,1);
+
+
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(pos);
+        effect.SetText(1,value, color);
+        effect.ActionEffect();
+
+       // -------출혈 이펙트 세팅 -----------
+        Effect bleedingEffect = GetFromPool("7021");
+        bleedingEffect.InitEffect(pos);
+        bleedingEffect.ActionEffect();
+    }
+
+
+    //=========================================================
+    // 적 회복시
+    //========================================================
+
+    void OnEnemyHeal(Vector3 pos, int heal)
+    {
+        // ---------텍스트 세팅---------------
+        string value = heal.ToString();
+        Color color = new Color(0.2f, 0.4f, 0.1f, 1.0f);
+
+
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(pos);
+        effect.SetText(2,value, color);
+        effect.ActionEffect();
+
+       // -------힐 이펙트 세팅 -----------
+        Effect healEffect = GetFromPool("7011");
+        healEffect.InitEffect(pos);
+        healEffect.ActionEffect();
+    }
+
+
+    //=========================================================
+    // 적 기절시
+    //========================================================
+
+    void OnEnemyStunned(Enemy e)
+    {
+        // -------- 텍스트 -------------
+        var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
+        effect.InitEffect(e.center.position);
+        effect.SetText(2,"STUNNED", Color.gray);
+        effect.ActionEffect();
+
+        // ----- 빙글빙글 ----------
+        Effect sEffect = GetFromPool("7020");
+        sEffect.InitEffect(e.myTransform.position);
+        sEffect.SetTarget(e.center);
+        sEffect.SetDependency(e);
+        sEffect.ActionEffect();
+    }
+
+    //============================================================= 피격 이펙트============================================================
 
     //===========================================================================================
     //====================================
@@ -219,7 +253,7 @@ public class EffectPoolManager : PoolManager<Effect>
     }
     
 
-        void OnLevelUp()
+    void OnLevelUp()
     {
         // Effect effect = EffectPoolManager.epm.GetFromPool("006");
         // effect.InitEffect(Player.player.center.position);

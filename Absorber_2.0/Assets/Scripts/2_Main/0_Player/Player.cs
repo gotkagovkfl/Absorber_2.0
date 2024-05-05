@@ -358,28 +358,19 @@ public class Player : MonoBehaviour
     //====================================
     public void ChangeHp(int value)
     {
-        int absValue = Math.Abs(value);
+        
         
         if (value >= 0)
         {
             playerStatus.Increase_currHp(value);
-
-            Effect effect =EffectPoolManager.instance.GetFromPool("003");
-            effect.InitEffect(t_player.position);
-            effect.ActionEffect();
         }
         else
         {
             playerStatus.Decrease_currHp(value);
         }
         
-        // playerUI.SetHpBar();
-        GameEvent.ge.onChange_hp.Invoke(value);
-        // playerUI.SetBloodOverlay();
 
-        // 이펙트는 나중에 따로 빼자 .
-        Color color = ((value >= 0) ? Color.green : Color.red);        
-        EffectPoolManager.instance.CreateText(center.position, absValue.ToString(), color,2);
+        GameEvent.ge.onChange_hp.Invoke(value);
     }
 
     public void OnGet_healingItem()
@@ -406,16 +397,6 @@ public class Player : MonoBehaviour
         {
             return;	
         }
-        else if(playerStatus.haveSheild)
-        {
-            playerStatus.Lose_shield();
-
-            EffectPoolManager.instance.CreateText(hitPoint, "GUARD", Color.gray,0);
-            return;
-        }
-
-
-
         if (!knockBackFlag)
         {
             StartCoroutine(Invincible(0.5f));        // 무적처리 (0.5초간 무적)
@@ -425,7 +406,7 @@ public class Player : MonoBehaviour
 		int prob = UnityEngine.Random.Range(1, 101);
         if (prob <= avoid_prob)
         {
-            EffectPoolManager.instance.CreateText(hitPoint, "MISS", Color.gray,0);
+            GameEvent.ge.onPlayerAvoid.Invoke(hitPoint);
             return;
         }
 
@@ -441,11 +422,17 @@ public class Player : MonoBehaviour
             finalDamage = (int)Mathf.Max(dmg * (100f / (100 + def + playerStatus.def_onStop)), 0);   // 공격의 경우 방어력 계산하여 피해량이 0보다 작아지면 방어하기 위해 0으로 설정 
         }
 
+        // 쉴드있으면 데미지를 0으로 바꾸고 실드 잃음. 
+        if(playerStatus.haveSheild)
+        {
+            playerStatus.Lose_shield();
+            finalDamage = 0;
+        }
 
         // 데미지 처리     
         if (finalDamage <= 0)
         {
-            EffectPoolManager.instance.CreateText(hitPoint, "GUARD", Color.gray,0);
+            GameEvent.ge.onPlayerGuard.Invoke(hitPoint);
             return;
         }
 
@@ -456,7 +443,7 @@ public class Player : MonoBehaviour
             KnockBack(10f, hitPoint);
         }
 
-        ChangeHp(-(finalDamage));      
+        ChangeHp(-finalDamage);      
         //
         OnDamageEffect(hitPoint);
         //

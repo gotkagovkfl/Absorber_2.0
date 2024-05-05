@@ -402,9 +402,9 @@ public abstract class Projectile : MonoBehaviour , IPoolObject
             Color color = new Color( 1.0f , 1.0f * (1 - weight_lvl*0.25f) , (weight_lvl==0)?1.0f:0.5f , 1.0f );             //255,255,255 / 255, 255, 0 / 255, 200, 0
             int tn = weight_lvl>0?3:0;
 
-            EffectPoolManager.instance.CreateText(hitPoint, finalDamage.ToString(), color,  tn);
-            EffectPoolManager.instance.CreateHitEffect(hitPoint);       // 총알 위치에 이펙트 생성 
-
+        
+            // 적 피격시 효과 
+            GameEvent.ge.onEnemyHit.Invoke(hitPoint,finalDamage, tn);
 
             //
             Enemy e =  other.GetComponent<Enemy>();

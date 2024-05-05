@@ -560,7 +560,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     {
         // int weight = (int)(power/5);
         float duration = 0.2f;
-        Stunned(duration);
+        Stunned(duration, false);
         onKnockBack =true;
         
         Vector3 dir = (center.position - pos).normalized;
@@ -584,7 +584,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     //===================================================
     // stun : can't move and attack
     //===================================================
-    public void Stunned(float time)
+    public void Stunned(float time, bool isStrongAttack)
     {
         rb.velocity = Vector3.zero;
         stunned = true;
@@ -592,6 +592,12 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         // canAttack_ = false;
         
         StartCoroutine( SetDuration_stun(time));
+
+
+        if (isStrongAttack)
+        {
+            GameEvent.ge.onEnemyStunned.Invoke(this);
+        }
     }
 
     //===================================================
@@ -700,15 +706,11 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
             num++;
         }
         
-        Vector3 hitPoint = center.position;
-        EffectPoolManager.instance.CreateText(hitPoint, totalTickDmg.ToString(), new Color(0.9f,0.5f,0.5f,1), 1);
-        // bleeding effect
-        Effect effect = EffectPoolManager.instance.GetFromPool("102");
-        effect.InitEffect(center.position);
-        effect.ActionEffect();
+
         //
-        // EffectPoolManager.instance.CreateText(hitPoint, num.ToString(), Color.red);
         Damaged(totalTickDmg);
+
+        GameEvent.ge.onEnemyBleeding.Invoke(center.position,(int)totalTickDmg);
     }
 
     //===================================================================================
@@ -717,11 +719,6 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     {
         // 1. 마지막 공격받은 시간에서 일정시간 지나면 스스로 힐
         // 2. 버프몬스터 근처에 있다가 힐 받음
-        Effect effect = EffectPoolManager.instance.GetFromPool("010");
-        effect.InitEffect(center.position);
-        effect.ActionEffect();
-
-        EffectPoolManager.instance.CreateText(myTransform.position, heal.ToString(), new Color(0.2f, 0.4f, 0.1f, 1.0f), 2);
         hp_curr += heal;
         if (id_enemy.Equals("b_001"))
         {
@@ -732,6 +729,8 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
         {
             hp_curr = hp_max;
         }
+
+        GameEvent.ge.onEnemyheal.Invoke(center.position,(int)heal);
     }
 
 

@@ -11,10 +11,6 @@ public class Effect_7111_BossEyeFlash : Effect
 
     public override void InitEffect_custom(Vector3 targetPos)
     {
-         pos = targetPos;
-        offset = Vector3.zero;
- 
-        speed = 0f;
         lifeTime = 0.4f;
     }
 
@@ -31,7 +27,7 @@ public class Effect_7111_BossEyeFlash : Effect
     {
         if (targetToFollow!=null)
         {
-            myTransform.position = targetToFollow.position;
+            t_effect.position = targetToFollow.position;
         }
         
     }

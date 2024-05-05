@@ -4,22 +4,24 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour , IPoolObject
 {
-    public Transform myTransform;
-    public Transform targetToFollow;
-    public Enemy    enemy_d;
     public string id_effect;
+    
+    protected Transform t_effect;
+    protected Transform targetToFollow;
+    protected Enemy    enemy_d;
+    
 
-    public Rigidbody2D rb;   
+    protected Rigidbody2D rb;   
 
-    public bool _isDead;
+    protected bool _isDead;
 
-    public Vector3 pos;     // 생성위치
-    public Vector3 offset = Vector3.zero;  // 생성위치에서의 오프셋
-    public Vector3 dir;     // 이동방향
-    public float speed = 1;        // 이동속도
-    public float lifeTime = 1f;    // 수명
+    protected Vector3 pos;     // 생성위치
+    protected Vector3 offset = Vector3.zero;  // 생성위치에서의 오프셋
+    protected Vector3 dir;     // 이동방향
+    protected float speed = 1;        // 이동속도
+    protected float lifeTime = 1f;    // 수명
 
-    public Vector3 originalScale;
+    protected Vector3 originalScale;
 
     protected AudioSource audioSource;
 
@@ -47,8 +49,8 @@ public abstract class Effect : MonoBehaviour , IPoolObject
     //===========================
     public void OnCreatedInPool()
     {
-        myTransform = transform;
-        originalScale = myTransform.localScale;
+        t_effect = transform;
+        originalScale = t_effect.localScale;
 
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
@@ -68,15 +70,14 @@ public abstract class Effect : MonoBehaviour , IPoolObject
     //==============================================================
     public void InitEffect(Vector3 targetPos)
     {
-        
-        
         if (audioSource != null)
         {
             audioSource.playOnAwake = false;
             audioSource.loop =false;
         }
 
-
+        pos = targetPos;
+        t_effect.localScale = originalScale;  
         InitEffect_custom(targetPos);
     }
 
@@ -96,7 +97,7 @@ public abstract class Effect : MonoBehaviour , IPoolObject
     //
     public void ActionEffect()
     {
-        myTransform.position = pos + offset;          // 설정된 값으로 위치 변경 
+        t_effect.position = pos + offset;          // 설정된 값으로 위치 변경 
         StartCoroutine(EffectDestroy());            // Init하면서 설정된 수명이 지난후 파괴 
         ActionEffect_custom();
     }
