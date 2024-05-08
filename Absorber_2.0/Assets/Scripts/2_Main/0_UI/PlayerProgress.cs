@@ -111,8 +111,8 @@ public class PlayerProgress : MonoBehaviour
     //-------------------------------------------------------------------------------
     void SetMpBar()
     {
-        slider_mp.maxValue = Player.player.exp_curr;
-        slider_mp.value = Player.player.exp_max;
+        slider_mp.maxValue = Player.player.exp_max;
+        slider_mp.value = Player.player.exp_curr;
     }
 
     void SetLevelText()

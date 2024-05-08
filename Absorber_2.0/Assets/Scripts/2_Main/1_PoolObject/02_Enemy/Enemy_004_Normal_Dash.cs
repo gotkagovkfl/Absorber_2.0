@@ -38,21 +38,11 @@ public class Enemy_004_Normal_Dash : Enemy
         battleType = BattleType.melee;
     }
 
-    protected override void MoveCustom()
-    {
-
-    }
     protected override void AttackCustom()
     {
         StartCoroutine(Dash());
     }
 
-    protected override void DieCustom()
-    {
-        // gameObject.SetActive(false);
-        // GetComponent<Collider2D>().enabled = true;
-        // hp = hpFull;
-    }
 
     IEnumerator Dash()
     {

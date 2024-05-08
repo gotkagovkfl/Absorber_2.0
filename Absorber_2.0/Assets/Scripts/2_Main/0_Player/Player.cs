@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
 
     public List<Coroutine> RunningCoroutines = new List<Coroutine>();
 
-    public int[,] Luk_Table = new int[,] { { 60, 30, 9, 1}, { 50, 35, 14, 1 }, { 35, 45, 15, 5 }, { 30, 45, 20, 5 }, { 25, 40, 30, 5 } };
+    
     #endregion
     public Vector2 inputVector;
     public GameObject LevelUpManager;
@@ -127,14 +128,13 @@ public class Player : MonoBehaviour
 
     
     //===================================
-    // public GameObject pauseUI;
     public bool OnSelecting;        //true when levelup popup set active
  
     // 애니메이션을 위한 스프라이트 렌더러 
     SpriteRenderer spriter;
     Animator animator;
 
-    public Coroutine damagedCoroutine;
+    Sequence seq_damaged;
 
     //================================================
     public AudioSource audioSource;
@@ -290,7 +290,6 @@ public class Player : MonoBehaviour
         {
             playerStatus.LevelUp();
         
-            LevelUpManager.GetComponent<LevelUpManager>().LevelUp();    //수정해야함.
             GameEvent.ge.onChange_level.Invoke();
         }
         #endregion
@@ -366,7 +365,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            playerStatus.Decrease_currHp(value);
+            playerStatus.Decrease_currHp(-value);
         }
         
 
@@ -385,10 +384,10 @@ public class Player : MonoBehaviour
     //====================================
     public void OnDamage(int dmg,  Vector3 hitPoint, bool knockBackFlag)
     {
-        if (DirectingManager.dm.onDirecting == true)
-        {
-            return;
-        }
+        // if (DirectingManager.dm.onDirecting == true)
+        // {
+        //     return;
+        // }
         
         // Avoid_Time = Time.time;
 
@@ -445,7 +444,8 @@ public class Player : MonoBehaviour
 
         ChangeHp(-finalDamage);      
         //
-        OnDamageEffect(hitPoint);
+        GameEvent.ge.onPlayerHit.Invoke(hitPoint);
+        PlayAnim_damaged();
         //
         audioSource.PlayOneShot(sound_playerHit);
 
@@ -476,51 +476,24 @@ public class Player : MonoBehaviour
     //==========================
     // 피격 효과
     //=========================
-    public void OnDamageEffect(Vector3 hitPoint)
+
+    void PlayAnim_damaged()
     {
-        //effect
-        Effect effect =  EffectPoolManager.instance.GetFromPool("011");
-        effect.InitEffect(hitPoint);
-        effect.ActionEffect();
+        Color targetColor = new Color(1f, 0.3f, 0.3f, 1f);
         
-        // change Color
-        damagedCoroutine = StartCoroutine( OnDamageEffect_c() );
-    }
-    
-    //==========================
-    // 피격 효과
-    //=========================
-    public IEnumerator OnDamageEffect_c()
-    {
-        Color color = new Color(1.0f,1.0f,1.0f,1.0f);
-        for (int i=0; i<4;i++)
+
+        if (seq_damaged.IsActive())
         {
-            color.g = 0.65f;
-            color.b = 0.65f;
-            spriter.material.color = color;
-            yield return null;
-            yield return null;
+            seq_damaged.Kill();
+        }
 
-            color.g = 0.3f;
-            color.b = 0.3f;
-            spriter.material.color = color;
-            yield return null;
-            yield return null;
 
-            color.g = 0.65f;
-            color.b = 0.65f;
-            spriter.material.color = color;
-            yield return null;
-            yield return null;
-
-            color.g = 1.0f;
-            color.b = 1.0f;
-            spriter.material.color = color;
-            yield return null;
-            yield return null;
-        }     
+        seq_damaged = DOTween.Sequence()
+        .OnKill(()=>spriter.material.color= Color.white)
+        .Append( spriter.material.DOColor(targetColor, 0.15f ))
+        .SetLoops( 3, LoopType.Yoyo )
+        .Play();
     }
-
 
 
     //====================================

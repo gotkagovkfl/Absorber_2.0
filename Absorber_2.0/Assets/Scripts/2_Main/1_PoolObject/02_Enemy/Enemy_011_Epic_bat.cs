@@ -30,18 +30,4 @@ public class Enemy_011_Epic_bat : Enemy
     {
         
     }
-    protected override void MoveCustom()
-    {
-
-    }
-
-    protected override void DieCustom()  // *****************************************************
-    {
-        // obj.SetActive(false);
-        // GetComponent<Collider2D>().enabled = true;
-        // base.hp = 10;                // *****************************************************
-        // base.DropItem();
-    }
-
-
 }

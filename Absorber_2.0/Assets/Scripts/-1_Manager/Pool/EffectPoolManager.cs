@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using TMPro;            //텍스트매쉬프로 
+using TMPro;
+using Unity.VisualScripting;            //텍스트매쉬프로 
 
 
 
@@ -33,13 +34,20 @@ public class EffectPoolManager : PoolManager<Effect>
         GameEvent.ge.onChange_hp.AddListener(OnPlayerChangeHp);
         GameEvent.ge.onPlayerGuard.AddListener(OnPlayerGuard);
         GameEvent.ge.onPlayerAvoid.AddListener(OnPlayerAvoid);
+        GameEvent.ge.onPlayerHit.AddListener(OnPlayerHit);
 
 
-        //
+        // enemy
         GameEvent.ge.onEnemyHit.AddListener( OnEnemyHit );
         GameEvent.ge.onEnemyBleeding.AddListener( OnEnemyBleeding );
         GameEvent.ge.onEnemyheal.AddListener( OnEnemyHeal );
         GameEvent.ge.onEnemyStunned.AddListener( OnEnemyStunned );
+        GameEvent.ge.onEnemyDie.AddListener( OnEnemyDie );      // 보스제외
+
+
+        // item
+        GameEvent.ge.onPickUpItem.AddListener( OnPickUpItem );
+
     }
     
     
@@ -100,7 +108,7 @@ public class EffectPoolManager : PoolManager<Effect>
         // 힐되는 경우엔 치유 이펙트
         if (value >=0)
         {
-            Effect healEffect =GetFromPool("003");
+            Effect healEffect =GetFromPool("7002");
             healEffect.InitEffect(pos);
             healEffect.ActionEffect();
 
@@ -136,6 +144,14 @@ public class EffectPoolManager : PoolManager<Effect>
         var effect = GetFromPool("7000").GetComponent<Effect_7000_Text>();
         effect.InitEffect(pos);
         effect.SetText(0, "MISS", Color.gray);
+        effect.ActionEffect();
+    }
+
+    void OnPlayerHit(Vector3 pos)   // 플레이어 체력 줄어들때 넣어도 큰 상관은 없을거같네
+    {
+        //effect
+        Effect effect =  GetFromPool("7001");
+        effect.InitEffect(pos);
         effect.ActionEffect();
     }
 
@@ -228,6 +244,27 @@ public class EffectPoolManager : PoolManager<Effect>
         sEffect.SetDependency(e);
         sEffect.ActionEffect();
     }
+
+
+    void OnEnemyDie(Enemy e)
+    {
+        Effect effect = GetFromPool("7012");
+        effect.InitEffect(e.center.position);
+        effect.ActionEffect();
+    }
+
+
+//}
+    void OnPickUpItem(DropItem dropItem)
+    {
+        string id = dropItem.id_dropItem.Equals("000")?"7005":"7004";       // 경험치의 경우와 다른 아이템의 경우 발생 이펙트가 다름. 
+
+        Effect effect = GetFromPool(id);
+        effect.InitEffect(Player.player.center.position);
+        effect.ActionEffect();
+
+    }
+
 
     //============================================================= 피격 이펙트============================================================
 

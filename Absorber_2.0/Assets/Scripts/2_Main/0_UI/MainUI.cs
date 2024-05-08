@@ -9,6 +9,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] public Popup_Pause popup_pause;
     [SerializeField] public Popup_WeaponSelection popup_weaponSelection;
 
+    [SerializeField] public Popup_LevelUp popup_levelUp;
+
 
     IEnumerator Start()
     {
@@ -20,6 +22,8 @@ public class MainUI : MonoBehaviour
         popup_weaponSelection = transform.Find("Popup_WeaponSelection").GetComponent<Popup_WeaponSelection>();
         popup_weaponSelection.InitPopup();
 
+        popup_levelUp = transform.Find("Popup_LevelUp").GetComponent<Popup_LevelUp>();
+        popup_levelUp.InitPopup();
 
         mainUI = this;
     }

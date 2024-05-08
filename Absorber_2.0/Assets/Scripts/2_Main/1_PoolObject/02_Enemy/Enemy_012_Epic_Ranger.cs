@@ -59,17 +59,5 @@ public class Enemy_012_Epic_Ranger : Enemy
         proj.Action();
     }  
 
-    protected override void DieCustom()
-    {
-    }
-
-    protected override void MoveCustom()
-    {
-
-       
-        
-
-    }
-
 
 }

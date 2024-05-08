@@ -47,15 +47,17 @@ public class Elite_001 : Enemy
     //     // }
     // }
 
-    protected override void DieCustom()
+    protected override void DropItem()
     {
+        base.DropItem();
+        
         Instantiate( Resources.Load<GameObject>("Prefabs/W/Stages/Object_666_crown"), myTransform.position, Quaternion.identity);
     }
 
-    protected override void MoveCustom()
-    {
+    // protected override void MoveCustom()
+    // {
 
-    }
+    // }
 
 
 }

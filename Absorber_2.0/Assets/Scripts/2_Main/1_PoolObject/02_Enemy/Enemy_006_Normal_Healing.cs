@@ -32,21 +32,10 @@ public class Enemy_006_Normal_Healing : Enemy
         battleType = BattleType.range;
     }
 
-    protected override void MoveCustom()
-    {
-
-    }
 
     protected override void AttackCustom()
     {
         StartCoroutine(HealEnemy());
-    }
-
-    protected override void DieCustom()
-    {
-        // gameObject.SetActive(false);
-        // GetComponent<Collider2D>().enabled = true;
-        // hp = hpFull;
     }
 
     IEnumerator HealEnemy()

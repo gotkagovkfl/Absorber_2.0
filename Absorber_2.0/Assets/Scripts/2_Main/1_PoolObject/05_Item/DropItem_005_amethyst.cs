@@ -19,10 +19,10 @@ public class DropItem_005_amethyst : DropItem
     //==============================================
     public override void PickupEffect()
     {
-        // 마비 effect
-        Effect effect = EffectPoolManager.instance.GetFromPool("005");
-        effect.InitEffect(myTransform.position);
-        effect.ActionEffect();
+        // 마비 effect - 이거 투사체로 바꿀 예정.
+        // Effect effect = EffectPoolManager.instance.GetFromPool("005");
+        // effect.InitEffect(myTransform.position);
+        // effect.ActionEffect();
 
 
         // 모든 적 마비

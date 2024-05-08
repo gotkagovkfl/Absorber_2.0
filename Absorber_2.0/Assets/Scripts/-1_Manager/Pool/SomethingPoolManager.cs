@@ -24,9 +24,6 @@ public class SomethingPoolManager : PoolManager<Something>
         
         // 스테이지 클리어 시 이벤트
         GameEvent.ge.onStageClear.AddListener( CreatePortal );       // 포탈생성
-
-        //
-        GameEvent.ge.onChange_level.AddListener(OnLevelUp );
     }
     
     
@@ -147,10 +144,4 @@ public class SomethingPoolManager : PoolManager<Something>
     }
 
 
-    void OnLevelUp()
-    {
-        // Effect effect = EffectPoolManager.epm.GetFromPool("006");
-        // effect.InitEffect(Player.player.center.position);
-        // effect.ActionEffect();
-    }
 }

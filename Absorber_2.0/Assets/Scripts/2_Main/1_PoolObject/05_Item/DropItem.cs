@@ -219,13 +219,8 @@ public abstract class DropItem : MonoBehaviour , IPoolObject
         if (other.CompareTag("Player"))
         {            
             //pickup effect
-            string id = (id_dropItem.Equals("000"))?"013":"004";
+            GameEvent.ge.onPickUpItem.Invoke(this);
 
-            Effect effect = EffectPoolManager.instance.GetFromPool(id);
-            effect.InitEffect(Player.player.center.position);
-            effect.ActionEffect();
-
-            
             
             PickupEffect(); // 아이템 습득 효과 발동
 

@@ -42,8 +42,9 @@ public class GameEvent : MonoBehaviour
 
     public UnityEvent<KeyCode> onUseSkill;
 
-    public UnityEvent<Vector3> onPlayerGuard;
-    public UnityEvent<Vector3> onPlayerAvoid;
+    public UnityEvent<Vector3> onPlayerGuard;       //v : hitPoint
+    public UnityEvent<Vector3> onPlayerAvoid;       //v : hitPoint
+    public UnityEvent<Vector3> onPlayerHit;         //v : hitPoint
     
 
     
@@ -55,10 +56,13 @@ public class GameEvent : MonoBehaviour
     public UnityEvent<Vector3,int> onEnemyheal;
     public UnityEvent<Enemy> onEnemyStunned;
 
+    public UnityEvent<Enemy> onEnemyDie;
 
 
 
-    
+    // 아이템
+    public UnityEvent<DropItem> onPickUpItem;
+
     
 
 

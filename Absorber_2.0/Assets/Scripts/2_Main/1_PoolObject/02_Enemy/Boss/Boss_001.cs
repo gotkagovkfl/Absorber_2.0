@@ -45,7 +45,7 @@ public class Boss_001 : Enemy
 
         hp_max = baseHp + Random.Range(-500,500);      
         damage = baseAtk + Random.Range(-5,5);
-        def =  baseDef + Random.Range(-1, 1);
+        // def =  baseDef + Random.Range(-1, 1);
         movementSpeed = 3;
 
         attackSpeed = 0f; 
@@ -107,27 +107,17 @@ public class Boss_001 : Enemy
         bossUI.InitHpBar();
     }
 
-
-    protected override void MoveCustom()
-    {
-        distance = Vector3.Distance(transform.position, base.target.position);
-        //dirVec = base.target.transform.position - transform.position; 
-        //Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
-        Vector3 dirVec = base.target.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f)) - transform.position;  // ���� = Ÿ�� ��ġ - �� ��ġ
-        rb.velocity = dirVec.normalized * movementSpeed;
-        //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.fixedDeltaTime);
-    }
-
-    protected override void DieCustom()  // *****************************************************
-    {
-        audioSource.PlayOneShot( Resources.Load<AudioClip>("Sound/13_bossdeath") );
+    // 죽을 때 효과를 처리해야함. 
+    // protected override void DieCustom()  // *****************************************************
+    // {
+    //     audioSource.PlayOneShot( Resources.Load<AudioClip>("Sound/13_bossdeath") );
         
-        StartCoroutine(Die());
-        // obj.SetActive(false);
-        // GetComponent<Collider2D>().enabled = true;
-        // base.hp = 10;                // *****************************************************
-        // base.DropItem();
-    }
+    //     StartCoroutine(Die());
+    //     // obj.SetActive(false);
+    //     // GetComponent<Collider2D>().enabled = true;
+    //     // base.hp = 10;                // *****************************************************
+    //     // base.DropItem();
+    // }
 
     public void Enter2Phase()
     {        
@@ -141,7 +131,7 @@ public class Boss_001 : Enemy
     {
         canMove = false;
         ready = false;
-        deltaScale = 0;
+        // deltaScale = 0;
         
         rb.simulated = false;
         StopCoroutine(PlayAnim_move());
@@ -154,7 +144,7 @@ public class Boss_001 : Enemy
 
         canMove = true;
         ready = true;
-        deltaScale = 0.001f;
+        // deltaScale = 0.001f;
         
         rb.simulated = true;
         StartCoroutine(PlayAnim_move());

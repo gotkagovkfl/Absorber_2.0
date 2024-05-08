@@ -43,19 +43,11 @@ public class Enemy_000_Normal_itemBox : Enemy
         
     }
 
-    // =========== 오버라이드 =============
-    // 상자는 움직이지 않음
-    // ===================================
-    protected override void MoveCustom()
-    {
-
-    }
-
 
     // =========== 오버라이드 =============
     // 죽으면 아이템 드랍 
     // ===================================
-    protected override void DieCustom()
+    protected override void DropItem()
     {
         // lucky mana
         int num = Random.Range(0,100); // 확률

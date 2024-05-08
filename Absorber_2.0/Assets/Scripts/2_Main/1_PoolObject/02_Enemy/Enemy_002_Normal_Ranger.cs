@@ -60,15 +60,5 @@ public class Enemy_002_Normal_Ranger : Enemy
         proj.Action();
     }
 
-    protected override void DieCustom()
-    {
-
-    }
-
-    protected override void MoveCustom()
-    {
-
-
-    }
 
 }

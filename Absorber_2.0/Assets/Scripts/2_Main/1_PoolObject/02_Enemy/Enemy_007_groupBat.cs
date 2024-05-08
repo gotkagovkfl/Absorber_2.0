@@ -21,12 +21,6 @@ public class Enemy_007_groupBat : Enemy
     }
 
 
-    
-    protected override void DieCustom()
-    {
-        
-    }
-
     public override void InitEnemyStatusCustom()
     {
         hp_max = 8;
@@ -52,12 +46,6 @@ public class Enemy_007_groupBat : Enemy
         battleType = BattleType.special;
     }
 
-
-
-    protected override void MoveCustom()
-    {
-
-    }
 
     protected override void AttackCustom()
     {

@@ -57,6 +57,14 @@ public static class ResourceManager
 
     static void LoadResources_pictograms()
     {
+        string path = "00_Images/Pictograms";
+        
+        foreach( var sprite in Resources.LoadAll<Sprite>(path))
+        {
+            string id= sprite.name;
+
+            dic_pictograms.TryAdd(id, sprite);
+        }
 
     }
 
@@ -74,6 +82,18 @@ public static class ResourceManager
     }
 
     //=====================================================================================
+
+    public static Sprite GetPictogram(string id)
+    {
+        Sprite ret = null;
+
+        if (dic_pictograms.TryGetValue(id, out ret))
+        {
+
+        }
+        return ret;
+
+    }
 
 
     public static Sprite GetSkillIcon(string id)

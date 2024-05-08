@@ -10,10 +10,10 @@ public  enum BattleType { none, melee, range, special };      // 움직임 제�
 
 public abstract class Enemy : MonoBehaviour , IPoolObject
 {
-    public bool isBoss;     // 보스몬스터인지
+    protected bool isBoss;     // 보스몬스터인지
     public bool deathAnimationEnd;
     public bool ready;
-    public float deltaScale;
+    // public float deltaScale;
 
     public bool oneShot = false;
     public bool shot = false;
@@ -33,29 +33,29 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
     public float hp_max;     // ****************
 
-    public int def;
+    // public int def;
 
     public int damage; // ���ݷ�
-    public float range;
+    protected float range;
 
-    public bool strongAttack = false;
+    protected bool strongAttack = false;
 
-    public float attackSpeed;   // ���ݼӵ�(�ʴ� ���ݼӵ�)
+    protected float attackSpeed;   // ���ݼӵ�(�ʴ� ���ݼӵ�)
 
     float attackDelay;
     // protected bool state = true; // ���� ���� true : �⺻����, false : �����̻� 
-    public float lastAttackTime;
+    float lastAttackTime;
 
-    public bool canKnockBack = true;
-    public float knockBack_time = 0.2f;
-    public bool onKnockBack;
+    protected bool canKnockBack = true;
+    float knockBack_time = 0.2f;
+    bool onKnockBack;
     protected bool hasAttackCustom;
 
-    public float lastMoveTime;
-    public bool stunned;
-    public bool canMove = true;
+    float lastMoveTime;
+    bool stunned;
+    protected bool canMove = true;
     // public bool canAttack_ = true;      // can damage player 
-    public bool canAttack       // ���� ���� ����
+    bool canAttack       // ���� ���� ����
     {
         get
         {
@@ -76,7 +76,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
             return false;
         }
     }
-    public bool canMoving
+    bool canMoving
     {
         get
         {
@@ -320,9 +320,9 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
     // ����
     protected abstract void AttackCustom();
-    protected abstract void MoveCustom();
+    //protected abstract void MoveCustom();
 
-    protected abstract void DieCustom(); //********************************
+    //protected abstract void DieCustom(); //********************************
 
 
     //
@@ -363,7 +363,7 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
 
 
     // 죽을 때 아이템 드랍 ( 마나 포함)
-    public void DropItem()
+    protected virtual void DropItem()
     {
         // default : drop mana.
         DropItem item = ItemPoolManager.instance.SpawnItem("000", manaValue, transform.position);
@@ -378,33 +378,34 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     // ����
     protected void Die()                                  //********************************
     {             
-        GameManager.gm.KillCount += 1;
-        GameManager.gm.Score += (int)hp_max;
-
         isDead = true;
         ready = false;
 
         dotQ.Clear();
 
+        rb.simulated = false;
+
+
+
+        StartCoroutine( DeathAnimation());
+
+
+
+
+
         if (!isBoss)
         {
-            Effect effect = EffectPoolManager.instance.GetFromPool("007");
-            effect.InitEffect(center.position);
-            effect.ActionEffect();
+            GameEvent.ge.onEnemyDie.Invoke(this);
             if(audioSource !=null)
             {
                 audioSource.PlayOneShot(sound_death);
             }
             
         }
-
-
-        DieCustom();
         DropItem();
-        // StopCoroutine( MoveAnimation());
-        rb.simulated = false;
-
-        StartCoroutine( DeathAnimation());
+        
+        GameManager.gm.KillCount += 1;
+        GameManager.gm.Score += (int)hp_max;
     }
 
     // ===============================
@@ -412,16 +413,11 @@ public abstract class Enemy : MonoBehaviour , IPoolObject
     // ================================
     public void CleanDeath()
     {
-        // GameManager.gm.KillCount += 1;GetComponen
         isDead = true;
         ready = false;
 
         dotQ.Clear();
 
-
-        // DieCustom();
-        // DropItem();
-        // StopCoroutine( MoveAnimation());
         rb.simulated = false;
 
         

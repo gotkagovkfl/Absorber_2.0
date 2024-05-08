@@ -43,20 +43,6 @@ public class Enemy_003_Normal_Bomb : Enemy
     {
         
     }
-    protected override void MoveCustom()
-    {
-
-    }
-
-
-    protected override void DieCustom() // *****************************************************
-    {     
-        // obj.SetActive(false);
-        // GetComponent<Collider2D>().enabled = true;
-        // base.hp = 15 ;                               // *****************************************************
-        // base.DropItem();
-    }
-
 
 
     private void Update()
